@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alamatkontak;
+use App\Models\Bannerhome;
+use App\Models\Bannerslider;
 use App\Models\Identitaswebsite;
 use App\Models\Logo;
 use App\Models\Menuwebsite;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -16,25 +19,25 @@ class MainController extends Controller
     public function index()
     {
         $identitas = Identitaswebsite::first();
+        $banners = Bannerslider::all();
         $alamat = Alamatkontak::first();
         $logo = Logo::orderBy('id_logo', 'DESC')->first();
+        $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
+        // dd($links);
         $menus = Menuwebsite::where('id_parent', 0)
-            ->with('children.children') // Menyertakan children hingga 2 level
+        ->with('children.children') // Menyertakan children hingga 2 level
             ->orderBy('position', 'asc')
             ->get();
-        return view('dinas-1.layout', compact('identitas', 'alamat', 'logo', 'menus'));
+        return view('dinas-1.dashboard', compact('identitas', 'alamat', 'logo', 'menus','banners'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
-        $identitas = Identitaswebsite::first();
-        $alamat = Alamatkontak::first();
-        $logo = Logo::orderBy('id_logo', 'DESC')->first();
-        $menus = Menuwebsite::where('id_parent', 0)->with('children')->get();
-        return view('dinas-2.layout', compact('identitas', 'alamat', 'logo', 'menus'));
+        $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
+        return view('dinas-1.sliderlogo', compact('links'));
     }
 
     /**

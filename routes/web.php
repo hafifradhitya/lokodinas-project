@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Route::get('administrator/dashboard', [DashboardController::class, "dashboard"]);
 
@@ -104,6 +104,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
 //     Route::resource('dashboard',MainController::class );
 // });
 
-Route::get('/', [Main2Controller::class, 'index']);
+Route::get('/', [MainController::class, 'index']);
+Route::get('slidelogo', [MainController::class, 'create']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);

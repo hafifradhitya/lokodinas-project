@@ -41,6 +41,7 @@
 
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/sliderlogo.css') }}" type="text/css">
 
     <!-- Slider Bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/slider-bootstrap/slider-bootstrap.css') }}">
@@ -81,7 +82,7 @@
                                 </a>
                             </li>
                             @foreach($menus as $menu)
-                            <li class="dropdown dropdown-mega position-relative">
+                            <li class="dropdown dropdown-mega  position-relative">
                                 <a class="dropdown-toggle" href="{{ $menu->link }}" id="navbarDropdown{{ $menu->id_menu }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ $menu->nama_menu }}
                                 </a>
@@ -113,6 +114,7 @@
                                 @endif
                             </li>
                             @endforeach
+
                             <li>
                                 <a href="{{ url('hubungi/') }}">
                                     Hubungi Kami
@@ -138,12 +140,8 @@
         </div>
     </header>
 
-    <div class="container-fluid">
-
-    </div>
-    <br>
-    <br>
-    <br>
+        @yield('content')
+    
     @yield('footer')
     <footer class="">
         <div class="container-fluid bg-dark text-white p-6">
@@ -201,6 +199,8 @@
     <script src="{{ asset('assets/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/slider-bootstrap/slider-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendor/dataTables/datatables.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 
     <!-- Theme Base, Components and Settings -->
     <script src="{{ asset('assets/js/theme.js') }}"></script>
