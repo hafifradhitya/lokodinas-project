@@ -1,6 +1,6 @@
 @extends('administrator.layout')
 
-@section('content')  
+@section('content')
     <!-- Table -->
     <div class="row">
       <div class="col">
@@ -32,9 +32,9 @@
                   <th>Tanggal</th>
                   <th>Status</th>
                   <th class="text-center">Action</th>
-                </tr>  
+                </tr>
               </thead>
-              <tbody>        
+              <tbody>
                 @foreach ($berita as $index => $news)
                     <tr>
                         {{-- <td>{{ $no }}</td> --}}
@@ -47,7 +47,7 @@
                             @else
                             <span style="color:red">Unpublished</span>
                             @endif
-                        </td>  
+                        </td>
                         <td class="text-center">
                             <a href="{{ route('administrator.berita.publish', $news->id_berita) }}" class="btn btn-info btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                 <i class="fa fa-check"></i>

@@ -74,10 +74,22 @@ if($users->foto != NULL){
                                 <th style="padding: 5px; border: 1px solid #ddd;">Tambah Akses</th>
                                 <td style="padding: 5px; border: 1px solid #ddd;">
                                     <div style="max-height: 200px; overflow-y: auto;">
+                                        {{-- @foreach($moduls as $modul)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ $modul->id_modul }}"
+                                                   id="modul_{{ $modul->id_modul }}" name="modul[]"
+                                                   @if(in_array($modul->id_modul, $akses_user ?? [])) checked @endif>
+                                            <label class="form-check-label" for="modul_{{ $modul->id_modul }}">
+                                                {{ $modul->nama_modul }}
+                                            </label>
+                                        </div>
+                                            @endforeach --}}
                                         @foreach($moduls as $modul)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{ $modul->id_modul }}" id="modul" name="modul[]">
-                                            <label class="form-check-label" for="modul">
+                                            <input class="form-check-input" type="checkbox" value="{{ $modul->id_modul }}"
+                                                   id="modul_{{ $modul->id_modul }}" name="modul[]"
+                                                   @if(in_array($modul->id_modul, $akses_user)) checked @endif>
+                                            <label class="form-check-label" for="modul_{{ $modul->id_modul }}">
                                                 {{ $modul->nama_modul }}
                                             </label>
                                         </div>

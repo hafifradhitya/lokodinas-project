@@ -113,7 +113,6 @@
                                 @endif
                             </li>
                             @endforeach
-
                             <li>
                                 <a href="{{ url('hubungi/') }}">
                                     Hubungi Kami

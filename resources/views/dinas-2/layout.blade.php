@@ -53,6 +53,9 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
 <link href="{{ asset('template/cloapedia/css/responsive.css')}}" rel="stylesheet">
 <link href="{{ asset('template/cloapedia/css/carousel.css')}}" rel="stylesheet">
 <link href="{{ asset('template/cloapedia/css/colors.css')}}" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- [if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -90,7 +93,7 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex justify-content-end">
                         <div class="topsearch">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search justify-content-end"></i> Search</a>
@@ -127,409 +130,35 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
                                     <i class="fa fa-home" style="font-size:25px;"></i>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                                <ul class="dropdown-menu megamenu" aria-labelledby="dropdown01">
-                                    <li>
-                                        <div class="mega-menu-content clearfix">
-                                            <div class="tab">
-                                                <button class="tablinks active" onclick="openCategory(event, 'cat01')">Beauty</button>
-                                                <button class="tablinks" onclick="openCategory(event, 'cat02')">Fashion</button>
-                                                <button class="tablinks" onclick="openCategory(event, 'cat03')">Travel</button>
-                                                <button class="tablinks" onclick="openCategory(event, 'cat04')">Architecture</button>
-                                                <button class="tablinks" onclick="openCategory(event, 'cat05')">Recipes</button>
-                                            </div>
-
-                                            <div class="tab-details clearfix">
-                                                <div id="cat01" class="tabcontent active">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_01.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Spa</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Top 10+ care advice for your toenails</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_02.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Beauty</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">The secret of your beauty is handmade soap</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_03.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Beauty</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Benefits of face mask made from mud</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_04.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Spa</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Relax with the unique warmth of candle flavor</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="cat02" class="tabcontent">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_05.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Fashion</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">2017 summer stamp will have design models here</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_06.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Collections</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Which color is the most suitable color for you?</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_07.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Fashion</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Subscribe to these sites to keep an eye on the fashion</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-
-                                                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_08.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Trends</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">The most trends of this year with color combination</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                    <!-- </div>
-                                                </div>
-                                                <div id="cat03" class="tabcontent">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_09.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Tourism</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">I visited the architects of Istanbul for you</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-
-                                                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_11.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Travel</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Prepared handmade dish dish in the Netherlands</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-
-                                                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_12.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">City Tours</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">I recommend you visit the fairy chimneys</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-
-                                                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_13.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Tourism</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">One of the most beautiful ports in the world</a></h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                                <div id="cat04" class="tabcontent">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_14.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Places</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">A collection of the most beautiful shop designs</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_15.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Designs</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">America's and Canada's most beautiful wine houses</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_16.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Minimalism</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">The most professional ways to color your walls</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_17.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Furnishings</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Stylish cabinet designs and furnitures</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="cat05" class="tabcontent">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_18.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Vegetables</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Grilled vegetable with fish prepared with fish</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_19.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Restaurants</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">The world's finest and clean meat restaurants</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_20.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Meat foods</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Fried veal and vegetable dish</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-
-                                                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="blog-box">
-                                                                <div class="post-media">
-                                                                    <a href="single.html" title="">
-                                                                        <img src="upload/menu_21.jpg" alt="" class="img-fluid">
-                                                                        <div class="hovereffect">
-                                                                        </div>
-                                                                        <span class="menucat">Pastas</span>
-                                                                    </a>
-                                                                </div><!-- end media -->
-                                                                <div class="blog-meta">
-                                                                    <h4><a href="single.html" title="">Tasty pasta sauces and recipes</a></h4>
-                                                                </div><!-- end meta -->
-                                                            </div><!-- end blog-box -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- end tab-details -->
-                                        </div><!-- end mega-menu-content -->
-                                    </li>
-                                </ul>
-                            </li>
+                            @foreach($menus as $menu)
                             <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Features</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="single.html">Single Blog <span class="hidden-md-down hidden-sm-down hidden-xs-down"><i class="fa fa-angle-right"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="single.html">Single Default</a></li>
-                                            <li><a class="dropdown-item" href="single-fullwidth.html">Single Fullwidth</a></li>
-                                            <li><a class="dropdown-item" href="single-slider.html">Single Gallery</a></li>
-                                            <li><a class="dropdown-item" href="single-video.html">Single Video</a></li>
-                                            <li><a class="dropdown-item" href="single-audio.html">Single Audio</a></li>
-                                            <li><a class="dropdown-item" href="single-no-media.html">Single No Media</a></li>
-                                        </ul>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown{{ $menu->id_menu }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ $menu->nama_menu }}
+                                </a>
+                                @if($menu->children->count() > 0)
+                                <ul class="dropdown-menu megamenu" aria-labelledby="dropdown{{ $menu->id_menu }}">
+                                    <li>
+                                            @foreach($menu->children as $child)
+                                            {{-- <a href="#{{ $child->id_menu }}">{{ $child->nama_menu }}</a> --}}
+                                            @endforeach
+                                            <div class="row">
+                                                <div class="col">
+                                                    <!-- Menu parent lama -->
+                                                    @foreach($menu->children as $child)
+                                                    <div class="dropdown">
+                                                        <h3>{{ $child->nama_menu }}</h3>
+                                                        @foreach($child->children as $subChild)
+                                                        <a class="nav-link" href="{{ $subChild->link }}">{{ $subChild->nama_menu }}</a>
+                                                        @endforeach
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                     </li>
-                                    <li><a class="dropdown-item" href="single.html">Blog Category <span class="hidden-md-down hidden-sm-down hidden-xs-down"><i class="fa fa-angle-right"></i></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="blog-category-01.html">Blog Category A</a></li>
-                                            <li><a class="dropdown-item" href="blog-category-02.html">Blog Category B</a></li>
-                                            <li><a class="dropdown-item" href="blog-category-03.html">Blog Category C</a></li>
-                                            <li><a class="dropdown-item" href="blog-category-04.html">Blog Category D</a></li>
-                                            <li><a class="dropdown-item" href="blog-category-05.html">Blog Category E</a></li>
-                                            <li><a class="dropdown-item" href="blog-category-06.html">Blog Category F</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="blog-author.html">Blog Author</a></li>
-                                    <li><a class="dropdown-item" href="page-contact.html">Contact Page</a></li>
-                                    <li><a class="dropdown-item" href="page.html">Default Page</a></li>
-                                    <li><a class="dropdown-item" href="page-fullwidth.html">Fullwidth Page</a></li>
-                                    <li><a class="dropdown-item" href="page-404.html">Not Found Page</a></li>
-                                    <li><a class="dropdown-item" href="page-sitemap.html">Sitemap & Archives</a></li>
                                 </ul>
+                                @endif
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-pink-hover" href="blog-category-01.html">Fashion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-red-hover" href="blog-category-02.html">Food</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-aqua-hover" href="blog-category-03.html">Lifestyle</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="blog-category-04.html">Travel</a>
-                            </li>  
-                            <li class="nav-item">
-                                <a class="nav-link color-yellow-hover" href="blog-category-05.html"><i class="fa fa-play-circle-o"></i> Vlogs</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-grey-hover" href="blog-category-06.html">Health</a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </nav>
@@ -565,10 +194,10 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
                                         <h4><a href="single.html" title="">5 places you should see</a></h4>
                                         <small><a href="single.html" title="">24 July, 2017</a></small>
                                         <small><a href="blog-author.html" title="">by Amanda</a></small>
-                                    </div>   
-                                </div> 
-                            </div> 
-                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="masonry-box small-box post-media">
                              <img src="upload/blog_masonry_03.jpg" alt="" class="img-fluid">
@@ -1142,7 +771,7 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
                                 <a href="index.html"><img src="images/flogo.png" alt="" class="img-fluid"></a>
                                 <p>Cloapedia is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                                 <div class="social">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
@@ -1171,7 +800,7 @@ $rows = \App\Models\Berita::where('judul_seo', request()->segment(3))->first();
         </footer> -->
 
         <div class="dmtop">Scroll to Top</div>
-        
+
     </div><!-- end wrapper -->
 
     <!-- Core JavaScript

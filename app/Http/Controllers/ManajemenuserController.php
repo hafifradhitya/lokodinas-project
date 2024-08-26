@@ -137,20 +137,38 @@ class ManajemenuserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit(string $id):View
+    // {
+    //     //
+    //     $users = User::findOrFail($id);
+    //     $akses = DB::table('users')
+    //     ->join('users_modul', 'users.id_session', '=', 'users_modul.id_session')
+    //     ->join('modul', 'users_modul.id_modul', '=', 'modul.id_modul')
+    //     ->where('users.id', $id)
+    //     ->orderBy('users_modul.id_umod', 'DESC')
+    //     ->get();
+
+    //     $moduls = Manajemenmodul::all(); // Untuk daftar semua modul yang tersedia
+
+    //     return view('administrator.manajemenuser.edit', compact('users', 'akses', 'moduls'));
+    // }
+
     public function edit(string $id):View
     {
-        //
         $users = User::findOrFail($id);
         $akses = DB::table('users')
-        ->join('users_modul', 'users.id_session', '=', 'users_modul.id_session')
-        ->join('modul', 'users_modul.id_modul', '=', 'modul.id_modul')
-        ->where('users.id', $id)
-        ->orderBy('users_modul.id_umod', 'DESC')
-        ->get();
+            ->join('users_modul', 'users.id_session', '=', 'users_modul.id_session')
+            ->join('modul', 'users_modul.id_modul', '=', 'modul.id_modul')
+            ->where('users.id', $id)
+            ->orderBy('users_modul.id_umod', 'DESC')
+            ->get();
 
-        $moduls = Manajemenmodul::all(); // Untuk daftar semua modul yang tersedia
+        $moduls = Manajemenmodul::all();
 
-        return view('administrator.manajemenuser.edit', compact('users', 'akses', 'moduls'));
+        // Siapkan array id_modul yang sudah dimiliki user
+        $akses_user = $akses->pluck('id_modul')->toArray();
+
+        return view('administrator.manajemenuser.edit', compact('users', 'akses', 'moduls', 'akses_user'));
     }
 
     /**
@@ -159,19 +177,31 @@ class ManajemenuserController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // dd($request);
+
         $validated = $request->validate([
             "username" => 'required|string|max:255',
             "email" => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
+            'password' => 'nullable|string|min:6',
             'level' => 'required|string|in:admin,user,kontributor'
         ]);
 
-        $validated['password'] = bcrypt($validated['password']);
+        // $validated['password'] = bcrypt($validated['password']);
+
+            // Jika password diisi, enkripsi password baru
+        if ($request->filled('password')) {
+            $validated['password'] = bcrypt($request->password);
+        } else {
+            // Jika password tidak diisi, gunakan password lama
+            unset($validated['password']);
+        }
 
         $users = User::findOrFail($id);
 
         $username = $request->username;
         $no_telp = $request->no_telp;
+
+        $fotoName = $users->foto;
 
         if ($request->hasFile('foto')) {
             $foto = $request->file("foto");
@@ -180,16 +210,39 @@ class ManajemenuserController extends Controller
             $users->foto = $fotoName;
         }
 
+        if ($request->nama_modul !=''){
+            $link = $request->nama_modul;
+            $nama_modul=implode(',',$link);
+        }else{
+            $nama_modul = '';
+        }
+
         $users->update([
             "username" => $username,
             "nama_lengkap" => $request->nama_lengkap,
             "email" => $request->email,
-            "password" => $validated['password'],
             "level" => $validated['level'],
             "foto" => $fotoName,
             "no_telp" => $no_telp,
             "blokir" => 'N'
         ]);
+
+        if (isset($validated['password'])) {
+            $users->update(['password' => $validated['password']]);
+        }
+
+        // Proses tambah akses baru
+        if ($request->has('modul')) {
+            $existingModuls = Usermodul::where('id_session', $users->id_session)->pluck('id_modul')->toArray();
+            $newModuls = array_diff($request->modul, $existingModuls);
+
+            foreach ($newModuls as $modulId) {
+                Usermodul::create([
+                    'id_session' => $users->id_session,
+                    'id_modul' => $modulId
+                ]);
+            }
+        }
 
         session()->flash("pesan", "Data berhasil Diperbarui");
         return redirect()->route('administrator.manajemenuser.index')->with(['success' => 'Data berhasil Diperbarui']);
@@ -208,5 +261,5 @@ class ManajemenuserController extends Controller
         return redirect()->route('administrator.manajemenuser.index')->with(['success'=>'Data berhasil Dihapus']);
     }
 
-    
+
 }

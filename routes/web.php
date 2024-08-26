@@ -18,6 +18,7 @@ use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KomentarberitaController;
 use App\Http\Controllers\KomentarvideoController;
 use App\Http\Controllers\LogowebsiteController;
+use App\Http\Controllers\Main2Controller;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ManajemenmodulController;
 use App\Http\Controllers\ManajemenuserController;
@@ -99,10 +100,10 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::resource('ym', YmController::class);
 });
 
-Route::prefix('dinas-1')->name('dinas-1.')->group(function () {
-    Route::resource('dashboard',MainController::class );
-});
+// Route::prefix('dinas-1')->name('dinas-1.')->group(function () {
+//     Route::resource('dashboard',MainController::class );
+// });
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [Main2Controller::class, 'index']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);
