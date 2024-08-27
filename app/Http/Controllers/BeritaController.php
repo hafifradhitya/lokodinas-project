@@ -20,18 +20,27 @@ class BeritaController extends Controller
      */
     public function index(Request $request):View
     {
-        //
         $search = $request->search;
+        $month = $request->month;
+
+        $query = Berita::query();
+
         if (!empty($search)) {
-            $berita = Berita::latest()
-                ->where('judul', 'like', "%$search%")
-                ->orWhere('isi_berita', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $berita = Berita::orderBy('tanggal', 'desc')->paginate(10);
+            $query->where('judul', 'like', "%$search%")
+                ->orWhere('isi_berita', 'like', "%$search%");
         }
 
-        return view('administrator.berita.index', compact('berita'));
+        if (!empty($month)) {
+            $query->whereMonth('tanggal', $month);
+        }
+
+        $berita = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+        $months = Berita::selectRaw('MONTH(tanggal) as month')
+                    ->groupBy('month')
+                    ->get();
+
+        return view('administrator.berita.index', compact('berita', 'months'));
     }
 
     /**
@@ -65,7 +74,7 @@ class BeritaController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName =$gambar->getClientOriginalName();
             $gambar->move("./foto_berita/", $gambarName);
         }
         $keterangan_gambar = $request->keterangan_gambar;
@@ -164,7 +173,7 @@ class BeritaController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_berita/", $gambarName);
             $berita->gambar = $gambarName;
         }

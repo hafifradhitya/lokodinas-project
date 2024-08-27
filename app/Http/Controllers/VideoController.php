@@ -69,7 +69,7 @@ class VideoController extends Controller
 
         if($request->hasFile('gbr_video')) {
             $gbr_video = $request->file("gbr_video");
-            $gambarName = $jdl_video.".".Str::random(25).".".$gbr_video->getClientOriginalExtension();
+            $gambarName = $gbr_video->getClientOriginalName();
             $gbr_video->move("./foto_video/", $gambarName);
         }
 
@@ -151,7 +151,7 @@ class VideoController extends Controller
 
         if($request->hasFile('gbr_video')) {
             $gbr_video = $request->file("gbr_video");
-            $gambarName = $jdl_video.".".Str::random(25).".".$gbr_video->getClientOriginalExtension();
+            $gambarName = $gbr_video->getClientOriginalName();
             $gbr_video->move("./foto_video/", $gambarName);
             $videos->gbr_video = $gambarName;
         }

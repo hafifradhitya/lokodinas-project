@@ -17,6 +17,8 @@ class DashboardController extends Controller
         $agenda['total_agenda'] = Agenda::count();
         $users['total_users'] = User::count();
 
+        // $totalUsers = User::count();
+
         return view('administrator.dashboard', compact('berita', 'halamanbaru', 'agenda', 'users'));
     }
 }

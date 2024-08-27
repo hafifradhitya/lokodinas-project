@@ -12,13 +12,30 @@ class MenuwebsiteController extends Controller
 {
     // ... kode yang ada sebelumnya ...
 
-    public function index():View
+    public function index(Request $request):View
     {
-        $menuwebs = Menuwebsite::with('parent')
-                            ->orderBy('position', 'DESC')
-                            ->orderBy('urutan', 'DESC')
-                            ->paginate(10);
-        return view('administrator.menuwebsite.index', compact('menuwebs'));
+        $search = $request->search;
+        $urutan = $request->urutan;
+    
+        $query = Menuwebsite::with('parent');
+    
+        if (!empty($search)) {
+            $query->where('nama_menu', 'like', "%$search%");
+        }
+    
+        if (!empty($urutan)) {
+            $query->where('urutan', $urutan);
+        }
+    
+        $menuwebs = $query->orderBy('position', 'DESC')
+                          ->orderBy('urutan', 'DESC')
+                          ->paginate(10);
+    
+        $urutans = Menuwebsite::select('urutan')
+                    ->groupBy('urutan')
+                    ->get();
+    
+        return view('administrator.menuwebsite.index', compact('menuwebs', 'urutans'));
     }
 
     public function create(): View

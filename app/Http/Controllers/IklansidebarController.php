@@ -58,7 +58,7 @@ class IklansidebarController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_iklansidebar/", $gambarName);
         }
 
@@ -110,7 +110,7 @@ class IklansidebarController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_iklansidebar/", $gambarName);
             $updateData['gambar'] = $gambarName;
         }

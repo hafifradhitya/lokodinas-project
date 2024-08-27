@@ -135,7 +135,7 @@
                                             class="nav-link">Banner Slider</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('administrator/modul-banner/bannerhome') }}"
+                                        <a href="{{ url('administrator/bannerhome') }}"
                                             class="nav-link">Banner Home</a>
                                     </li>
                                     <li class="nav-item">

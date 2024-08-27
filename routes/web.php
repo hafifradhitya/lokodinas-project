@@ -42,15 +42,7 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/dashboard', function () {
-
-    $berita['total_berita'] = Berita::count();
-    $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
-    $agenda['total_agenda'] = Agenda::count();
-    $users['total_users'] = User::count();
-
-    return view('administrator.dashboard', compact('berita', 'halamanbaru', 'agenda', 'users'));
-})->middleware(['auth', 'verified'])->name('dashboard'); // Mengarahkan ke halaman register Laravel Breeze
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('index'); // Mengarahkan ke halaman register Laravel Breeze
 
 Route::get('/login', function () {
     return view('auth.login'); // Mengarahkan ke halaman login Laravel Breeze
@@ -105,6 +97,6 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
 // });
 
 Route::get('/', [MainController::class, 'index']);
-Route::get('slidelogo', [MainController::class, 'create']);
+Route::get('sliderlogo', [MainController::class, 'create']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);

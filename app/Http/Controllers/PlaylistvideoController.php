@@ -57,7 +57,7 @@ class PlaylistvideoController extends Controller
 
         if ($request->hasFile('gbr_playlist')) {
             $gambar = $request->file("gbr_playlist");
-            $gambarName = $jdl_playlist."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./img_playlist/", $gambarName);
         }
 
@@ -114,7 +114,7 @@ class PlaylistvideoController extends Controller
 
         if ($request->hasFile('gbr_playlist')) {
             $gambar = $request->file("gbr_playlist");
-            $gambarName = $jdl_playlist."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./img_playlist/", $gambarName);
         }
 

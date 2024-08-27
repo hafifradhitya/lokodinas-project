@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Agenda;
+use App\Models\Berita;
+use App\Models\Halamanbaru;
 use App\Models\Poling;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,9 +27,14 @@ class JejakpendapatController extends Controller
                 ->paginate(10);
         } else {
             $polings = Poling::orderBy('id_poling', 'desc')->paginate(10);
+
+            $berita['total_berita'] = Berita::count();
+            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+            $agenda['total_agenda'] = Agenda::count();
+            $users['total_users'] = User::count();
         }
 
-        return view('administrator.jejakpendapat.index', compact('polings'));
+        return view('administrator.jejakpendapat.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'polings'));
     }
 
     /**

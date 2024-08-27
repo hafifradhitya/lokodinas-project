@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
+use App\Models\Berita;
 use App\Models\Downloadarea;
+use App\Models\Halamanbaru;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,9 +29,14 @@ class DownloadareaController extends Controller
                 ->paginate(10);
         } else {
             $downloads = Downloadarea::orderBy('id_download', 'desc')->paginate(10);
+
+            $berita['total_berita'] = Berita::count();
+            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+            $agenda['total_agenda'] = Agenda::count();
+            $users['total_users'] = User::count();
         }
 
-        return view('administrator.downloadarea.index', compact('downloads'));
+        return view('administrator.downloadarea.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'downloads'));
     }
 
     /**
@@ -48,7 +57,7 @@ class DownloadareaController extends Controller
 
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'nama_file' => 'required|file|mimes:pdf,doc,docx,xls,txt,xlsx,ppt,pptx,txt|max:2048'
+            'nama_file' => 'required|file|mimes:pdf,doc,docx,xls,txt,xlsx,ppt,pptx,txt,png,jpg,jpeg,gif|max:2048'
         ]);
 
         $judul = $request->judul;
@@ -56,7 +65,7 @@ class DownloadareaController extends Controller
 
         if ($request->hasFile('nama_file')) {
             $file = $request->file("nama_file");
-            $namaFile = $judul . "_" . Str::random(25) . "." . $file->getClientOriginalExtension();
+            $namaFile = $file->getClientOriginalName();
             $file->move("./downloads/", $namaFile);
         } else {
             return redirect()->route('administrator.downloadarea.index')->with(['error' => 'File harus dimasukan']);
@@ -77,7 +86,7 @@ class DownloadareaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id_download):BinaryFileResponse
+    public function show(Request $request, string $id_download): mixed
     {
         //
         $download = Downloadarea::findOrFail($id_download);
@@ -126,7 +135,7 @@ class DownloadareaController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file("file");
-            $namaFile = $judul . "_" . Str::random(25) . "." . $file->getClientOriginalExtension();
+            $namaFile = $file->getClientOriginalName();
             $file->move("./downloads/", $namaFile);
             $download->nama_file = $namaFile;
         }

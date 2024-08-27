@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\Berita;
+use App\Models\Halamanbaru;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -14,7 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 class AgendaController extends Controller
 {
     /**
-     * Display a listing of the resource.   
+     * Display a listing of the resource.
      */
     public function index(Request $request):View
     {
@@ -27,11 +30,16 @@ class AgendaController extends Controller
                 ->paginate(10);
         } else {
             $agendas = Agenda::orderBy('tgl_posting', 'desc')->paginate(10);
+
+            $berita['total_berita'] = Berita::count();
+            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+            $agenda['total_agenda'] = Agenda::count();
+            $users['total_users'] = User::count();
         }
 
-        return view('administrator.agenda.index', compact('agendas'));
+        return view('administrator.agenda.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'agendas'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +77,7 @@ class AgendaController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $tema."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move(public_path("foto_agenda/"), $gambarName);
         }
 
@@ -164,7 +172,7 @@ class AgendaController extends Controller
 
         session()->flash("pesan", "Agenda berhasil Diperbarui");
         return redirect()->route('administrator.agenda.index')->with(['success' => 'Agenda berhasil Diperbarui']);
-        
+
     }
 
     /**

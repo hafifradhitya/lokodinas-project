@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
+use App\Models\Berita;
+use App\Models\Halamanbaru;
 use App\Models\Kategori;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -20,16 +24,30 @@ class KategoriberitaController extends Controller
     {
         //  
         $search = $request->search;
-        if(!empty($search)) {
-            $kategori = Kategori::latest()
-            ->where('nama_kategori', 'like', '%$search%')
-            ->orWhere('isi_halaman', 'like', '%$search')
-            ->paginate(10);
-        } else {
-            $kategori = Kategori::paginate(10);
+        $sidebar = $request->sidebar;
+
+        $query = Kategori::query();
+
+        if (!empty($search)) {
+            $query->where('nama_kategori', 'like', "%$search%");
         }
 
-        return view('administrator.kategoriberita.index', compact(['kategori']));
+        if (!empty($sidebar)) {
+            $query->where('sidebar', $sidebar);
+        }
+
+        $kategori = $query->paginate(10);
+
+        $sidebars = Kategori::select('sidebar')
+                    ->groupBy('sidebar')
+                    ->get();
+
+        $berita['total_berita'] = Berita::count();
+        $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+        $agenda['total_agenda'] = Agenda::count();
+        $users['total_users'] = User::count();
+
+        return view('administrator.kategoriberita.index', compact(['berita', 'halamanbaru', 'agenda', 'users', 'kategori', 'sidebars']));
     }
 
     /**

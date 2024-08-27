@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
+use App\Models\Berita;
+use App\Models\Halamanbaru;
 use App\Models\Sekilasinfo;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
@@ -24,9 +28,14 @@ class SekilasinfoController extends Controller
                 ->paginate(10);
         } else {
             $infos = Sekilasinfo::orderBy('id_sekilas', 'desc')->paginate(10);
+
+            $berita['total_berita'] = Berita::count();
+            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+            $agenda['total_agenda'] = Agenda::count();
+            $users['total_users'] = User::count();
         }
 
-        return view('administrator.sekilasinfo.index', compact('infos'));
+        return view('administrator.sekilasinfo.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'infos'));
     }
 
     /**
@@ -54,7 +63,7 @@ class SekilasinfoController extends Controller
 
         if ($request->hasFile('foto')) {
             $gambar = $request->file("foto");
-            $gambarName = $info . "_" . Str::random(25) . "." . $gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_info/", $gambarName);
         }
 
@@ -105,7 +114,7 @@ class SekilasinfoController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $info . "_" . Str::random(25) . "." . $gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_info/", $gambarName);
             $sekilasinfo->gambar = $gambarName;
         }

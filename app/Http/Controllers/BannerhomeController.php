@@ -56,7 +56,7 @@ class BannerhomeController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_bannerhome/", $gambarName);
         }
 
@@ -112,7 +112,7 @@ class BannerhomeController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_bannerhome/", $gambarName);
             $updateData['gambar'] = $gambarName;
         }

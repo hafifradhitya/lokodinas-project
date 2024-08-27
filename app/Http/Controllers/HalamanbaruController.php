@@ -16,19 +16,29 @@ class HalamanbaruController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):View
+    public function index(Request $request): View
     {
         $search = $request->search;
+        $month = $request->month;
+
+        $query = Halamanbaru::query();
+
         if (!empty($search)) {
-            $halamanbaru = Halamanbaru::latest()
-                ->where('judul', 'like', "%$search%")
-                ->orWhere('isi_halaman', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $halamanbaru = Halamanbaru::orderBy('tgl_posting', 'desc')->paginate(10);
+            $query->where('judul', 'like', "%$search%")
+                ->orWhere('tgl_posting', 'like', "%$search%");
         }
 
-        return view('administrator.halamanbaru.index', compact(['halamanbaru']));
+        if (!empty($month)) {
+            $query->whereMonth('tgl_posting', $month);
+        }
+
+        $halamanbaru = $query->orderBy('tgl_posting', 'desc')->paginate(10);
+
+        $months = Halamanbaru::selectRaw('MONTH(tgl_posting) as month')
+                    ->groupBy('month')
+                    ->get();
+
+        return view('administrator.halamanbaru.index', compact(['halamanbaru', 'months']));
     }
 
     /**
@@ -58,7 +68,7 @@ class HalamanbaruController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_halaman/", $gambarName);
         }
 
@@ -116,7 +126,7 @@ class HalamanbaruController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_halaman/", $gambarName);
             $halamanbaru->gambar = $gambarName;
         }
