@@ -21,52 +21,52 @@
             <div class="card-body">
                 <form action="{{ route('administrator.bannerslider.index') }}" method="GET" class="mb-1">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari banner..." name="search" value="{{ request('search') }}">
+                        <input type="text" class="form-control" placeholder="Cari Bannerslider..." name="search" value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit">Cari</button>
                         </div>
                     </div>
                 </form>
-            </div>
 
-            <div class="table-responsive py-4">
-                <table class="table table-bordered" id="datatable-basic">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Judul</th>
-                            <th class="text-center">Deskripsi</th>
-                            <th class="text-center">Tgl Posting</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($bannersliders as $index => $banner)
-                        <tr>
-                            <td>{{ $bannersliders->firstItem() + $index }}</td>
-                            <td>{{ $banner->judul }}</td>
-                            <td>{{ strip_tags($banner->deskripsi) }}</td>
-                            <td>{{ \Carbon\Carbon::parse($banner->tgl_posting)->locale('id')->isoFormat('D MMM YYYY') }}</td>
-                            <td class="text-center">
-                                <div class="d-flex justify-content-center">
-                                    <a href="{{ route('administrator.bannerslider.edit', $banner->id_banner) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('administrator.bannerslider.destroy', $banner->id_banner) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $banner->judul }}?')">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <br>
-                {{ $bannersliders->links('vendor.pagination.bootstrap-4') }}
+                <div class="table-responsive py-4">
+                    <table class="table table-bordered" id="datatable-basic">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Judul</th>
+                                <th class="text-center">Deskripsi</th>
+                                <th class="text-center">Tgl Posting</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bannersliders as $index => $banner)
+                            <tr>
+                                <td>{{ $bannersliders->firstItem() + $index }}</td>
+                                <td>{{ $banner->judul }}</td>
+                                <td>{{ strip_tags($banner->deskripsi) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($banner->tgl_posting)->locale('id')->isoFormat('D MMM YYYY') }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ route('administrator.bannerslider.edit', $banner->id_banner) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('administrator.bannerslider.destroy', $banner->id_banner) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $banner->judul }}?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <br>
+                    {{ $bannersliders->links('vendor.pagination.bootstrap-4') }}
+                </div>
             </div>
         </div>
     </div>

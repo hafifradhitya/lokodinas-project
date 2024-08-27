@@ -16,25 +16,25 @@ class MenuwebsiteController extends Controller
     {
         $search = $request->search;
         $urutan = $request->urutan;
-    
+
         $query = Menuwebsite::with('parent');
-    
+
         if (!empty($search)) {
             $query->where('nama_menu', 'like', "%$search%");
         }
-    
+
         if (!empty($urutan)) {
             $query->where('urutan', $urutan);
         }
-    
+
         $menuwebs = $query->orderBy('position', 'DESC')
                           ->orderBy('urutan', 'DESC')
                           ->paginate(10);
-    
+
         $urutans = Menuwebsite::select('urutan')
                     ->groupBy('urutan')
                     ->get();
-    
+
         return view('administrator.menuwebsite.index', compact('menuwebs', 'urutans'));
     }
 
@@ -44,7 +44,7 @@ class MenuwebsiteController extends Controller
         return view('administrator.menuwebsite.create', compact('menuwebs'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'id_parent' => 'nullable|exists:menu,id_menu',
@@ -57,9 +57,13 @@ class MenuwebsiteController extends Controller
 
         Menuwebsite::create($validated);
 
-        session()->flash("pesan", "MenuWebsite berhasil Ditambah");
-        return redirect()->route('administrator.menuwebsite.index')->with(['success'=>'Berita berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.menuwebsite.index'),
+            'success' => true,
+            'message' => 'MenuWebsite berhasil ditambah!'
+        ]);
     }
+
 
     public function edit(string $id_menu): View
     {

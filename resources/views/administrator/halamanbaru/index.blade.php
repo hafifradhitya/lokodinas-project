@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="input-group" style="max-width: 300px;">
-                        <input type="text" class="form-control" placeholder="Cari judul berita..." name="search" value="{{ request('search') }}">
+                        <input type="text" class="form-control" placeholder="Cari Halamanbaru..." name="search" value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit">Cari</button>
                         </div>
@@ -57,44 +57,44 @@
                 </div>
                 @endif
             </form>
-        </div>
 
-        <div class="table-responsive py-4">
-          <table class="table table-bordered" id="datatable-basic">
-            <thead class="thead-light">
-              <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">Judul</th>
-                <th class="text-center">Link</th>
-                <th class="text-center">Tgl Posting</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($halamanbaru as $index => $page)
-              <tr>
-                <td>{{ $index + $halamanbaru->firstItem() }}</td>
-                <td>{{ $page->judul }}</td>
-                <td><a href="{{ url('halaman/detail/' . $page->judul_seo) }}">halaman/detail/{{ $page->judul_seo }}</a></td>
-                <td>{{ \Carbon\Carbon::parse($page->tgl_posting)->format('d M Y') }}</td>
-                <td class="text-center">
-                    <a href="{{ route('administrator.halamanbaru.edit', $page->id_halaman) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <form action="{{ route('administrator.halamanbaru.destroy', $page->id_halaman) }}" method="POST" class="d-inline-block">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $page->judul }}?')">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-          <br>
-          {{ $halamanbaru->links('vendor.pagination.bootstrap-4') }}
+            <div class="table-responsive py-4">
+            <table class="table table-bordered" id="datatable-basic">
+                <thead class="thead-light">
+                <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Judul</th>
+                    <th class="text-center">Link</th>
+                    <th class="text-center">Tgl Posting</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($halamanbaru as $index => $page)
+                <tr>
+                    <td>{{ $index + $halamanbaru->firstItem() }}</td>
+                    <td>{{ $page->judul }}</td>
+                    <td><a href="{{ url('halaman/detail/' . $page->judul_seo) }}">halaman/detail/{{ $page->judul_seo }}</a></td>
+                    <td>{{ \Carbon\Carbon::parse($page->tgl_posting)->format('d M Y') }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('administrator.halamanbaru.edit', $page->id_halaman) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                        <i class="fa fa-edit"></i>
+                        </a>
+                        <form action="{{ route('administrator.halamanbaru.destroy', $page->id_halaman) }}" method="POST" class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $page->judul }}?')">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <br>
+            {{ $halamanbaru->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
       </div>
     </div>

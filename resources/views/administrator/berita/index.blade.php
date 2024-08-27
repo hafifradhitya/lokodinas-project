@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="input-group" style="max-width: 300px;">
-                            <input type="text" class="form-control" placeholder="Cari judul berita..." name="search" value="{{ request('search') }}">
+                            <input type="text" class="form-control" placeholder="Cari Semuaberita..." name="search" value="{{ request('search') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit">Cari</button>
                             </div>
@@ -41,13 +41,12 @@
                     </div>
                     @endif
                 </form>
-            </div>
-
-          <div class="table-responsive py-4">
-            <table class="table table-bordered" id="datatable-basic">
+                
+                <div class="table-responsive py-4">
+                <table class="table table-bordered" id="datatable-basic">
               <thead class="thead-light">
                 <tr>
-                  <th>No</th>
+                    <th>No</th>
                   <th>Judul Berita</th>
                   <th>Tanggal</th>
                   <th>Status</th>
@@ -84,9 +83,10 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
-              </tbody>
-            </table>
+                    @endforeach
+                </tbody>
+                </table>
+            </div>
             <br>
             {{ $berita->links('vendor.pagination.bootstrap-4') }}
           </div>

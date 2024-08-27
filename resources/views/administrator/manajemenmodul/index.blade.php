@@ -20,54 +20,54 @@
                         </div>
                     </div>
                 </form>
-            </div>
 
-            <div class="table-responsive py-4">
-                <table class="table table-bordered" id="datatable-basic">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Modul</th>
-                            <th>URL</th>
-                            <th>Publish</th>
-                            <th>Aktif</th>
-                            <th>Status</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        @foreach ($manajemenmodul as $index => $modul)
-                        <tr>
-                            <td>{{ $index + $manajemenmodul->firstItem() }}</td>
-                            <td>{{ $modul->nama_modul }}</td>
-                            <td><a href="{{ $modul->link }}" target="_blank">	http://localhost/lokodinas/administrator/ {{ $modul->link }}</a></td>
-                            <td>{{ $modul->publish }}</td>
-                            <td>{{ $modul->aktif }}</td>
-                            <td>{{ $modul->status }}</td>
-                            <td class="text-center">
-                                <a href="{{ route('administrator.manajemenmodul.edit', $modul->id_modul) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('administrator.manajemenmodul.destroy', $modul->id_modul) }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $modul->nama_modul }}?')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @php
-                            $no++;
-                        @endphp
-                        @endforeach
-                    </tbody>
-                </table>
-                <br>
-                {{ $manajemenmodul->links('vendor.pagination.bootstrap-4') }}
+                <div class="table-responsive py-4">
+                    <table class="table table-bordered" id="datatable-basic">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Modul</th>
+                                <th>URL</th>
+                                <th>Publish</th>
+                                <th>Aktif</th>
+                                <th>Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $no=1;
+                            @endphp
+                            @foreach ($manajemenmodul as $index => $modul)
+                            <tr>
+                                <td>{{ $index + $manajemenmodul->firstItem() }}</td>
+                                <td>{{ $modul->nama_modul }}</td>
+                                <td><a href="{{ $modul->link }}" target="_blank">	http://localhost/lokodinas/administrator/ {{ $modul->link }}</a></td>
+                                <td>{{ $modul->publish }}</td>
+                                <td>{{ $modul->aktif }}</td>
+                                <td>{{ $modul->status }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('administrator.manajemenmodul.edit', $modul->id_modul) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('administrator.manajemenmodul.destroy', $modul->id_modul) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $modul->nama_modul }}?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @php
+                                $no++;
+                            @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <br>
+                    {{ $manajemenmodul->links('vendor.pagination.bootstrap-4') }}
+                </div>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@
   <title>Welcome Administrator-</title>
   <link rel="icon" href="{{ asset('foto_identitas/Website DPPKB Karawang 2_JUgtyyIC4x6eZLRfKWazW.png')}}" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="{{ url('assets/css/sweetalert2.min.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url('assets/css/argon.css') }}" type="text/css">
@@ -513,6 +514,8 @@
     <script src="{{ url('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <script src="{{ url('assets/js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ url('assets/js/sweetalert2.min.js') }}"></script>
     {{-- <!-- Optional JS -->
   <script src="{{ url('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
   <!-- Demo JS - remove this in your project -->
@@ -537,6 +540,7 @@
     <script src="{{ url('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ url('assets/js/components/charts/chart-bar.js') }}"></script>
     <script src="{{ url('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
+    @yield('script')
     {{-- <script src="{{ url('assets/vendor/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
   <script src="{{ url('assets/js/vendor/jvectormap/jquery-jvectormap-world-mill.js') }}"></script> --}}
     <!-- Argon JS -->
