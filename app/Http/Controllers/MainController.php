@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\Alamatkontak;
 use App\Models\Bannerhome;
 use App\Models\Bannerslider;
+use App\Models\Berita;
 use App\Models\Identitaswebsite;
 use App\Models\Logo;
 use App\Models\Menuwebsite;
+use App\Models\Sekilasinfo;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -23,12 +26,14 @@ class MainController extends Controller
         $alamat = Alamatkontak::first();
         $logo = Logo::orderBy('id_logo', 'DESC')->first();
         $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
-        // dd($links);
+        $beritas = Berita::all();
+        $infos = Sekilasinfo::all();
+        $agendas = Agenda::all();
         $menus = Menuwebsite::where('id_parent', 0)
         ->with('children.children') // Menyertakan children hingga 2 level
             ->orderBy('position', 'asc')
             ->get();
-        return view('dinas-1.dashboard', compact('identitas', 'alamat', 'logo', 'menus','banners'));
+        return view('dinas-1.dashboard', compact('identitas', 'alamat', 'logo', 'menus','banners','beritas','infos','agendas'));
     }
 
     /**

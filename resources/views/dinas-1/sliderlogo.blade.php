@@ -12,7 +12,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.customer-logos').slick({
+        $('customer-logos').slick({
             slidesToShow: 6,
             slidesToScroll: 1,
             autoplay: true,
@@ -36,8 +36,27 @@
 </script>
 <style>
     .custom-logo {
-    width: 100%; /* Memanjang ke samping */
-    height: auto; /* Menjaga rasio aspek */
-    max-width: 150px; /* Ukuran maksimum gambar */
-}
+        width: 100%;
+        /* Memanjang ke samping */
+        height: auto;
+        /* Menjaga rasio aspek */
+        max-width: 150px;
+        /* Ukuran maksimum gambar */
+        margin-right: 10px;
+        /* Memberikan jarak antar gambar */
+        
+    }
+
+    .customer-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .slide {
+        width: calc(100% / 6 - 10px);
+        /* Menyesuaikan lebar per slide dan menambahkan jarak */
+        box-sizing: border-box;
+    }
 </style>
