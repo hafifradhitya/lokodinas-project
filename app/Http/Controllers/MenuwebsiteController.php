@@ -60,7 +60,7 @@ class MenuwebsiteController extends Controller
         return response()->json([
             'url' => route('administrator.menuwebsite.index'),
             'success' => true,
-            'message' => 'MenuWebsite berhasil ditambah!'
+            'message' => 'Data MenuWebsite Berhasil Ditambah'
         ]);
     }
 
@@ -91,17 +91,18 @@ class MenuwebsiteController extends Controller
 
         $menu->update($validated); // Gunakan $validated langsung
 
-        session()->flash("pesan", "MenuWebsite berhasil Diperbarui");
-        return redirect()->route('administrator.menuwebsite.index')->with('success', 'Menu berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.menuwebsite.index'),
+            'success' => true,
+            'message' => 'Data MenuWebsite Berhasil Diperbaharui'
+        ]);
     }
 
-    public function destroy(string $id_menu):RedirectResponse
+    public function destroy(string $id_menu)
     {
         $menuwebs = Menuwebsite::findOrFail($id_menu);
         $menuwebs->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.menuwebsite.index')->with(['success'=>'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 
     // ... kode destroy yang ada sebelumnya ...

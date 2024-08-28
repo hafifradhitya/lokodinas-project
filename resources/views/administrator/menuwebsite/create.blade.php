@@ -103,19 +103,18 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $(document).on('click', '.btn-delete', function() {
-            let btn = $(this);
+            let btn =$(this);
             Swal.fire({
-                icon: 'warning',
-                text: 'Data yang sudah di hapus tidak dapat dikembalikan!',
-                title: 'Apakah Anda yakin ingin menghapus data ini?',
-                showCancelButton: true,
-                confirmButtonColor: '#D33',
-                confirmButtonText: 'Yakin hapus?',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
+               icon:'warning',
+               text:'Data yang sudah di hapus tidak dapat dikembalikan!',
+               title:'Apakah Anda yakin ingin menghapus data ini?',
+               showCancelButton: true,
+               confirmButtonColor:'#D33',
+               confirmButtonText:'Yakin hapus?',
+               cancelButtonText:'Batal'
+            }).then((result)=>{
+                if (result.isConfirmed){
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
@@ -125,36 +124,39 @@
                 }
             });
         });
-
         $('.form-ajax').each(function() {
-            $(this).bind('submit', function(e) {
-                e.preventDefault();
-                let form = $(this);
-                $.ajax({
-                    url: form.prop('action'),
-                    data: new FormData(this),
-                    cache: false,
-                    type: 'post',
-                    contentType: false,
-                    processData: false,
-                    success: function(data) {
+                $(this).bind('submit', function(e) {
+                    e.preventDefault();
+                    let form = $(this);
+                    $.ajax({
+                        url: form.prop('action'),
+                        data: new FormData(this),
+                        cache: false,
+                        async: false,
+                        type: 'post',
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
                         if (data.success === false) {
                             Swal.fire({
                                 icon: 'error',
+                                html: data.message,
                                 timer: 1500,
                                 showConfirmButton: false
                             });
                         } else {
                             Swal.fire({
-                                position: "center",
-                                icon: "success",
-                                title: data.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then((result)=>{
-                                console.log(result);
-                                document.location = data.url;
-                            });
+                                    position: "center",
+                                    icon: "success",
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result)=>{
+                                    console.log(result);
+                                    document.location = data.url;
+                                });
+
+
                         }
                     }
                 });

@@ -69,13 +69,12 @@
                                 <a href="{{ route('administrator.menuwebsite.edit', $menu->id_menu) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <form action="{{ route('administrator.menuwebsite.destroy', $menu->id_menu) }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $menu->nama_menu }}?')">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+                                <button data-url="{{ route('administrator.menuwebsite.destroy', $menu->id_menu) }}" 
+                                    type="button" 
+                                    class="btn-delete btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" 
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fa fa-trash"></i>
+                                </button>                            
                             </td>
                     </tr>
                 @endforeach
@@ -88,7 +87,9 @@
       </div>
     </div>
 </div>
+@endsection
 
+@section('script')
 <script>
     $(function() {
         $.ajaxSetup({
@@ -96,24 +97,58 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $(document).on('click', '.btn-delete', function() {
-            let btn =$(this);
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault(); // Mencegah aksi default
+
+            let btn = $(this);
+            let url = btn.data('url'); // Ambil URL dari data-url
+
             Swal.fire({
-               icon:'warning',
-               text:'Data yang sudah di hapus tidak dapat dikembalikan!',
-               title:'Apakah Anda yakin ingin menghapus data ini?',
-               showCancelButton: true,
-               confirmButtonColor:'#D33',
-               confirmButtonText:'Yakin hapus?',
-               cancelButtonText:'Batal'
-            }).then((result)=>{
-                if (result.isConfirmed){
+                icon: 'warning',
+                text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
+                title: 'Apakah Anda yakin ingin menghapus data ini?',
+                showCancelButton: true,
+                confirmButtonColor: '#D33',
+                confirmButtonText: 'Yakin hapus?',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tampilkan pesan "Deleting..." sebelum permintaan AJAX
                     Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
+                        title: 'Deleting...',
+                        text: 'Sedang menghapus data...',
+                        icon: 'info',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onOpen: () => {
+                            Swal.showLoading();
+                        }
                     });
-                    document.location = btn.data('url');
+
+                    // Mengirim permintaan AJAX DELETE
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}' // Sertakan CSRF token
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Data Anda telah dihapus.",
+                                icon: "success"
+                            }).then(() => {
+                                location.reload(); // Muat ulang halaman setelah berhasil menghapus
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Terjadi kesalahan saat menghapus data.",
+                                icon: "error"
+                            });
+                        }
+                    });
                 }
             });
         });
@@ -130,10 +165,10 @@
                         contentType: false,
                         processData: false,
                         success: function(data) {
-                        if (data.success = false) {
+                        if (data.success === false) {
                             Swal.fire({
                                 icon: 'error',
-                                //html: data.message,
+                                html: data.message,
                                 timer: 1500,
                                 showConfirmButton: false
                             });

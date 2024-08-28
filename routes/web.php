@@ -76,7 +76,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::resource('sekilasinfo', SekilasinfoController::class);
     Route::resource('jejakpendapat', JejakpendapatController::class);
     Route::resource('downloadarea', DownloadareaController::class);
-    Route::resource('menuwebsite', MenuwebsiteController::class);
+    Route::resource('menuwebsite', MenuwebsiteController::class)->except(['show']);
     Route::resource('bannerslider', BannersliderController::class);
     Route::resource('bannerhome', BannerhomeController::class);
     Route::resource('iklansidebar', IklansidebarController::class);

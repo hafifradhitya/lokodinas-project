@@ -503,50 +503,24 @@
     </footer>
   </div>
 
-  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   {{-- <script src="{{ url('assets/js/ckeditor.js') }}"></script> --}}
   {{-- <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js"></script> --}}
 
     <script src="{{ url('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url('assets/js/sweetalert2.js') }}"></script>
     <script src="{{ url('assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src="{{ url('assets/js/argon.js') }}"></script>
 
     <script src="{{ url('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-    <script src="{{ url('assets/js/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ url('assets/js/sweetalert2.min.js') }}"></script>
-    {{-- <!-- Optional JS -->
-  <script src="{{ url('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
-  <!-- Demo JS - remove this in your project -->
-  <script src="{{ url('assets/js/demo.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-  <script src="{{ url('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script> --}}
-
-
-     <!-- Argon Scripts -->
-    <!-- Core -->
-    <script src="{{ url('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('assets/vendor/js-cookie/js.cookie.js') }}"></script>
-    <script src="{{ url('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ url('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Optional JS -->
     <script src="{{ url('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ url('assets/js/components/charts/chart-bar.js') }}"></script>
     <script src="{{ url('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     @yield('script')
-    {{-- <script src="{{ url('assets/vendor/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
-  <script src="{{ url('assets/js/vendor/jvectormap/jquery-jvectormap-world-mill.js') }}"></script> --}}
-    <!-- Argon JS -->
-    {{-- <script src="{{ url('assets/js/argon.js?v=1.1.0') }}"></script>
-  <!-- Demo JS - remove this in your project -->
-  <script src="{{ url('assets/js/demo.min.js') }}"></script> --}}
       <script>
           CKEDITOR.replace('isi_halaman');
       </script>
