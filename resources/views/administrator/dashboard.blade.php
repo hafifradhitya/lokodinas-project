@@ -262,6 +262,19 @@
     </div>
 </div>
 
+{{-- <script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script> --}}
+@endsection
+
+
+@section('script')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('chart-bars').getContext('2d');

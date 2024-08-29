@@ -8,7 +8,7 @@
           <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="mb-0">Menu Website</h3>
               <a href="{{ route('administrator.menuwebsite.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
-          </div>
+          </div>  
 
           <!-- Tambahkan form pencarian -->
           <div class="card-body">
@@ -69,12 +69,12 @@
                                 <a href="{{ route('administrator.menuwebsite.edit', $menu->id_menu) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <button data-url="{{ route('administrator.menuwebsite.destroy', $menu->id_menu) }}" 
-                                    type="button" 
-                                    class="btn-delete btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" 
+                                <button data-url="{{ route('administrator.menuwebsite.destroy', $menu->id_menu) }}"
+                                    type="button"
+                                    class="btn-delete btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center"
                                     style="width: 32px; height: 32px;">
                                     <i class="fa fa-trash"></i>
-                                </button>                            
+                                </button>
                             </td>
                     </tr>
                 @endforeach
@@ -85,7 +85,7 @@
             </div>
         </div>
       </div>
-    </div>
+    </div>  
 </div>
 @endsection
 
@@ -138,7 +138,9 @@
                                 text: "Data Anda telah dihapus.",
                                 icon: "success"
                             }).then(() => {
-                                location.reload(); // Muat ulang halaman setelah berhasil menghapus
+                                btn.closest('tr').fadeOut(500, function() {
+                                    $(this).remove();
+                                });
                             });
                         },
                         error: function(xhr) {
@@ -150,44 +152,6 @@
                         }
                     });
                 }
-            });
-        });
-        $('.form-ajax').each(function() {
-                $(this).bind('submit', function(e) {
-                    e.preventDefault();
-                    let form = $(this);
-                    $.ajax({
-                        url: form.prop('action'),
-                        data: new FormData(this),
-                        cache: false,
-                        async: false,
-                        type: 'post',
-                        contentType: false,
-                        processData: false,
-                        success: function(data) {
-                        if (data.success === false) {
-                            Swal.fire({
-                                icon: 'error',
-                                html: data.message,
-                                timer: 1500,
-                                showConfirmButton: false
-                            });
-                        } else {
-                            Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: data.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then((result)=>{
-                                    console.log(result);
-                                    document.location = data.url;
-                                });
-
-
-                        }
-                    }
-                });
             });
         });
     });

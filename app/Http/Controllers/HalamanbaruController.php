@@ -26,7 +26,7 @@ class HalamanbaruController extends Controller
         if (!empty($search)) {
             $query->where('judul', 'like', "%$search%")
                 ->orWhere('tgl_posting', 'like', "%$search%");
-        }
+        }  
 
         if (!empty($month)) {
             $query->whereMonth('tgl_posting', $month);
@@ -53,7 +53,7 @@ class HalamanbaruController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
 
@@ -85,8 +85,11 @@ class HalamanbaruController extends Controller
             "gambar" => $gambarName
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.halamanbaru.index')->with(['succes'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.halamanbaru.index'),
+            'success' => true,
+            'message' => 'Data Halaman baru Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -141,20 +144,24 @@ class HalamanbaruController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.halamanbaru.index')->with(['success' => 'Data berhasil Diperbarui']);
+        // session()->flash("pesan", "Data berhasil Diperbarui");
+        // return redirect()->route('administrator.halamanbaru.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.halamanbaru.index'),
+            'success' => true,
+            'message' => 'Data Halaman baru Berhasil Diperbaharui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_halaman):RedirectResponse
+    public function destroy(string $id_halaman)
     {
         //
         $halamanbaru = Halamanbaru::findOrFail($id_halaman);
         $halamanbaru->delete();
 
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.halamanbaru.index')->with(['success'=>'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

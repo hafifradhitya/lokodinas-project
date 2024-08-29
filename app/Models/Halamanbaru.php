@@ -18,5 +18,5 @@ class Halamanbaru extends Model
     public function scopeLatest($query)
     {
         return $query->orderBy('tgl_posting', 'desc');
-    }
+    }  
 }

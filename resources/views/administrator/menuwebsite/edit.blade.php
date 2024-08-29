@@ -50,9 +50,9 @@
                             <tr>
                                 <th style="padding: 5px;">Deskripsi</th>
                                 <td style="padding: 5px;">
-                                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan Deskripsi Menu">{{ old('deskripsi', $menu->deskripsi) }}</textarea>
+                                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="isi_deskripsi" name="deskripsi">{{ $menu->deskripsi }}</textarea>
                                     @error('deskripsi')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </td>
                             </tr>
@@ -76,11 +76,9 @@
                             </tr>
                             <tr>
                                 <th style="padding: 5px;">Urutan</th>
-                                <td style="padding: 5px;">
-                                    <input type="number" class="form-control @error('urutan') is-invalid @enderror" id="urutan" name="urutan" value="{{ old('urutan', $menu->urutan) }}" placeholder="Urutan Menu" required style="width: 100px;">
-                                    @error('urutan')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <td style="padding: 5px;">  
+                                    {{-- <textarea type="text" class="form-control" name="deskripsi" placeholder="Masukkan Deskripsi">{{ $menu->deskripsi }}</textarea> --}}
+                                    <input type="number" class="form-control" id="urutan" name="urutan" value="{{ $menu->urutan }}">
                                 </td>
                             </tr>
                             <tr>
@@ -154,6 +152,11 @@
         $('.form-ajax').each(function() {
                 $(this).bind('submit', function(e) {
                     e.preventDefault();
+
+                    for (instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].updateElement();
+                    }
+
                     let form = $(this);
                     $.ajax({
                         url: form.prop('action'),
@@ -191,4 +194,8 @@
         });
     });
 </script>
+
+{{-- <script>
+    CKEDITOR.replace('deskripsi');
+</script> --}}
 @endsection

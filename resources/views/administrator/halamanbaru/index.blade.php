@@ -57,7 +57,7 @@
                 </div>
                 @endif
             </form>
-
+  
             <div class="table-responsive py-4">
             <table class="table table-bordered" id="datatable-basic">
                 <thead class="thead-light">
@@ -80,13 +80,12 @@
                         <a href="{{ route('administrator.halamanbaru.edit', $page->id_halaman) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                         <i class="fa fa-edit"></i>
                         </a>
-                        <form action="{{ route('administrator.halamanbaru.destroy', $page->id_halaman) }}" method="POST" class="d-inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="return confirm('Yakin hapus {{ $page->judul }}?')">
+                        <button 
+                            data-url="{{ route('administrator.halamanbaru.destroy', $page->id_halaman) }}"
+                            type="submit"
+                            class="btn-delete btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                             <i class="fa fa-trash"></i>
                         </button>
-                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -99,5 +98,73 @@
       </div>
     </div>
   </div>
+@endsection
 
+@section('script')
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault(); // Mencegah aksi default
+
+            let btn = $(this);
+            let url = btn.data('url'); // Ambil URL dari data-url
+
+            Swal.fire({
+                icon: 'warning',
+                text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
+                title: 'Apakah Anda yakin ingin menghapus data ini?',
+                showCancelButton: true,
+                confirmButtonColor: '#D33',
+                confirmButtonText: 'Yakin hapus?',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tampilkan pesan "Deleting..." sebelum permintaan AJAX
+                    Swal.fire({
+                        title: 'Deleting...',
+                        text: 'Sedang menghapus data...',
+                        icon: 'info',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Mengirim permintaan AJAX DELETE
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}' // Sertakan CSRF token
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Data Anda telah dihapus.",
+                                icon: "success"
+                            }).then(() => {
+                                btn.closest('tr').fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Terjadi kesalahan saat menghapus data.",
+                                icon: "error"
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

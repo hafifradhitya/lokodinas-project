@@ -3,8 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Welcome Administrator-</title>
   <link rel="icon" href="{{ asset('foto_identitas/Website DPPKB Karawang 2_JUgtyyIC4x6eZLRfKWazW.png')}}" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -16,6 +17,7 @@
 
   <!-- Flatpickr CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 
 <!-- Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -503,11 +505,11 @@
     </footer>
   </div>
 
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+  
+    <script src="{{ url('assets/js/jquery.min.js') }}"></script>
   {{-- <script src="{{ url('assets/js/ckeditor.js') }}"></script> --}}
   {{-- <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js"></script> --}}
-
-    <script src="{{ url('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="{{ url('assets/js/sweetalert2.js') }}"></script>
     <script src="{{ url('assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src="{{ url('assets/js/argon.js') }}"></script>
@@ -531,7 +533,7 @@
         CKEDITOR.replace('keterangan');
     </script>
   <script>
-    CKEDITOR.replace('deskripsi');
+    CKEDITOR.replace('isi_deskripsi');
   </script>
   <script>
     CKEDITOR.replace('alamat');

@@ -12,7 +12,8 @@ class Menuwebsite extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_menu';
     protected $table = 'menu';
-    protected $fillable = ['id_menu', 'nama_menu', 'link', 'aktif', 'position', 'urutan']; // Kolom yang dapat diisi
+    protected $fillable = ['id_menu', 'deskripsi', 'id_parent', 'nama_menu', 'link', 'aktif', 'position', 'urutan'];
+
 
     public function parent()
     {

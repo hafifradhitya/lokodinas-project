@@ -52,10 +52,17 @@ class MenuwebsiteController extends Controller
             'link' => 'required|string|max:255',
             'position' => 'required|in:Top,Bottom',
             'urutan' => 'required|integer',
-            'deskripsi' => 'required|string',
-        ]);
+            'deskripsi' => 'required|string'
+        ]);  
 
-        Menuwebsite::create($validated);
+        Menuwebsite::create([
+            "id_parent" => $validated['id_parent'],
+            "nama_menu" => $validated['nama_menu'],
+            "link" => $validated['link'],
+            "position" => $validated['position'],
+            "urutan" => $validated['urutan'],
+            "deskripsi" => $validated['deskripsi']
+        ]);
 
         return response()->json([
             'url' => route('administrator.menuwebsite.index'),
@@ -63,7 +70,6 @@ class MenuwebsiteController extends Controller
             'message' => 'Data MenuWebsite Berhasil Ditambah'
         ]);
     }
-
 
     public function edit(string $id_menu): View
     {
