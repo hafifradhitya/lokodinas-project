@@ -22,18 +22,18 @@ class MainController extends Controller
     public function index()
     {
         $identitas = Identitaswebsite::first();
-        $banners = Bannerslider::all();
-        $alamat = Alamatkontak::first();
+        // $banners = Bannerslider::all();
+        // $alamat = Alamatkontak::first();
         $logo = Logo::orderBy('id_logo', 'DESC')->first();
-        $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
-        $beritas = Berita::all();
-        $infos = Sekilasinfo::all();
-        $agendas = Agenda::all();
-        $menus = Menuwebsite::where('id_parent', 0)
-        ->with('children.children') // Menyertakan children hingga 2 level
-            ->orderBy('position', 'asc')
-            ->get();
-        return view('dinas-1.dashboard', compact('identitas', 'alamat', 'logo', 'menus','banners','beritas','infos','agendas'));
+        // $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
+        // $beritas = Berita::all();
+        // $infos = Sekilasinfo::all();
+        // $agendas = Agenda::all();
+        // $menus = Menuwebsite::where('id_parent', 0)
+        // ->with('children.children') // Menyertakan children hingga 2 level
+        //     ->orderBy('position', 'asc')
+        //     ->get();
+        return view('dinas-3.layout', compact('identitas','logo'));
     }
 
     /**
