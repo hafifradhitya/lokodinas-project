@@ -69,6 +69,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::resource('playlistvideo', PlaylistvideoController::class);
     Route::resource('video', VideoController::class);
     Route::resource('tagvideo', TagvideoController::class);
+
     Route::resource('manajemenuser', ManajemenuserController::class);
     //Route::get('manajemenuser/delete_akses', [ManajemenuserController::class, 'delete_akses'])->name('manajemenuser.delete_akses');
     Route::get('manajemenuser/delete_akses/{id_umod}/{user_id}', [ManajemenuserController::class, 'delete_akses'])->name('manajemenuser.delete_akses');
@@ -76,7 +77,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::resource('sekilasinfo', SekilasinfoController::class);
     Route::resource('jejakpendapat', JejakpendapatController::class);
     Route::resource('downloadarea', DownloadareaController::class);
-    Route::resource('menuwebsite', MenuwebsiteController::class); 
+    Route::resource('menuwebsite', MenuwebsiteController::class);
     Route::resource('bannerslider', BannersliderController::class);
     Route::resource('bannerhome', BannerhomeController::class);
     Route::resource('iklansidebar', IklansidebarController::class);
