@@ -1,5 +1,5 @@
 @extends('administrator.layout')
-  
+
 @section('content')
 <?php
 $gambar = "profile.png";
@@ -7,7 +7,7 @@ if($halamanbaru->gambar != NULL){
     $gambar = $halamanbaru->gambar;
 }
 ?>
-  
+
 <div class="card card-shadow">
     <div class="card-body">
         <form action="{{ route('administrator.halamanbaru.update', $halamanbaru->id_halaman) }}" method="POST" enctype="multipart/form-data" class="form-ajax">
@@ -45,7 +45,7 @@ if($halamanbaru->gambar != NULL){
                 </tbody>
             </table>
             <div class="mt-4 d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
                 <a href="{{ route('administrator.halamanbaru.index') }}" class="btn btn-danger">Cancel</a>
             </div>
         </form>

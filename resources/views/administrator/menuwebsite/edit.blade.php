@@ -76,7 +76,7 @@
                             </tr>
                             <tr>
                                 <th style="padding: 5px;">Urutan</th>
-                                <td style="padding: 5px;">  
+                                <td style="padding: 5px;">
                                     {{-- <textarea type="text" class="form-control" name="deskripsi" placeholder="Masukkan Deskripsi">{{ $menu->deskripsi }}</textarea> --}}
                                     <input type="number" class="form-control" id="urutan" name="urutan" value="{{ $menu->urutan }}">
                                 </td>

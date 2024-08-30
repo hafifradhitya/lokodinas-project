@@ -4,9 +4,9 @@
     <div class="card shadow">
         <div class="card-header">
             <h3 class="mb-0">Edit Berita</h3>
-        </div>  
+        </div>
         <div class="card-body">
-            <form action="{{ route('administrator.berita.update', $berita->id_berita) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('administrator.berita.update', $berita->id_berita) }}" method="POST" enctype="multipart/form-data" class="form-ajax">
                 @csrf
                 @method('PUT')
                 <table class="table" style="border: none; border-collapse: collapse;">
@@ -67,7 +67,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>  
+                        <tr>
                             <th style="padding: 5px;">Berita Utama</th>
                             <td style="padding: 5px;">
                                 <div class="form-check form-check-inline">
@@ -144,7 +144,7 @@
                     </tbody>
                 </table>
                 <div class="mt-4 d-flex justify-content-between">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Perbarui</button>
                     <a href="{{ route('administrator.berita.index') }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
@@ -167,4 +167,85 @@
             }
         }
     </script>
+@endsection
+
+
+@section('script')
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).on('click', '.btn-delete', function() {
+            let btn =$(this);
+            Swal.fire({
+               icon:'warning',
+               text:'Data yang sudah di hapus tidak dapat dikembalikan!',
+               title:'Apakah Anda yakin ingin menghapus data ini?',
+               showCancelButton: true,
+               confirmButtonColor:'#D33',
+               confirmButtonText:'Yakin hapus?',
+               cancelButtonText:'Batal'
+            }).then((result)=>{
+                if (result.isConfirmed){
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                    document.location = btn.data('url');
+                }
+            });
+        });
+        $('.form-ajax').each(function() {
+                $(this).bind('submit', function(e) {
+                    e.preventDefault();
+
+                    for (instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].updateElement();
+                    }
+
+                    let form = $(this);
+                    $.ajax({
+                        url: form.prop('action'),
+                        data: new FormData(this),
+                        cache: false,
+                        async: false,
+                        type: 'post',
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                        if (data.success === false) {
+                            Swal.fire({
+                                icon: 'error',
+                                html: data.message,
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result)=>{
+                                    console.log(result);
+                                    document.location = data.url;
+                                });
+
+
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+{{-- <script>
+    CKEDITOR.replace('deskripsi');
+</script> --}}
 @endsection

@@ -68,8 +68,11 @@ class BannerhomeController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.bannerhome.index')->with('success', 'Banner home berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.bannerhome.index'),
+            'success' => true,
+            'message' => 'Data Banner Home Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -119,22 +122,23 @@ class BannerhomeController extends Controller
 
         $bannerhomes->update($updateData);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.bannerhome.index')->with('success', 'Banner slider berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.bannerhome.index'),
+            'success' => true,
+            'message' => 'Data Banner Home Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):RedirectResponse
+    public function destroy(string $id)
     {
         //
 
         $bannerhomes = Bannerhome::findOrFail($id);
 
         $bannerhomes->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.bannerhome.index')->with('success', 'Banner slider berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

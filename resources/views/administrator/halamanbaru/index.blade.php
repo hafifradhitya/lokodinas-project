@@ -57,7 +57,7 @@
                 </div>
                 @endif
             </form>
-  
+
             <div class="table-responsive py-4">
             <table class="table table-bordered" id="datatable-basic">
                 <thead class="thead-light">
@@ -72,7 +72,7 @@
                 <tbody>
                 @foreach ($halamanbaru as $index => $page)
                 <tr>
-                    <td>{{ $index + $halamanbaru->firstItem() }}</td>
+                    <td>{{ $loop->iteration + $halamanbaru->firstItem() - 1 }}</td>
                     <td>{{ $page->judul }}</td>
                     <td><a href="{{ url('halaman/detail/' . $page->judul_seo) }}">halaman/detail/{{ $page->judul_seo }}</a></td>
                     <td>{{ \Carbon\Carbon::parse($page->tgl_posting)->format('d M Y') }}</td>
@@ -80,7 +80,7 @@
                         <a href="{{ route('administrator.halamanbaru.edit', $page->id_halaman) }}" class="btn btn-success btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                         <i class="fa fa-edit"></i>
                         </a>
-                        <button 
+                        <button
                             data-url="{{ route('administrator.halamanbaru.destroy', $page->id_halaman) }}"
                             type="submit"
                             class="btn-delete btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
@@ -108,6 +108,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault(); // Mencegah aksi default
 
@@ -149,8 +150,12 @@
                                 text: "Data Anda telah dihapus.",
                                 icon: "success"
                             }).then(() => {
+                                // Hapus baris tabel
                                 btn.closest('tr').fadeOut(500, function() {
                                     $(this).remove();
+
+                                    // Perbarui nomor urut setelah elemen dihapus
+                                    updateRowNumbers();
                                 });
                             });
                         },
@@ -165,6 +170,14 @@
                 }
             });
         });
+
+        // Fungsi untuk memperbarui nomor urut
+        function updateRowNumbers() {
+            let startingIndex = {{ $halamanbaru->firstItem() - 1 }};
+            $('table tbody tr').each(function(index) {
+                $(this).find('td:first-child').text(startingIndex + index + 1);
+            });
+        }
     });
 </script>
 @endsection

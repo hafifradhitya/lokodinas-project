@@ -49,7 +49,7 @@ class JejakpendapatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -67,9 +67,11 @@ class JejakpendapatController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Jejak pendapat berhasil Ditambah");
-        return redirect()->route('administrator.jejakpendapat.index')->with(['success' => 'Jejak pendapat berhasil Ditambah']);
-
+        return response()->json([
+            'url' => route('administrator.jejakpendapat.index'),
+            'success' => true,
+            'message' => 'Data Jajak Pendapat Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -93,7 +95,7 @@ class JejakpendapatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id_poling):RedirectResponse
+    public function update(Request $request, string $id_poling)
     {
         //
         $validated = $request->validate([
@@ -110,8 +112,11 @@ class JejakpendapatController extends Controller
             "aktif" => $request->aktif ?? 'Y'
         ]);
 
-        session()->flash("pesan", "Jejak pendapat berhasil Diubah");
-        return redirect()->route('administrator.jejakpendapat.index')->with(['success' => 'Jejak pendapat berhasil Diubah']);
+        return response()->json([
+            'url' => route('administrator.jejakpendapat.index'),
+            'success' => true,
+            'message' => 'Data Jajak Pendapat Berhasil Diperbarui'
+        ]);
     }
 
     /**
@@ -120,10 +125,8 @@ class JejakpendapatController extends Controller
     public function destroy(string $id_poling)
     {
         //
-        $poling = Poling::findOrFail($id_poling);
+        $poling = Poling::findOrFail($id_poling); 
         $poling->delete();
-
-        session()->flash("pesan", "Jejak pendapat berhasil Dihapus");
-        return redirect()->route('administrator.jejakpendapat.index')->with(['success' => 'Jejak pendapat berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

@@ -11,5 +11,5 @@ class Sekilasinfo extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_sekilas';
     protected $table = 'sekilasinfo';
-    protected $fillable = ['gambar','info','aktif','tgl_posting'];
+    protected $fillable = ['id_sekilas', 'gambar','info','aktif','tgl_posting'];
 }

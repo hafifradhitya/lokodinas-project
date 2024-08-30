@@ -36,7 +36,7 @@ class AgendaController extends Controller
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
         }
-
+  
         return view('administrator.agenda.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'agendas'));
     }
 
@@ -45,7 +45,7 @@ class AgendaController extends Controller
      * Show the form for creating a new resource.
      */
     public function create():View
-    {
+    { 
         //
         return view('administrator.agenda.create');
     }
@@ -98,8 +98,11 @@ class AgendaController extends Controller
             "username" => $username,
         ]);
 
-        session()->flash("pesan", "Agenda berhasil Ditambah");
-        return redirect()->route('administrator.agenda.index')->with('success', 'Agenda berhasil ditambahkan.');
+        return response()->json([
+            'url' => route('administrator.agenda.index'),
+            'success' => true,
+            'message' => 'Data Agenda Berhasil Ditambah'
+        ]);
     }
 
 
@@ -170,21 +173,22 @@ class AgendaController extends Controller
             "pengirim" => $validated['pengirim']
         ]);
 
-        session()->flash("pesan", "Agenda berhasil Diperbarui");
-        return redirect()->route('administrator.agenda.index')->with(['success' => 'Agenda berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.agenda.index'),
+            'success' => true,
+            'message' => 'Data Agenda Berhasil Diperbarui'
+        ]);
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_agenda):RedirectResponse
+    public function destroy(string $id_agenda)
     {
         //
         $agenda = Agenda::findOrFail($id_agenda);
         $agenda->delete();
-
-        session()->flash("pesan", "Agenda berhasil Dihapus");
-        return redirect()->route('administrator.agenda.index')->with(['success'=>'Agenda berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

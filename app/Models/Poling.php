@@ -11,5 +11,5 @@ class Poling extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_poling';
     protected $table = 'poling';
-    protected $fillable = ['pilihan','status','rating','aktif','username'];
+    protected $fillable = ['id_poling', 'pilihan','status','rating','aktif','username'];
 }

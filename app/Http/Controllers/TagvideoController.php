@@ -43,7 +43,7 @@ class TagvideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -59,8 +59,11 @@ class TagvideoController extends Controller
             'count' => 0 // Tambahkan ini
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.tagvideo.index')->with(['success'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.tagvideo.index'),
+            'success' => true,
+            'message' => 'Data Tag Video Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -102,21 +105,23 @@ class TagvideoController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.tagvideo.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.tagvideo.index'),
+            'success' => true,
+            'message' => 'Data Tag Video Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_tag):RedirectResponse
+    public function destroy(string $id_tag)
     {
         //
         $tagvid = Tagvideo::findOrFail($id_tag);
 
         $tagvid->delete();
 
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.tagvideo.index')->with(['success', 'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

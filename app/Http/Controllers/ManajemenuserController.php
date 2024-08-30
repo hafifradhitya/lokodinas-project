@@ -59,7 +59,7 @@ class ManajemenuserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -122,8 +122,11 @@ class ManajemenuserController extends Controller
         }
 
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.manajemenuser.index')->with(['succes'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.manajemenuser.index'),
+            'success' => true,
+            'message' => 'Data User Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -244,21 +247,22 @@ class ManajemenuserController extends Controller
             }
         }
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.manajemenuser.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.manajemenuser.index'),
+            'success' => true,
+            'message' => 'Data User Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):RedirectResponse
+    public function destroy(string $id)
     {
         //
         $users = User::findOrFail($id);
         $users->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.manajemenuser.index')->with(['success'=>'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 
 

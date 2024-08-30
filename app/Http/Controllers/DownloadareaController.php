@@ -51,7 +51,7 @@ class DownloadareaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
 
@@ -78,8 +78,11 @@ class DownloadareaController extends Controller
             "hits" => 0
         ]);
 
-        session()->flash("pesan", "File berhasil ditambahkan");
-        return redirect()->route('administrator.downloadarea.index')->with(['success' => 'File berhasil ditambahkan']);
+        return response()->json([
+            'url' => route('administrator.downloadarea.index'),
+            'success' => true,
+            'message' => 'Data Download Area Berhasil Ditambah'
+        ]);
     }
 
 
@@ -128,13 +131,13 @@ class DownloadareaController extends Controller
             'judul' => 'required|string|max:255',
             'file' => 'nullable|file|mimes:pdf,doc,docx,xls,txt,xlsx,ppt,pptx,txt|max:2048'
         ]);
-
+  
         $download = Downloadarea::findOrFail($id_download);
 
         $judul = $request->judul;
 
-        if ($request->hasFile('file')) {
-            $file = $request->file("file");
+        if ($request->hasFile('nama_file')) {
+            $file = $request->file("nama_file");
             $namaFile = $file->getClientOriginalName();
             $file->move("./downloads/", $namaFile);
             $download->nama_file = $namaFile;
@@ -145,8 +148,11 @@ class DownloadareaController extends Controller
             "tgl_posting" => now(),
         ]);
 
-        session()->flash("pesan", "File berhasil Diperbarui");
-        return redirect()->route('administrator.downloadarea.index')->with(['success' => 'File berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.downloadarea.index'),
+            'success' => true,
+            'message' => 'Data Download Area Berhasil Diperbarui'
+        ]);
     }
 
     /**
@@ -157,7 +163,6 @@ class DownloadareaController extends Controller
         //
         $download = Downloadarea::findOrFail($id_download);
         $download->delete();
-        session()->flash("pesan", "Berita berhasil Dihapus");
-        return redirect()->route('administrator.downloadarea.index')->with(['success' => 'Berita berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

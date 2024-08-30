@@ -53,7 +53,7 @@ class MenuwebsiteController extends Controller
             'position' => 'required|in:Top,Bottom',
             'urutan' => 'required|integer',
             'deskripsi' => 'required|string'
-        ]);  
+        ]);
 
         Menuwebsite::create([
             "id_parent" => $validated['id_parent'],
@@ -67,7 +67,7 @@ class MenuwebsiteController extends Controller
         return response()->json([
             'url' => route('administrator.menuwebsite.index'),
             'success' => true,
-            'message' => 'Data MenuWebsite Berhasil Ditambah'
+            'message' => 'Data Menu Website Berhasil Ditambah'
         ]);
     }
 
@@ -100,7 +100,7 @@ class MenuwebsiteController extends Controller
         return response()->json([
             'url' => route('administrator.menuwebsite.index'),
             'success' => true,
-            'message' => 'Data MenuWebsite Berhasil Diperbaharui'
+            'message' => 'Data Menu Website Berhasil Diperbaharui'
         ]);
     }
 

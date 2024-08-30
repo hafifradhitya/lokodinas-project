@@ -29,7 +29,7 @@ class IklansidebarController extends Controller
         }
 
         return view('administrator.iklansidebar.index', compact(['iklansidebar']));
-    }
+    }  
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +43,7 @@ class IklansidebarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -70,8 +70,11 @@ class IklansidebarController extends Controller
             'username' => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.iklansidebar.index')->with('success', 'Banner slider berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.iklansidebar.index'),
+            'success' => true,
+            'message' => 'Data Iklan Sidebar Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -95,7 +98,7 @@ class IklansidebarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
+    public function update(Request $request, string $id)
     {
         //
         $iklansidebar = Iklansidebar::findOrFail($id);
@@ -117,8 +120,11 @@ class IklansidebarController extends Controller
 
         $iklansidebar->update($updateData);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.iklansidebar.index')->with('success', 'Banner slider berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.iklansidebar.index'),
+            'success' => true,
+            'message' => 'Data Iklan Sidebar Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -129,8 +135,6 @@ class IklansidebarController extends Controller
         //
         $iklansidebar = Iklansidebar::findOrFail($id);
         $iklansidebar->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.iklansidebar.index')->with('success', 'Banner slider berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

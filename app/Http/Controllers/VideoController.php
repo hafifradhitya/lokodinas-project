@@ -21,7 +21,7 @@ class VideoController extends Controller
      */
     public function index(Request $request):View
     {
-        //    
+        //
         $search = $request->search;
         if(!empty($search)) {
             $videos = Video::with('playlist')
@@ -29,7 +29,7 @@ class VideoController extends Controller
             ->paginate(10);
         } else {
             $videos = Video::with('playlist')->orderBy('tanggal', 'desc')->paginate(10);
-        }  
+        }
 
         return view('administrator.video.index', compact(['videos']));
     }
@@ -49,7 +49,7 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         // dd($request);
@@ -95,8 +95,11 @@ class VideoController extends Controller
             "hari" => now()->format('l'),
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.video.index')->with(['succes'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.video.index'),
+            'success' => true,
+            'message' => 'Data Video Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -170,20 +173,22 @@ class VideoController extends Controller
             "hari" => now()->format('l'),
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.video.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.video.index'),
+            'success' => true,
+            'message' => 'Data Video Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_video):RedirectResponse
+    public function destroy(string $id_video)
     {
         //
         $videos = Video::findOrFail($id_video);
         $videos->delete();
 
-         session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.video.index')->with(['success'=>'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

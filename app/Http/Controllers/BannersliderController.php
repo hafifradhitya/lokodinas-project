@@ -41,7 +41,7 @@ class BannersliderController extends Controller
     /**
      * Menyimpan banner slider baru ke dalam penyimpanan.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'judul' => 'required',
@@ -65,8 +65,11 @@ class BannersliderController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.bannerslider.index')->with('success', 'Banner slider berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.bannerslider.index'),
+            'success' => true,
+            'message' => 'Data Banner Slider Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -90,7 +93,7 @@ class BannersliderController extends Controller
     /**
      * Memperbarui banner slider tertentu dalam penyimpanan.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, string $id)
     {
         // $validated = $request->validate([
         //     'judul' => 'required|string|max:255',
@@ -116,19 +119,21 @@ class BannersliderController extends Controller
 
         $bannerslider->update($updateData);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.bannerslider.index')->with('success', 'Banner slider berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.bannerslider.index'),
+            'success' => true,
+            'message' => 'Data Banner Slider Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Menghapus banner slider tertentu dari penyimpanan.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
         $bannerslider = Bannerslider::findOrFail($id);
         $bannerslider->delete();
 
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.bannerslider.index')->with('success', 'Banner slider berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

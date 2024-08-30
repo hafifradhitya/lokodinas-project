@@ -8,7 +8,7 @@
           <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="mb-0">Menu Website</h3>
               <a href="{{ route('administrator.menuwebsite.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
-          </div>  
+          </div>
 
           <!-- Tambahkan form pencarian -->
           <div class="card-body">
@@ -58,7 +58,7 @@
                 <tbody>
                 @foreach ($menuwebs as $index => $menu)
                     <tr>
-                            <td>{{ $index + $menuwebs->firstItem() }}</td>
+                            <td>{{ $loop->iteration + $menuwebs->firstItem() - 1 }}</td>
                             <td>{{ $menu->nama_menu }}</td>
                             <td>{{ $menu->parent ? $menu->parent->nama_menu : 'Menu Utama' }}</td>
                             <td>{{ $menu->link }}</td>
@@ -85,7 +85,7 @@
             </div>
         </div>
       </div>
-    </div>  
+    </div>
 </div>
 @endsection
 
@@ -97,6 +97,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $(document).on('click', '.btn-delete', function(e) {
             e.preventDefault(); // Mencegah aksi default
 
@@ -138,8 +139,12 @@
                                 text: "Data Anda telah dihapus.",
                                 icon: "success"
                             }).then(() => {
+                                // Hapus baris tabel
                                 btn.closest('tr').fadeOut(500, function() {
                                     $(this).remove();
+
+                                    // Perbarui nomor urut setelah elemen dihapus
+                                    updateRowNumbers();
                                 });
                             });
                         },
@@ -151,9 +156,18 @@
                             });
                         }
                     });
-                }
+                } 
             });
         });
+
+        // Fungsi untuk memperbarui nomor urut
+        function updateRowNumbers() {
+            let startingIndex = {{ $menuwebs->firstItem() - 1 }};
+            $('table tbody tr').each(function(index) {
+                $(this).find('td:first-child').text(startingIndex + index + 1);
+            });
+        }
     });
 </script>
 @endsection
+

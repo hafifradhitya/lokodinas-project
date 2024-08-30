@@ -45,7 +45,7 @@ class ManajemenmodulController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $nama_modul = $request->nama_modul;
@@ -70,8 +70,11 @@ class ManajemenmodulController extends Controller
             'link_seo' => ''
         ]);
 
-        session()->flash("pesan", "MenuWebsite berhasil Ditambah");
-        return redirect()->route('administrator.manajemenmodul.index')->with(['success'=>'Berita berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.manajemenmodul.index'),
+            'success' => true,
+            'message' => 'Data Modul Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -127,8 +130,11 @@ class ManajemenmodulController extends Controller
 
         $manajemenmodul->update($updateData);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.manajemenmodul.index')->with('success', 'Banner slider berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.manajemenmodul.index'),
+            'success' => true,
+            'message' => 'Data Modul Berhasil Diperbarui'
+        ]);
     }
 
     /**
@@ -139,8 +145,6 @@ class ManajemenmodulController extends Controller
         //
         $manajemenmodul = Manajemenmodul::findOrFail($id);
         $manajemenmodul->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.manajemenmodul.index')->with('success', 'Banner slider berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

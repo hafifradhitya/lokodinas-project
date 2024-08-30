@@ -121,14 +121,14 @@
                     document.location = btn.data('url');
                 }
             });
-        });  
+        });
 
         $('.form-ajax').each(function() {
             $(this).bind('submit', function(e) {
                 e.preventDefault();
 
                 let form = $(this);
-                
+
                 // Menyinkronkan data dari CKEditor ke textarea
                 for (var instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();

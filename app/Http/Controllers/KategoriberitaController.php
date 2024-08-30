@@ -22,7 +22,7 @@ class KategoriberitaController extends Controller
      */
     public function index(Request $request):View
     {
-        //  
+        //
         $search = $request->search;
         $sidebar = $request->sidebar;
 
@@ -62,7 +62,7 @@ class KategoriberitaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -81,8 +81,11 @@ class KategoriberitaController extends Controller
             'username' => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.kategoriberita.index')->with(['success'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.kategoriberita.index'),
+            'success' => true,
+            'message' => 'Data Kategori Berita Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -128,21 +131,23 @@ class KategoriberitaController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.kategoriberita.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.kategoriberita.index'),
+            'success' => true,
+            'message' => 'Data Kategori Berita Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_kategori):RedirectResponse
+    public function destroy(string $id_kategori)
     {
         //
         $kategori = Kategori::findOrFail($id_kategori);
 
         $kategori->delete();
 
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.kategoriberita.index')->with(['success', 'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

@@ -50,19 +50,19 @@ class SekilasinfoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
             'info' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $info = $request->info;
         $gambarName = null;
 
-        if ($request->hasFile('foto')) {
-            $gambar = $request->file("foto");
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file("gambar");
             $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_info/", $gambarName);
         }
@@ -72,10 +72,13 @@ class SekilasinfoController extends Controller
             "aktif" => $request->aktif ?? 'Y',
             "tgl_posting" => now(),
             "gambar" => $gambarName
-        ]);
+        ]);  
 
-        session()->flash("pesan", "Info sekilas berhasil Ditambah");
-        return redirect()->route('administrator.sekilasinfo.index')->with(['success' => 'Info sekilas berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.sekilasinfo.index'),
+            'success' => true,
+            'message' => 'Data Sekilasinfo Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -125,28 +128,29 @@ class SekilasinfoController extends Controller
             "tgl_posting" => now()
         ]);
 
-        session()->flash("pesan", "Info sekilas berhasil Diubah");
-        return redirect()->route('administrator.sekilasinfo.index')->with(['success' => 'Info sekilas berhasil Diubah']);
+        return response()->json([
+            'url' => route('administrator.sekilasinfo.index'),
+            'success' => true,
+            'message' => 'Data Sekilasinfo Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_sekilas):RedirectResponse
-    {
-        //
-        $info = Sekilasinfo::findOrFail($id_sekilas);
+    public function destroy(string $id_sekilas)
+{
+    $info = Sekilasinfo::findOrFail($id_sekilas);
 
-        // Hapus gambar terkait jika ada
-        if ($info->gambar && file_exists("./foto_info/" . $info->gambar)) {
-            unlink("./foto_info/" . $info->gambar);
-        }
-
-        // Hap
-
-        $info->delete();
-
-        session()->flash("pesan", "info berhasil Dihapus");
-        return redirect()->route('administrator.sekilasinfo.index')->with(['success' => 'info berhasil Dihapus']);
+    // // Hapus gambar terkait jika ada
+    if ($info->gambar && file_exists("./foto_info/" . $info->gambar)) {
+        unlink("./foto_info/" . $info->gambar);
     }
+
+    $info->delete();
+
+    // Pastikan Anda mengembalika response JSON
+    return response()->json(['message' => 'Data berhasil dihapus.']);
+}
+
 }

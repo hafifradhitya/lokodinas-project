@@ -44,7 +44,7 @@ class PlaylistvideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -72,8 +72,11 @@ class PlaylistvideoController extends Controller
             "aktif" => $aktif
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.playlistvideo.index')->with(['succes'=>'Data berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.playlistvideo.index'),
+            'success' => true,
+            'message' => 'Data Playlist Video Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -82,7 +85,7 @@ class PlaylistvideoController extends Controller
     public function show(string $id)
     {
         //
-       
+
     }
 
     /**
@@ -126,20 +129,22 @@ class PlaylistvideoController extends Controller
             "aktif" => $aktif
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.playlistvideo.index')->with(['success' => 'Data berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.playlistvideo.index'),
+            'success' => true,
+            'message' => 'Data Playlist Video Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_playlist):RedirectResponse
+    public function destroy(string $id_playlist)
     {
         //
         $playlistvideos = Playlistvideo::findOrFail($id_playlist);
         $playlistvideos->delete();
 
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.playlistvideo.index')->with(['success'=>'Data berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

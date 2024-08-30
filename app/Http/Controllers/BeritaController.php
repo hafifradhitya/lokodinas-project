@@ -58,7 +58,7 @@ class BeritaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
 
         $validated = $request->validate([
@@ -86,7 +86,7 @@ class BeritaController extends Controller
             $tag=implode(',',$tag_seo);
         }else{
             $tag = '';
-        }  
+        }
 
         Berita::create([
             "judul" => $judul,
@@ -113,10 +113,11 @@ class BeritaController extends Controller
         //     $berita->tags()->attach($request->tag);
         // }
 
-
-
-        session()->flash("pesan", "Berita berhasil Ditambah");
-        return redirect()->route('administrator.berita.index')->with(['success'=>'Berita berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.berita.index'),
+            'success' => true,
+            'message' => 'Data Berita Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -195,21 +196,23 @@ class BeritaController extends Controller
             "username" => $username
         ]);
 
-        session()->flash("pesan", "Berita berhasil Diperbarui");
-        return redirect()->route('administrator.berita.index')->with(['success' => 'Berita berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.berita.index'),
+            'success' => true,
+            'message' => 'Data Berita Berhasil Diperbaharui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_berita):RedirectResponse
+    public function destroy(string $id_berita)
     {
         //
         $berita = Berita::findOrFail($id_berita);
         $berita->delete();
 
-        session()->flash("pesan", "Berita berhasil Dihapus");
-        return redirect()->route('administrator.berita.index')->with(['success'=>'Berita berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 
     public function publish(string $id_berita): RedirectResponse
