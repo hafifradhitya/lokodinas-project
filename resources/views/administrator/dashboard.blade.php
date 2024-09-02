@@ -72,8 +72,6 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Application Buttons</h3>
-                    <p>Silakan klik menu pilihan yang berada di sebelah kiri untuk mengelola konten website anda atau pilih ikon-ikon pada Control Panel di bawah ini:</p>
                     <div class="row">
                         <div class="col-3 mb-3">
                             <a class="btn btn-secondary d-flex flex-column align-items-center justify-content-center h-100 p-2 w-100 border-0 hover-border-dark " href="{{ route('administrator.identitaswebsite.edit') }}">
@@ -238,7 +236,7 @@
                             </a>
                         </div>
                         <div class="col-3 mb-3">
-                            <a class="btn btn-secondary d-flex flex-column align-items-center justify-content-center h-100 p-2 w-100 border-0 hover-border-dark">
+                            <a class="btn btn-secondary d-flex flex-column align-items-center justify-content-center h-100 p-2 w-100 border-0 hover-border-dark" href="{{ url('administrator/manajemenuser') }}">
                                 <i class="fa fa-users fa-2x mb-1 mx-auto"></i>
                                 <span class="small">Users</span>
                             </a>

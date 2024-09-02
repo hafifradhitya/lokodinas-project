@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\Album;
+use App\Models\Berita;
+use App\Models\Halamanbaru;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str; // Tambahkan baris ini
@@ -24,9 +28,14 @@ class AlbumController extends Controller
                 ->paginate(10);
         } else {
             $albums = Album::orderBy('id_album', 'DESC')->paginate(10);
+
+            $berita['total_berita'] = Berita::count();
+            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+            $agenda['total_agenda'] = Agenda::count();
+            $users['total_users'] = User::count();
         }
 
-        return view('administrator.album.index', compact('albums'));
+        return view('administrator.album.index', compact('berita', 'halamanbaru', 'agenda', 'users' ,'albums'));
     }
 
     /**
@@ -41,7 +50,7 @@ class AlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -54,7 +63,7 @@ class AlbumController extends Controller
 
         if ($request->hasFile('cover')) {
             $gambar = $request->file("cover");
-            $gambarName = $judul . "_" . Str::random(25) . "." . $gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./img_album/", $gambarName);
         }
 
@@ -70,8 +79,11 @@ class AlbumController extends Controller
             "username" => 'admin',
         ]);
 
-        session()->flash("pesan", "album berhasil Ditambah");
-        return redirect()->route('administrator.album.index')->with(['success' => 'album berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.album.index'),
+            'success' => true,
+            'message' => 'Data Album Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -112,7 +124,7 @@ class AlbumController extends Controller
         
         if ($request->hasFile('cover')) {
             $gambar = $request->file("cover");
-            $gambarName = $judul . "_" . Str::random(25) . "." . $gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./img_album/", $gambarName);
         }
         
@@ -123,8 +135,11 @@ class AlbumController extends Controller
             "aktif" => $request->aktif ?? 'Y', 
         ]);
         
-        session()->flash("pesan", "Album berhasil diperbarui");
-        return redirect()->route('administrator.album.index')->with(['success' => 'Album berhasil diperbarui']);
+        return response()->json([
+            'url' => route('administrator.album.index'),
+            'success' => true,
+            'message' => 'Data Album Berhasil Diperbarui'
+        ]);
         
     }
 
@@ -136,8 +151,6 @@ class AlbumController extends Controller
         //
         $album = Album::findOrFail($id_album);
         $album->delete();
-
-        session()->flash("pesan", "album berhasil Dihapus");
-        return redirect()->route('administrator.album.index')->with(['success' => 'info berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

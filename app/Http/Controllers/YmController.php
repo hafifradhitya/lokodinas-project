@@ -39,7 +39,7 @@ class YmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
         // Validasi input
@@ -56,9 +56,11 @@ class YmController extends Controller
             'ym_icon' => $validated['ym_icon'],
         ]);
 
-        // Flash pesan sukses
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.ym.index')->with('success', 'Yahoo Messenger berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.ym.index'),
+            'success' => true,
+            'message' => 'Data Yahoo Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -102,9 +104,11 @@ class YmController extends Controller
             'ym_icon' => $validated['ym_icon'],
         ]);
 
-        // Flash pesan sukses
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.ym.index')->with('success', 'Yahoo Messenger berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.ym.index'),
+            'success' => true,
+            'message' => 'Data Yahoo Berhasil Diperbarui'
+        ]);
     }
 
     /**
@@ -116,8 +120,6 @@ class YmController extends Controller
         $ym = Ym::findOrFail($id);
 
         $ym->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.ym.index')->with('success', 'yahoo messanger berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

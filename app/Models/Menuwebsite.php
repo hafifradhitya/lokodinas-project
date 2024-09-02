@@ -13,7 +13,7 @@ class Menuwebsite extends Model
     protected $primaryKey = 'id_menu';
     protected $table = 'menu';
     protected $fillable = ['id_menu', 'deskripsi', 'id_parent', 'nama_menu', 'link', 'aktif', 'position', 'urutan'];
-
+  
 
     public function parent()
     {

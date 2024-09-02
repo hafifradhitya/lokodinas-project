@@ -3,19 +3,21 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\HasMenuAccess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, HasMenuAccess, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'menu_access' => 'array',
+    ];
 
      public $timestamps = false;
      protected $primaryKey = 'id';
@@ -59,4 +61,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Usermodul::class, 'id_session', 'id_session');
     }
+
+    // public function hasAccessTo($modulName)
+    // {
+    //     // Cek apakah pengguna adalah admin
+    //     if ($this->level == 'admin') {
+    //         return true;
+    //     }
+
+    //     // Cek apakah pengguna memiliki akses ke modul tertentu
+    //     $modul = Manajemenmodul::where('nama_modul', $modulName)->first();
+    //     if ($modul && in_array($modul->id_modul, $this->menu_access)) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 }

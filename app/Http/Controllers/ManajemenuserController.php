@@ -31,7 +31,7 @@ class ManajemenuserController extends Controller
             ->paginate(10);
         } else {
             $users = User::orderBy('username', 'desc')->paginate(10);
-        }
+        }  
 
         return view('administrator.manajemenuser.index', compact(['users']));
     }
@@ -54,7 +54,7 @@ class ManajemenuserController extends Controller
         //
         $moduls = Manajemenmodul::all();
         return view('administrator.manajemenuser.create', compact(['moduls']));
-    }
+    }  
 
     /**
      * Store a newly created resource in storage.
@@ -78,7 +78,7 @@ class ManajemenuserController extends Controller
 
         if ($request->hasFile('foto')) {
             $foto = $request->file("foto");
-            $fotoName = $username."_".Str::random(25).".".$foto->getClientOriginalExtension();
+            $fotoName = $foto->getClientOriginalName();
             $foto->move("./foto_user/", $fotoName);
         }
 
@@ -156,7 +156,7 @@ class ManajemenuserController extends Controller
     //     return view('administrator.manajemenuser.edit', compact('users', 'akses', 'moduls'));
     // }
 
-    public function edit(string $id):View
+    public function edit(string $id): View
     {
         $users = User::findOrFail($id);
         $akses = DB::table('users')
@@ -165,12 +165,10 @@ class ManajemenuserController extends Controller
             ->where('users.id', $id)
             ->orderBy('users_modul.id_umod', 'DESC')
             ->get();
-
+    
         $moduls = Manajemenmodul::all();
-
-        // Siapkan array id_modul yang sudah dimiliki user
         $akses_user = $akses->pluck('id_modul')->toArray();
-
+    
         return view('administrator.manajemenuser.edit', compact('users', 'akses', 'moduls', 'akses_user'));
     }
 
@@ -208,7 +206,7 @@ class ManajemenuserController extends Controller
 
         if ($request->hasFile('foto')) {
             $foto = $request->file("foto");
-            $fotoName = $username."_".Str::random(25).".".$foto->getClientOriginalExtension();
+            $fotoName = $foto->getClientOriginalName();
             $foto->move("./foto_user/", $fotoName);
             $users->foto = $fotoName;
         }

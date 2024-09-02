@@ -31,16 +31,16 @@
                    <div class="card-body px-lg-5 py-lg-5">
                      <div class="text-center text-muted mb-4">
                        <h1>Log in</h1>
-                       <small>Use your Email to Continue</small>
+                       <small>Use your Full name to Continue</small>
                      </div>
                      <form method="POST" action="{{ route('login') }}">
                        @csrf
                        <div class="form-group mb-3">
                          <div class="input-group input-group-merge input-group-alternative">
                            <div class="input-group-prepend">
-                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                             <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                            </div>
-                           <input class="form-control" placeholder="Email" name="email" type="email">
+                           <input class="form-control" placeholder="Full name" name="username" type="text">
                          </div>
                        </div>
                        <div class="form-group mb-2">

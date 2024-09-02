@@ -92,20 +92,21 @@ class KomentarvideoController extends Controller
             "jam_komentar" => now()
         ]);
 
-        session()->flash("pesan", "Komentar Video berhasil Diperbarui");
-        return redirect()->route('administrator.komentarvideo.index')->with(['success' => 'Komentar Video berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.komentarvideo.index'),
+            'success' => true,
+            'message' => 'Data Komentar Video Berhasil Diperbaharui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_komentar):RedirectResponse
+    public function destroy(string $id_komentar)
     {
         //
         $komentarvideo = Komentarvideo::findOrFail($id_komentar);
         $komentarvideo->delete();
-
-        session()->flash("pesan", "Komentar Video Berhasil Dihapus");
-        return redirect()->route('administrator.komentarvideo.index')->with(['success'=>'Komentar Video berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

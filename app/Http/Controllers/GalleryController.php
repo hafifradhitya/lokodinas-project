@@ -47,7 +47,7 @@ class GalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -61,7 +61,7 @@ class GalleryController extends Controller
 
         if($request->hasFile('gbr_gallery')) {
             $gbr_gallery = $request->file("gbr_gallery");
-            $gambarName = $jdl_gallery."_">Str::random(25).".".$gbr_gallery->getClientOriginalExtension();
+            $gambarName = $gbr_gallery->getClientOriginalName();
             $gbr_gallery->move("./img_gallery", $gambarName);
         }
         $keterangan = $request->keterangan;
@@ -77,8 +77,11 @@ class GalleryController extends Controller
             "id_album" => $validated['id_album'],
         ]);
 
-        session()->flash("pesan", "Gallery berhasil Ditambah");
-        return redirect()->route('administrator.gallery.index')->with(['success'=>'Gallery berhasil Ditambah']);
+        return response()->json([
+            'url' => route('administrator.gallery.index'),
+            'success' => true,
+            'message' => 'Data Galley Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -121,7 +124,7 @@ class GalleryController extends Controller
 
         if ($request->hasFile('gbr_gallery')) {
             $gbr_gallery = $request->file("gbr_gallery");
-            $gambarName = $jdl_gallery."_".Str::random(25).".".$gbr_gallery->getClientOriginalExtension();
+            $gambarName = $gbr_gallery->getClientOriginalName();
             $gbr_gallery->move("./img_gallery/", $gambarName);
             $gallery->gbr_gallery = $gambarName;
         }
@@ -135,20 +138,21 @@ class GalleryController extends Controller
             "id_album" => $validated['id_album'],
         ]);
 
-        session()->flash("pesan", "Gallery berhasil Diperbarui");
-        return redirect()->route('administrator.gallery.index')->with(['success' => 'Gallery berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.gallery.index'),
+            'success' => true,
+            'message' => 'Data Galley Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_gallery):RedirectResponse
+    public function destroy(string $id_gallery)
     {
         //
         $gallery = Gallery::findOrFail($id_gallery);
         $gallery->delete();
-
-        session()->flash("pesan", "Gallery berhasil Dihapus");
-        return redirect()->route('administrator.gallery.index')->with(['success'=>'Gallery berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

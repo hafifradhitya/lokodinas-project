@@ -40,7 +40,7 @@ class IklanatasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -55,7 +55,7 @@ class IklanatasController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul . "_" . Str::random(25) . "." . $gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_iklansidebar/", $gambarName);
         }
 
@@ -67,8 +67,11 @@ class IklanatasController extends Controller
             'username' => $username
         ]);
 
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.iklanatas.index')->with('success', 'Banner slider berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.iklanatas.index'),
+            'success' => true,
+            'message' => 'Data Iklan Atas Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -107,15 +110,18 @@ class IklanatasController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $judul."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_iklanatas/", $gambarName);
             $updateData['gambar'] = $gambarName;
         }
 
         $iklanatas->update($updateData);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.iklanatas.index')->with('success', 'Banner slider berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.iklanatas.index'),
+            'success' => true,
+            'message' => 'Data Iklan Atas Berhasil Diperbarui'
+        ]);
     }
 
     /**
@@ -126,8 +132,6 @@ class IklanatasController extends Controller
         //
         $iklanatas = Iklanatas::findOrFail($id_iklanatas);
         $iklanatas->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.iklanatas.index')->with('success', 'Banner slider berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

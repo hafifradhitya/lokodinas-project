@@ -64,20 +64,44 @@
                             </a>
                             <div class="collapse" id="menu-utama">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ route('administrator.identitaswebsite.edit') }}"
-                                            class="nav-link">Identitas Website</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/menuwebsite') }}"
-                                            class="nav-link">Menu Website</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/halamanbaru') }}"
-                                            class="nav-link">Halaman Baru</a>
-                                    </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/identitaswebsite') }}" class="nav-link">Identitas Website</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/menuwebsite') }}" class="nav-link">Menu Website</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/halamanbaru') }}" class="nav-link">Halaman Baru</a>
+                                </li>
                                 </ul>
                             </div>
+                            {{-- <div class="collapse" id="menu-utama">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasAccessTo('identitaswebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/identitaswebsite') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Identitas Website
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('menuwebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/menuwebsite') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Menu Website
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('halamanbaru'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/halamanbaru') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Halaman Baru
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div> --}}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-berita" data-toggle="collapse" role="button"
@@ -87,20 +111,44 @@
                             </a>
                             <div class="collapse" id="modul-berita">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/berita') }}"
-                                            class="nav-link">Berita</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/kategoriberita') }}"
-                                            class="nav-link">Kategori Berita</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/tagberita') }}"
-                                            class="nav-link">Tag Berita</a>
-                                    </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/berita') }}" class="nav-link">Berita</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/kategoriberita') }}" class="nav-link">Kategori Berita</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('administrator/tagberita') }}" class="nav-link">Tag Berita</a>
+                                </li>
                                 </ul>
                             </div>
+                            {{-- <div class="collapse" id="modul-berita">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasAccessTo('berita'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/berita') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Berita
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('kategoriwebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/kategoriwebsite') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Kategori Website
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('tagberita'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/tagberita') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Tag berita
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div> --}}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-video" data-toggle="collapse" role="button"
@@ -124,6 +172,33 @@
                                     </li>
                                 </ul>
                             </div>
+                            {{-- <div class="collapse" id="modul-video">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasAccessTo('playlistvideo'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/playlistvideo') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Playlist Video
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('video'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/video') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Video
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('tagvideo'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/tagvideo') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Tag Video
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div> --}}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-banner" data-toggle="collapse" role="button"
@@ -147,6 +222,33 @@
                                     </li>
                                 </ul>
                             </div>
+                            {{-- <div class="collapse" id="modul-banner">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasAccessTo('bannerslider'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/bannerslider') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Banner Slider
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('bannerhome'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/bannerhome') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Banner Home
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('iklansidebar'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/iklansidebar') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Iklan Sidebar
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div> --}}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-web" data-toggle="collapse" role="button"
@@ -170,6 +272,33 @@
                                     </li>
                                 </ul>
                             </div>
+                            {{-- <div class="collapse" id="modul-web">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasAccessTo('logowebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/logowebsite') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Logo Website
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('templatewebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/templatewebsite') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Template Website
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('backgroundwebsite'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/backgroundwebsite') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Background Website
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div> --}}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-interaksi" data-toggle="collapse" role="button"
@@ -203,6 +332,53 @@
                                         <a href="{{ url('administrator/pesanmasuk') }}"
                                             class="nav-link">Pesan Masuk</a>
                                     </li>
+                                    {{-- @if(Auth::user()->hasAccessTo('agenda'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/agenda') }}" class="nav-link">
+                                                <i class="ni ni-world text-orange"></i> Agenda
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('sekilasinfo'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/sekilasinfo') }}" class="nav-link">
+                                                <i class="ni ni-compass-04 text-orange"></i> Sekilas Info
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('jejakpendapat'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/jejakpendapat') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Jajak Pendapat
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('alamatkontak'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/alamatkontak') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Alamat Kontak
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('downloadarea'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/downloadarea') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Download Area
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('pesanmasuk'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/pesanmasuk') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Pesan Masuk
+                                            </a>
+                                        </li>
+                                    @endif --}}
                                 </ul>
                             </div>
                         </li>
@@ -222,6 +398,22 @@
                                         <a href="{{ url('administrator/manajemenmodul') }}"
                                             class="nav-link">Manajemen Modul</a>
                                     </li>
+
+                                    {{-- @if(Auth::user()->hasAccessTo('manajemenuser'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/manajemenuser') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Manajemen User
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if(Auth::user()->hasAccessTo('manajemenmodul'))
+                                        <li class="nav-item">
+                                            <a href="{{ url('administrator/manajemenmodul') }}" class="nav-link">
+                                                <i class="ni ni-fat-add text-orange"></i> Manajemen Modul
+                                            </a>
+                                        </li>
+                                    @endif --}}
                                 </ul>
                             </div>
                         </li>
@@ -498,14 +690,14 @@
       <div class="row align-items-center justify-content-lg-between">
         <div class="col-lg-12">
           <div class="copyright-text text-center">
-            <strong>Copyright &copy; 2016 - <?php echo date('Y'); ?> <a target='_BLANK' href="http://www.lokomedia.web.id"> Lokomedia.web.id</a>.</strong> All rights reserved.
+            <strong>Copyright &copy;  <?php echo date('Y'); ?> <a target='_BLANK' href="http://www.lokomedia.web.id"> P.T Grage Media Technology</a>.</strong> All rights reserved.
           </div>
         </div>
       </div>
     </footer>
   </div>
 
-  
+
     <script src="{{ url('assets/js/jquery.min.js') }}"></script>
   {{-- <script src="{{ url('assets/js/ckeditor.js') }}"></script> --}}
   {{-- <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js"></script> --}}

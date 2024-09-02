@@ -73,7 +73,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </td>
-                            </tr>
+                            </tr>  
                             <tr>
                                 <th style="padding: 5px;">Urutan</th>
                                 <td style="padding: 5px;">

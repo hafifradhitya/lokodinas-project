@@ -17,6 +17,7 @@ use App\Http\Controllers\JejakpendapatController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KomentarberitaController;
 use App\Http\Controllers\KomentarvideoController;
+use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\LogowebsiteController;
 use App\Http\Controllers\Main2Controller;
 use App\Http\Controllers\MainController;
@@ -59,6 +60,7 @@ require __DIR__ . '/auth.php';
 // Route::get('administrator/dashboard', [DashboardController::class, "dashboard"]);
 
 Route::prefix('administrator')->name('administrator.')->group(function () {
+    Route::resource('layout', LayoutController::class);
     Route::resource('halamanbaru', HalamanbaruController::class);
     Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])->name('identitaswebsite.edit');
     Route::put('identitaswebsite', [IdentitaswebsiteController::class, 'update'])->name('identitaswebsite.update');

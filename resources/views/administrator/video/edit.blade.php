@@ -62,7 +62,7 @@
                                 <td style="padding: 5px;">
                                     <input type="text" class="form-control" id="youtube" name="youtube" value="{{ old('youtube', $videos->youtube) }}" placeholder="Contoh link: http://www.youtube.com/embed/xbuEmoRWQHU">
                                 </td>
-                            </tr>
+                            </tr> 
                             <tr>
                                 <th style="padding: 5px;">Tag</th>
                                 <td style="padding: 5px; border: 1px solid #ddd;">
@@ -90,7 +90,7 @@
                     </table>
                     <div class="mt-4 d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Perbarui</button>
-                        <a href="{{ route('administrator.video.index') }}" class="btn btn-danger">Cancel</a>
+                        <a href="{{ route('administrator.video.index') }}" class="btn btn-danger">Batal</a>
                     </div>
                 </form>
             </div>

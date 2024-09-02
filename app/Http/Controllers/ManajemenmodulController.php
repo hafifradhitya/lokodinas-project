@@ -19,7 +19,7 @@ class ManajemenmodulController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request):View
-    {
+    {  
         //
         $search = $request->search;
         if(!empty($search)) {
@@ -29,17 +29,16 @@ class ManajemenmodulController extends Controller
         } else {
             $manajemenmodul = Manajemenmodul::paginate(10);
         }
-
+  
         return view('administrator.manajemenmodul.index', compact(['manajemenmodul']));
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create():View
     {
-        //
-        return view('administrator.manajemenmodul.create');
+        $manajemenmodul = Manajemenmodul::all();
+        return view('administrator.manajemenmodul.create', compact(['manajemenmodul']));
     }
 
     /**

@@ -26,7 +26,7 @@
             </table>
             <div class="mt-4 d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('administrator.downloadarea.index') }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('administrator.downloadarea.index') }}" class="btn btn-danger">Batal</a>
             </div>
         </form>
     </div>

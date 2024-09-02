@@ -39,7 +39,7 @@ class SensorkomentarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
         $validated = $request->validate([
@@ -56,9 +56,11 @@ class SensorkomentarController extends Controller
             'username' => $username
         ]);
 
-        // Flash pesan sukses
-        session()->flash("pesan", "Data berhasil Ditambah");
-        return redirect()->route('administrator.sensorkomentar.index')->with('success', 'Sensor komentar berhasil ditambahkan');
+        return response()->json([
+            'url' => route('administrator.sensorkomentar.index'),
+            'success' => true,
+            'message' => 'Data Sensor Komentar Berhasil Ditambah'
+        ]);
     }
 
     /**
@@ -98,21 +100,22 @@ class SensorkomentarController extends Controller
             'username' => 'admin',
         ]);
 
-        session()->flash("pesan", "Data berhasil Diperbarui");
-        return redirect()->route('administrator.sensorkomentar.index')->with('success', 'Sensor komentar berhasil diperbarui');
+        return response()->json([
+            'url' => route('administrator.sensorkomentar.index'),
+            'success' => true,
+            'message' => 'Data Sensor Komentar Berhasil Diperbarui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_jelek):RedirectResponse
+    public function destroy(string $id_jelek)
     {
         //
         $sensor = Sensorkomentar::findOrFail($id_jelek);
 
         $sensor->delete();
-
-        session()->flash("pesan", "Data berhasil Dihapus");
-        return redirect()->route('administrator.sensorkomentar.index')->with('success', 'Sensor komentar berhasil dihapus');
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

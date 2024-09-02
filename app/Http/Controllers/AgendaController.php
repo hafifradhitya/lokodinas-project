@@ -154,7 +154,7 @@ class AgendaController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file("gambar");
-            $gambarName = $tema."_".Str::random(25).".".$gambar->getClientOriginalExtension();
+            $gambarName = $gambar->getClientOriginalName();
             $gambar->move("./foto_agenda/", $gambarName);
             $agenda->gambar = $gambarName;
         }

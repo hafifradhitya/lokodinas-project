@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redirect;  
 
 class KomentarberitaController extends Controller
 {
@@ -92,20 +92,21 @@ class KomentarberitaController extends Controller
             "jam_komentar" => now()
         ]);
 
-        session()->flash("pesan", "Komentar Berita berhasil Diperbarui");
-        return redirect()->route('administrator.komentarberita.index')->with(['success' => 'Komentar Berita berhasil Diperbarui']);
+        return response()->json([
+            'url' => route('administrator.komentarberita.index'),
+            'success' => true,
+            'message' => 'Data Komentar Berita Berhasil Diperbaharui'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_komentar):RedirectResponse
+    public function destroy(string $id_komentar)
     {
         //  
         $komentarberita = Komentarberita::findOrFail($id_komentar);
         $komentarberita->delete();
-
-        session()->flash("pesan", "Komentar Berita Berhasil Dihapus");
-        return redirect()->route('administrator.komentarberita.index')->with(['success'=>'Komentar Berita berhasil Dihapus']);
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }

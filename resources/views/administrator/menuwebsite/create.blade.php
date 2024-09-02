@@ -77,7 +77,7 @@
                                     @error('urutan')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </td>
+                                </td>  
                             </tr>
                         </tbody>
                     </table>

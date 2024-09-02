@@ -19,6 +19,19 @@
                                     <input type="text" class="form-control" id="nama_modul" name="nama_modul" placeholder="Masukkan Nama Modul" required>
                                 </td>
                             </tr>
+                            {{-- <tr>
+                                <th style="padding: 5px">Parent Modul</th>
+                                <td style="padding: 5px">
+                                    <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id" id="parent_id">
+                                        <option value="">-- Pilih Parent Menu --</option>
+                                        @foreach ($manajemenmodul as $modul)
+                                            <option value="{{ $modul->id_modul }}" {{ old('parent_id') == $modul->id_modul ? 'selected' : '' }}>
+                                                {{ $modul->nama_modul }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr> --}}
                             <tr>
                                 <th style="padding: 5px;">Link</th>
                                 <td style="padding: 5px;">

@@ -21,7 +21,7 @@ class MenuwebsiteController extends Controller
 
         if (!empty($search)) {
             $query->where('nama_menu', 'like', "%$search%");
-        }
+        }  
 
         if (!empty($urutan)) {
             $query->where('urutan', $urutan);
@@ -34,7 +34,7 @@ class MenuwebsiteController extends Controller
         $urutans = Menuwebsite::select('urutan')
                     ->groupBy('urutan')
                     ->get();
-
+     
         return view('administrator.menuwebsite.index', compact('menuwebs', 'urutans'));
     }
 
@@ -95,7 +95,7 @@ class MenuwebsiteController extends Controller
 
         $menu = Menuwebsite::findOrFail($id_menu);
 
-        $menu->update($validated); // Gunakan $validated langsung
+           $menu->update($validated); // Gunakan $validated langsung
 
         return response()->json([
             'url' => route('administrator.menuwebsite.index'),
