@@ -60,39 +60,74 @@ require __DIR__ . '/auth.php';
 // Route::get('administrator/dashboard', [DashboardController::class, "dashboard"]);
 
 Route::prefix('administrator')->name('administrator.')->group(function () {
-    Route::resource('layout', LayoutController::class);
-    Route::resource('halamanbaru', HalamanbaruController::class);
-    Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])->name('identitaswebsite.edit');
-    Route::put('identitaswebsite', [IdentitaswebsiteController::class, 'update'])->name('identitaswebsite.update');
-    Route::resource('berita', BeritaController::class);
-    Route::get('berita/publish/{id_berita}', [BeritaController::class, 'publish'])->name('berita.publish');
-    Route::resource('kategoriberita', KategoriberitaController::class);
-    Route::resource('tagberita', TagberitaController::class);
-    Route::resource('playlistvideo', PlaylistvideoController::class);
-    Route::resource('video', VideoController::class);
-    Route::resource('tagvideo', TagvideoController::class);
+    // Route::resource('halamanbaru', HalamanbaruController::class);
+    Route::resource('halamanbaru', HalamanbaruController::class)
+    ->middleware('checkModul:halamanbaru');
+    // Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])->name('identitaswebsite.edit');
+    // Route::put('identitaswebsite', [IdentitaswebsiteController::class, 'update'])->name('identitaswebsite.update');
+    Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])
+    ->middleware('checkModul:identitaswebsite')
+    ->name('identitaswebsite.edit');
+    Route::resource('berita', BeritaController::class)
+    ->middleware('checkModul:berita');
+    Route::get('berita/publish/{id_berita}', [BeritaController::class, 'publish'])
+        ->name('berita.publish')
+        ->middleware('checkModul:berita.publish');
+    Route::resource('kategoriberita', KategoriberitaController::class)
+        ->middleware('checkModul:kategoriberita');
+    Route::resource('tagberita', TagberitaController::class)
+        ->middleware('checkModul:tagberita');
+    Route::resource('playlistvideo', PlaylistvideoController::class)
+        ->middleware('checkModul:playlistvideo');
+    Route::resource('video', VideoController::class)
+        ->middleware('checkModul:video');
+    Route::resource('tagvideo', TagvideoController::class)
+        ->middleware('checkModul:tagvideo');
 
-    Route::resource('manajemenuser', ManajemenuserController::class);
-    //Route::get('manajemenuser/delete_akses', [ManajemenuserController::class, 'delete_akses'])->name('manajemenuser.delete_akses');
-    Route::get('manajemenuser/delete_akses/{id_umod}/{user_id}', [ManajemenuserController::class, 'delete_akses'])->name('manajemenuser.delete_akses');
-    Route::resource('manajemenmodul', ManajemenmodulController::class);
-    Route::resource('sekilasinfo', SekilasinfoController::class);
-    Route::resource('jejakpendapat', JejakpendapatController::class);
-    Route::resource('downloadarea', DownloadareaController::class);
-    Route::resource('menuwebsite', MenuwebsiteController::class);
-    Route::resource('bannerslider', BannersliderController::class);
-    Route::resource('bannerhome', BannerhomeController::class);
-    Route::resource('iklansidebar', IklansidebarController::class);
-    Route::resource('agenda', AgendaController::class);
-    Route::resource('alamatkontak', AlamatkontakController::class);
-    Route::resource('logowebsite', LogowebsiteController::class);
-    Route::resource('album', AlbumController::class);
-    Route::resource('iklanatas', IklanatasController::class);
-    Route::resource('sensorkomentar', SensorkomentarController::class);
-    Route::resource('komentarberita', KomentarberitaController::class);
-    Route::resource('komentarvideo', KomentarvideoController::class);
-    Route::resource('gallery', GalleryController::class);
-    Route::resource('ym', YmController::class);
+
+    Route::resource('manajemenuser', ManajemenuserController::class)
+        ->middleware('checkModul:manajemenuser');
+    Route::get('manajemenuser/delete_akses/{id_umod}/{user_id}', [ManajemenuserController::class, 'delete_akses'])
+        ->name('manajemenuser.delete_akses')
+        ->middleware('checkModul:manajemenuser.delete_akses');
+    Route::resource('manajemenmodul', ManajemenmodulController::class)
+        ->middleware('checkModul:manajemenmodul');
+    Route::resource('sekilasinfo', SekilasinfoController::class)
+        ->middleware('checkModul:sekilasinfo');
+    Route::resource('jejakpendapat', JejakpendapatController::class)
+        ->middleware('checkModul:jejakpendapat');
+    Route::resource('downloadarea', DownloadareaController::class)
+        ->middleware('checkModul:downloadarea');
+    
+    // Route::resource('menuwebsite', MenuwebsiteController::class);
+    Route::resource('menuwebsite', MenuwebsiteController::class)
+    ->middleware('checkModul:menuwebsite');
+    Route::resource('bannerslider', BannersliderController::class)
+    ->middleware('checkModul:bannerslider');
+    Route::resource('bannerhome', BannerhomeController::class)
+        ->middleware('checkModul:bannerhome');
+    Route::resource('iklansidebar', IklansidebarController::class)
+        ->middleware('checkModul:iklansidebar');
+    Route::resource('agenda', AgendaController::class)
+        ->middleware('checkModul:agenda');
+    Route::resource('alamatkontak', AlamatkontakController::class)
+        ->middleware('checkModul:alamatkontak');
+    Route::resource('logowebsite', LogowebsiteController::class)
+        ->middleware('checkModul:logowebsite');
+    Route::resource('album', AlbumController::class)
+        ->middleware('checkModul:album');
+    Route::resource('iklanatas', IklanatasController::class)
+        ->middleware('checkModul:iklanatas');
+    Route::resource('sensorkomentar', SensorkomentarController::class)
+        ->middleware('checkModul:sensorkomentar');
+    Route::resource('komentarberita', KomentarberitaController::class)
+        ->middleware('checkModul:komentarberita');
+    Route::resource('komentarvideo', KomentarvideoController::class)
+        ->middleware('checkModul:komentarvideo');
+    Route::resource('gallery', GalleryController::class)
+        ->middleware('checkModul:gallery');
+    Route::resource('ym', YmController::class)
+        ->middleware('checkModul:ym');
 });
 
 // Route::prefix('dinas-1')->name('dinas-1.')->group(function () {

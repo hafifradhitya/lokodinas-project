@@ -27,11 +27,17 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = Auth::user(); // Ambil data pengguna yang berhasil login
         $username = $request->input('username');
         // $email = $request->input('email');  
         // $no_telp = $request->input('no_telp');
 
-        session(['username' => $username]);
+        // Simpan data di session
+        session([
+            'username' => $username,
+            'id_session' => $user->id_session,
+            'level' => $user->level
+        ]);
 
         $request->session()->regenerate();
 

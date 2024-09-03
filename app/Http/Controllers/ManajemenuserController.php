@@ -89,7 +89,7 @@ class ManajemenuserController extends Controller
             $nama_modul = '';
         }
 
-        User::create([
+        $user = User::create([
             "username" => $username,
             "nama_lengkap" => $request->nama_lengkap,
             "email" => $request->email,
@@ -111,14 +111,23 @@ class ManajemenuserController extends Controller
         //         $this->model_app->insert('users_modul',$datam);
         //       }
 
-        $mod = count($request->modul);
-        $modul = $request->modul;
-        $sess = md5($username.'-'.date('YmdHis'));
-        for($i = 0; $i < $mod; $i++){
-            Usermodul::create([
-                'id_session' =>$sess,
-                'id_modul' => $modul[$i]
-            ]);
+        // $mod = count($request->modul);
+        // $modul = $request->modul;
+        // $sess = md5($username.'-'.date('YmdHis'));
+        // for($i = 0; $i < $mod; $i++){
+        //     Usermodul::create([
+        //         'id_session' =>$sess,
+        //         'id_modul' => $modul[$i]
+        //     ]);
+        // }
+
+        if ($request->has('modul')) {
+            foreach ($request->modul as $modulId) {
+                Usermodul::create([
+                    'id_session' => $user->id_session,
+                    'id_modul' => $modulId
+                ]);
+            }
         }
 
 
