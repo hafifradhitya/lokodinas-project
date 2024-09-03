@@ -34,7 +34,7 @@
     <link rel="icon" href="{{ asset('foto_identitas/' . $identitas->favicon)}}" type="image/x-icon">
 </head>
 
-<body data-spy="scroll" data-target=".fixed-top">
+<body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark"> <!-- Menambahkan padding untuk memperbesar ukuran navbar -->
@@ -90,7 +90,7 @@
                         @endforeach
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" style="font-size: 1.0rem;" href="{{ url('hubungi/') }}">Hubungi Kami</a>
+                        <a class="nav-link page-scroll" style="font-size: 1.0rem;" href="#hubungi">Hubungi Kami</a>
                     </li>
                     </li>
                 </ul>
@@ -111,305 +111,8 @@
             </div> <!-- end of navbar-collapse -->
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
-    <!-- end of navigation -->
-    <!-- Header -->
-    <header id="header" class="header" style="padding-bottom: 10px;"> <!-- Mengurangi padding atas untuk mengangkat header -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="slider-container">
-                        <div class="swiper-container text-slider">
-                            <div class="swiper-wrapper">
-                                @foreach($banners as $banner) <!-- Mengambil data banner -->
-                                <div class="swiper-slide">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-xl-7">
-                                            <div class="image-container">
-                                                <img class="img-fluid" src="{{ url('foto_banner/' . $banner->gambar) }}" alt="alternative"> <!-- Ganti dengan data banner -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-xl-5">
-                                            <div class="text-container">
-                                                <h1 class="h1-large">{{ $banner->judul }}</h1> <!-- Ganti dengan data banner -->
-                                                <p class="p-large">{{ $banner->deskripsi }}</p> <!-- Ganti dengan data banner -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach <!-- Akhir loop banner -->
-                            </div>
 
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="container" style="margin-top: 100px;"> <!-- Tambahkan jarak dari container pertama -->
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-5">
-                        <h2 class="text-center mb-4">Link Terkait</h2>
-                        <div class="slider-container">
-                            <div class="swiper-container card-slider">
-                                <div class="swiper-wrapper">
-                                    @foreach($links as $link)
-                                    <div class="swiper-slide">
-                                        <div class="card">
-                                            <img src="{{ asset('foto_bannerhome/' . $link->gambar) }}">
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </header>
-
-    <div class="slide-1 bg-dark-blue">
-        <div class="slider-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="text-center mb-4">Berita <strong>Terbaru</strong></h2> <!-- Tambahkan judul -->
-                        <div class="slider-container">
-                            <div class="swiper-container card-slider">
-                                <div class="swiper-wrapper">
-                                    @foreach ($beritas as $index => $berita)
-                                    <div class="swiper-slide">
-                                        <div class="card">
-                                            <img class="card-image" src="{{ asset('foto_berita/' . $berita->gambar) }}" alt="alternative">
-                                            <div class="card-body">
-                                                <p class="testimonial-text">"{{ $berita->judul }}"</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="tabs" style="margin-top: -50px; width: 100%;">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-xl-7">
-                    <div class="tabs-container">
-
-                        <ul class="nav nav-tabs" id="revoTabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">ANNOUNCEMENT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">ACTIVITY AGENDA</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content" id="revoTabsContent">
-
-
-                            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                                <h4>Pengumuman</h4>
-                                @foreach ($infos as $h)
-                                <div class="recent-posts">
-                                    <article class="post">
-                                        <p><span><i class="fa fa-volume-up"></i></span> &nbsp;{{ $h->info }}</p>
-                                    </article>
-                                </div>
-                                @endforeach
-                            </div>
-
-
-
-                            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                                <h4>Ageda Kegiatan</h4>
-                                @foreach ($agendas as $h)
-                                <div class="recent-posts">
-                                    <div class="post-meta">
-                                        <span><i class="fa fa-calendar"></i> {{ $h->tgl_posting }} {{ $h->jam}}</span>
-                                        <h5><a href="{{ url('agenda/detail/' . $h->tema_seo) }}" class="text-red">{{ $h->tema }}</a></h5>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="purchase" class="basic-3 bg-dark-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <h2 class="h2-heading text-left">Berita <strong>OPD</strong></h2>
-                    @foreach($beritao as $berita)
-                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
-                        <div class="card-body">
-                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
-                            <p class="card-title">{{ $berita->judul }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="col-lg-4">
-                    <h2 class="h2-heading text-left">Berita <strong>DAERAH</strong></h2>
-                    @foreach($beritad as $berita)
-                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
-                        <div class="card-body">
-                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
-                            <p class="card-title">{{ $berita->judul }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="col-lg-4">
-                    <h2 class="h2-heading text-left">Berita <strong>UMUM</strong></h2>
-                    @foreach($beritau as $berita)
-                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
-                        <div class="card-body">
-                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
-                            <p class="card-title">{{ $berita->judul }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="details" class="basic-1 bg-dark-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xl-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details-1.jpg" alt="alternative">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-5">
-                    <div class="text-container">
-                        <h2>Prototype With Revo</h2>
-                        <p>Our experienced designers and developers have implemented cutting edge tools that will help you sketch your ideas in record time and prepare the design</p>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>Use a single app</strong> to get from sketch to actual code</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>Bundled templates</strong> to help you get inspired faster</div>
-                            </li>
-                        </ul>
-                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox">LIGHTBOX</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="details-lightbox" class="lightbox-basic zoom-anim-dialog mfp-hide">
-        <div class="row">
-            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-            <div class="col-lg-8">
-                <div class="image-container">
-                    <img class="img-fluid" src="images/details-lightbox.jpg" alt="alternative">
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <h3>Goals Setting</h3>
-                <hr>
-                <p>The app can easily help you track your personal development evolution if you take the time to set it up.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity.</p>
-                <ul class="list-unstyled li-space-lg">
-                    <li class="media">
-                        <i class="fas fa-square"></i>
-                        <div class="media-body">Splash screen panel</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-square"></i>
-                        <div class="media-body">Statistics graph report</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-square"></i>
-                        <div class="media-body">Events calendar layout</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-square"></i>
-                        <div class="media-body">Location details screen</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-square"></i>
-                        <div class="media-body">Onboarding steps interface</div>
-                    </li>
-                </ul>
-                <a class="btn-solid-reg mfp-close page-scroll" href="#registration">FREE TRIAL</a> <button class="btn-outline-reg mfp-close as-button" type="button">BACK</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="basic-2 bg-dark-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Video Presentation</h2>
-                    <p class="p-heading">Check out our video presentation for Revo desktop app. It will take you through an entire design project from the initial sketch to the final code</p>
-
-
-                    <div class="image-container">
-                        <div class="video-wrapper">
-                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
-                                <img class="img-fluid" src="images/video-preview.jpg" alt="alternative">
-                                <span class="video-play-button">
-                                    <span></span>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-  
-    <div class="basic-4 bg-dark-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="resource-container">
-                        <img class="img-fluid" src="images/resources-1.jpg" alt="alternative">
-                        <div class="text-container">
-                            <h4>User Showcases</h4>
-                            <p>Check out these awesome customer showcases to convince you to give Revo and try right away</p>
-                        </div>
-                    </div>
-                    <div class="resource-container">
-                        <img class="img-fluid" src="images/resources-2.jpg" alt="alternative">
-                        <div class="text-container">
-                            <h4>Knowledge Center</h4>
-                            <p>We've gathered some great resources to help you learn how to use Revo and overcome issues</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @yield('content')
 
     <!-- Footer -->
     <div class="footer ">
@@ -463,10 +166,7 @@
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of footer -->
-    <!-- end of footer -->
 
-
-    <!-- Copyright -->
     <div class="copyright ">
         <div class="container">
             <div class="row">
@@ -476,11 +176,21 @@
                 <!-- end of col -->
             </div> <!-- enf of row -->
         </div> <!-- end of container -->
-    </div> <!-- end of copyright -->
-    <!-- end of copyright -->
+    </div>
 
 
     <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gambar = document.querySelector('meta[name="gambar"]').getAttribute('content');
+            fetch(`/background-color?gambar=${gambar}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.documentElement.style.setProperty('--dynamic-bg-color', data.color);
+                })
+        });
+    </script>
+
     <script src="{{ url('template/revo/js/jquery.min.js') }}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="{{ url('template/revo/js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
     <script src="{{ url('template/revo/js/jquery.easing.min.js') }}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->

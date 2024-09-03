@@ -31,4 +31,18 @@ class Video extends Model
     {
         return $this->belongsTo(Komentarvideo::class, 'id_komentar');
     }
+    public function getEmbedUrlAttribute()
+    {
+        $url = $this->youtube;
+
+        if (preg_match('/youtu\.be\/([^\?]*)/', $url, $match)) {
+            $youtube_id = $match[1];
+        } elseif (preg_match('/youtube\.com.*v=([^\&]*)/', $url, $match)) {
+            $youtube_id = $match[1];
+        } else {
+            $youtube_id = ''; // Jika tidak cocok dengan pola, kembalikan string kosong
+        }
+
+        return 'https://www.youtube.com/embed/' . $youtube_id;
+    }
 }

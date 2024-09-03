@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Background;
 use Illuminate\Http\Request;
 
 class BackgroundwebsiteController extends Controller
@@ -9,9 +10,17 @@ class BackgroundwebsiteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $gambar = $request->query('gambar', 'default'); // Mengambil parameter 'gambar' dari query string
+        $background = Background::where('gambar', $gambar)->first();
+
+        if ($background) {
+            return response()->json(['color' => $background->gambar]);
+        } else {
+            return response()->json(['color' => 'darkslateblue']); // Warna default jika tidak ditemukan
+        }
     }
 
     /**
