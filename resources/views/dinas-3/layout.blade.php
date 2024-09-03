@@ -147,9 +147,10 @@
 
                 </div>
             </div>
-            <div class="container">
+            <div class="container" style="margin-top: 100px;"> <!-- Tambahkan jarak dari container pertama -->
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        <h2 class="text-center mb-4">Link Terkait</h2>
                         <div class="slider-container">
                             <div class="swiper-container card-slider">
                                 <div class="swiper-wrapper">
@@ -170,116 +171,128 @@
             </div>
     </header>
 
+    <div class="slide-1 bg-dark-blue">
+        <div class="slider-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="text-center mb-4">Berita <strong>Terbaru</strong></h2> <!-- Tambahkan judul -->
+                        <div class="slider-container">
+                            <div class="swiper-container card-slider">
+                                <div class="swiper-wrapper">
+                                    @foreach ($beritas as $index => $berita)
+                                    <div class="swiper-slide">
+                                        <div class="card">
+                                            <img class="card-image" src="{{ asset('foto_berita/' . $berita->gambar) }}" alt="alternative">
+                                            <div class="card-body">
+                                                <p class="testimonial-text">"{{ $berita->judul }}"</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-    <!-- Registration -->
-    <div id="registration" class="form-1 bg-dark-blue">
+    <div class="tabs" style="margin-top: -50px; width: 100%;">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Register For The Free Trial</h2>
-                        <p>You are just a few clicks away from using the first desktop app dedicated to web designers and developers. Fill out the form to get the 30-day trial and you will receive the download link</p>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>Prototype easier</strong> using intuitive features and design tools</div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    <div class="tabs-container">
+
+                        <ul class="nav nav-tabs" id="revoTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">ANNOUNCEMENT</a>
                             </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>Design layouts</strong> with faster with efficient components</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>Export to code</strong> and effortlessly upload your projects online</div>
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">ACTIVITY AGENDA</a>
                             </li>
                         </ul>
+
+                        <div class="tab-content" id="revoTabsContent">
+
+
+                            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                                <h4>Pengumuman</h4>
+                                @foreach ($infos as $h)
+                                <div class="recent-posts">
+                                    <article class="post">
+                                        <p><span><i class="fa fa-volume-up"></i></span> &nbsp;{{ $h->info }}</p>
+                                    </article>
+                                </div>
+                                @endforeach
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                                <h4>Ageda Kegiatan</h4>
+                                @foreach ($agendas as $h)
+                                <div class="recent-posts">
+                                    <div class="post-meta">
+                                        <span><i class="fa fa-calendar"></i> {{ $h->tgl_posting }} {{ $h->jam}}</span>
+                                        <h5><a href="{{ url('agenda/detail/' . $h->tema_seo) }}" class="text-red">{{ $h->tema }}</a></h5>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-
-
-                    <form id="registrationForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control-input" id="rname" required>
-                            <label class="label-control" for="rname">Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control-input" id="roccupation" required>
-                            <label class="label-control" for="roccupation">Occupation</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control-input" id="remail" required>
-                            <label class="label-control" for="remail">Email</label>
-                        </div>
-                        <div class="form-group checkbox">
-                            <input type="checkbox" id="rterms" value="Agreed-to-Terms" required>I agree with the website's <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms & Conditions</a>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">SIGN UP</button>
-                        </div>
-                    </form>
-
-
-                </div>
-            </div> -->
+            </div>
         </div>
     </div>
 
-
-
-    <!-- Features -->
-    <div id="features" class="cards-1 bg-dark-blue">
+    <div id="purchase" class="basic-3 bg-dark-blue">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Revo's Features</h2>
-                    <p class="p-heading">Revo is the first desktop app which helps web designers and developers create beautiful and efficient layouts for their online projects</p>
+                <div class="col-lg-4">
+                    <h2 class="h2-heading text-left">Berita <strong>OPD</strong></h2>
+                    @foreach($beritao as $berita)
+                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                        <div class="card-body">
+                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
+                            <p class="card-title">{{ $berita->judul }}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-
-
-                    <div class="card">
-                        <div class="card-image">
-                            <i class="fas fa-rocket"></i>
-                        </div>
+                <div class="col-lg-4">
+                    <h2 class="h2-heading text-left">Berita <strong>DAERAH</strong></h2>
+                    @foreach($beritad as $berita)
+                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Prototype Faster</h5>
-                            <p>Cutting edge tools that will help you sketch your ideas in record time and prepare the design</p>
+                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
+                            <p class="card-title">{{ $berita->judul }}</p>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <i class="fas fa-tv"></i>
-                        </div>
+                    @endforeach
+                </div>
+                <div class="col-lg-4">
+                    <h2 class="h2-heading text-left">Berita <strong>UMUM</strong></h2>
+                    @foreach($beritau as $berita)
+                    <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Design Layouts</h5>
-                            <p>Turn your prototypes into final designs using established and well-known features</p>
+                            <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
+                            <p class="card-title">{{ $berita->judul }}</p>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <i class="fas fa-user-tag"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Export To Code</h5>
-                            <p>When you're done designing export your layouts quickly to editable HTML/CSS code</p>
-                        </div>
-                    </div>
-
-
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    <!-- Details 1 -->
     <div id="details" class="basic-1 bg-dark-blue">
         <div class="container">
             <div class="row">
@@ -309,10 +322,6 @@
         </div>
     </div>
 
-
-
-    <!-- Details Lightbox -->
-    <!-- Lightbox -->
     <div id="details-lightbox" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
@@ -353,109 +362,7 @@
             </div>
         </div>
     </div>
-
-
-    <div class="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xl-5">
-                    <div class="tabs-container">
-
-
-                        <ul class="nav nav-tabs" id="revoTabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">PROTOTYPE</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">DESIGN</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">EXPORT</a>
-                            </li>
-                        </ul>
-
-
-
-                        <div class="tab-content" id="revoTabsContent">
-
-
-                            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                                <h4>Prototype Easier With Revo</h4>
-                                <p>It's now easier than ever to get your ideas into completed designs with Revo desktop app. Our <a class="turquoise page-scroll" href="#features">features</a> section shows how we are able to achieve all this.</p>
-                                <ul class="list-unstyled li-space-lg">
-                                    <li class="media">
-                                        <i class="fas fa-square"></i>
-                                        <div class="media-body"><strong>Experienced teams</strong> of top designers and developers</div>
-                                    </li>
-                                    <li class="media">
-                                        <i class="fas fa-square"></i>
-                                        <div class="media-body"><strong>Enthusiastic passion</strong> for all things web design related</div>
-                                    </li>
-                                    <li class="media">
-                                        <i class="fas fa-square"></i>
-                                        <div class="media-body"><strong>Focus on simplicity</strong> when it comes to the user interface</div>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-
-                            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                                <ul class="list-unstyled li-space-lg">
-                                    <li class="media">
-                                        <div class="media-bullet">1.</div>
-                                        <div class="media-body"><strong>Speed</strong> is important for our users so we invest a lot of time and resources to make everything work faster</div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-bullet">2.</div>
-                                        <div class="media-body"><strong>Reliability</strong> is what we're focused on achieving besides speed because we want our app to work all the time</div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-bullet">3.</div>
-                                        <div class="media-body"><strong>Standards</strong> are another factor that we take into consideration when developing our tools</div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-bullet">4.</div>
-                                        <div class="media-body"><strong>Performance</strong> is a key factor for our desktop apps</div>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-
-                            <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
-                                <p><strong>Our goal is to empower</strong> web designers and developers reach their full potential and help them get their designs from layouts to code in the shortest amount of time.</p>
-                                <p><strong>Design and layouts</strong> are the main focus of our apps but we also work on export-to-code functionalities.</p>
-                                <ul class="list-unstyled li-space-lg">
-                                    <li class="media">
-                                        <i class="fas fa-square"></i>
-                                        <div class="media-body">It's a fun and captivating endeavour that we love</div>
-                                    </li>
-                                    <li class="media">
-                                        <i class="fas fa-square"></i>
-                                        <div class="media-body">We're passionate about our work and it shows</div>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details-2.jpg" alt="alternative">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Video -->
+    
     <div class="basic-2 bg-dark-blue">
         <div class="container">
             <div class="row">
@@ -480,126 +387,7 @@
             </div>
         </div>
     </div>
-
-
-
-    <!-- Testimonials -->
-    <div class="slider-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-
-
-                    <div class="slider-container">
-                        <div class="swiper-container card-slider">
-                            <div class="swiper-wrapper">
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-1.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">I just finished my trial period and was so amazed with the support and results that I quickly purchased the app</p>
-                                            <p class="testimonial-author">Jude Thorn - Designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-2.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">I don't know how I managed to get work done without Revo. The speed of this application is amazing!</p>
-                                            <p class="testimonial-author">Roy Smith - Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-3.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">This app has the potential of becoming a mandatory tool in every developer's day to day regular operations</p>
-                                            <p class="testimonial-author">Marsha Singer - Marketer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-4.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Searching for a great prototyping and layout design app was difficult but thankfully I found Revo suite</p>
-                                            <p class="testimonial-author">Tim Shaw - Designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-5.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Revo's support team is amazing. They've helped me with some issues and I am so grateful to the entire team</p>
-                                            <p class="testimonial-author">Lindsay Spice - Designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="swiper-slide">
-                                    <div class="card">
-                                        <img class="card-image" src="images/testimonial-6.jpg" alt="alternative">
-                                        <div class="card-body">
-                                            <p class="testimonial-text">Who would have thought that Revo can provide such amazing results in just a few weeks of normal basic use</p>
-                                            <p class="testimonial-author">Ann Black - Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-
-
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Purchase -->
-    <div id="purchase" class="basic-3 bg-dark-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Get Revo And Start Designing</h2>
-                    <p class="p-heading p-large">The first desktop app for web designers and developers which helps them get their ideas from initial sketch to finalized code easier. Revo brings to the table cutting-edge technologies to help you get projects online faster.</p>
-                    <a class="btn-solid-lg" href="#your-link">$89 BUY</a> <a class="btn-outline-lg page-scroll" href="#registration">FREE TRIAL</a>
-                </div> >
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Resources -->
+  
     <div class="basic-4 bg-dark-blue">
         <div class="container">
             <div class="row">
@@ -623,26 +411,29 @@
         </div>
     </div>
 
-
-
     <!-- Footer -->
     <div class="footer ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer-col first">
-                        <h6>About Revo</h6>
-                        <p class="p-small">Revo is a desktop app website Bootstrap HTML template created for desktop applications, to present their features and control panel options</p>
+                        <h6>Location</h6>
+                        <iframe width="100%" height="305" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{ $identitas->maps }}"></iframe>
                     </div> <!-- end of footer-col -->
                     <div class="footer-col second">
                         <h6>Links</h6>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li>Important: <a href="terms.html">Terms & Conditions</a>, <a href="privacy.html">Privacy Policy</a></li>
-                            <li>Useful: <a href="#">Colorpicker</a>, <a href="#">Icon Library</a>, <a href="#">Illustrations</a></li>
-                            <li>Menu: <a class="page-scroll" href="#header">Home</a>, <a class="page-scroll" href="#registration">Trial</a>, <a class="page-scroll" href="#features">Features</a>, <a class="page-scroll" href="#details">Details</a></li>
-                        </ul>
+                        <div class="fb-page" data-href="https://www.facebook.com/dppkbkarawang/" data-tabs="timeline" data-width="300" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/dppkbkarawang/" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/dppkbkarawang/">DPPKB Karawang</a>
+                            </blockquote>
+                        </div>
                     </div> <!-- end of footer-col -->
                     <div class="footer-col third">
+                        <h6 class="text-left">Links</h6>
+                        <span class="phone">{{ $identitas->no_telp }}</span>
+                        <div class="text-white">
+                            {!! $alamat->alamat !!}
+                        </div>
                         <span class="fa-stack">
                             <a href="#your-link">
                                 <i class="fas fa-circle fa-stack-2x"></i>
@@ -667,8 +458,7 @@
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>
                         </span>
-                        <p class="p-small">We would love to hear from you <a href="mailto:contact@website.com"><strong>contact@website.com</strong></a></p>
-                    </div> <!-- end of footer-col -->
+                    </div>
                 </div>
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -681,7 +471,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="p-small">Copyright © <a href="#your-link">GMT Company</a></p>
+                    <p class="p-small">Copyright © {{ date('Y') }} Powered GMT Company</p>
                 </div>
                 <!-- end of col -->
             </div> <!-- enf of row -->

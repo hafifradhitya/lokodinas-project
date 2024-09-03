@@ -23,17 +23,20 @@ class MainController extends Controller
     {
         $identitas = Identitaswebsite::first();
         $banners = Bannerslider::all();
-        // $alamat = Alamatkontak::first();
+        $alamat = Alamatkontak::first();
         $logo = Logo::orderBy('id_logo', 'DESC')->first();
         $links = Bannerhome::orderBy('id_iklantengah', 'ASC')->limit(10)->get();
-        // $beritas = Berita::all();
-        // $infos = Sekilasinfo::all();
-        // $agendas = Agenda::all();
+        $beritau = Berita::where('id_kategori', 63)->orderBy('id_berita', 'DESC')->limit(5)->get();
+        $beritao = Berita::where('id_kategori', 62)->orderBy('id_berita', 'DESC')->limit(5)->get();
+        $beritad = Berita::where('id_kategori', 61)->orderBy('id_berita', 'DESC')->limit(5)->get();
+        $beritas = Berita::orderBy('id_berita', 'DESC')->limit(5)->get();
+        $infos = Sekilasinfo::all();
+        $agendas = Agenda::all();
         $menus = Menuwebsite::where('id_parent', 0)
         ->with('children.children') // Menyertakan children hingga 2 level
             ->orderBy('position', 'asc')
             ->get();
-        return view('dinas-3.layout', compact('identitas','logo','banners','links','menus'));
+        return view('dinas-3.layout', compact('identitas','logo','banners','links','menus','alamat','beritas','infos','agendas','beritau','beritao','beritad'));
     }
 
     /**
