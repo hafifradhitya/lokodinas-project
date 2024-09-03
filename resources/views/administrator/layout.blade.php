@@ -73,7 +73,7 @@
                                     <li class="nav-item">
                                         <a href="{{ url('administrator/halamanbaru') }}" class="nav-link">Halaman Baru</a>
                                     </li> --}}
-                                    @php
+                                    {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("identitaswebsite", session('id_session'));
                                     @endphp
@@ -92,6 +92,23 @@
                                         $cek = $userModul->umenu_akses("halamanbaru", session('id_session'));
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
+                                        <li><a href="{{ url('administrator/halamanbaru') }}"><i class='fa fa-circle-o'></i> Halaman Baru</a></li>
+                                    @endif --}}
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekIdentitaswebsite = $userModul->umenu_akses("identitaswebsite", session('id_session'));
+                                        $cekMenuwebsite = $userModul->umenu_akses("menuwebsite", session('id_session'));
+                                        $cekHalamanbaru = $userModul->umenu_akses("halamanbaru", session('id_session'));
+                                    @endphp
+
+                                    @if($cekIdentitaswebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/identitaswebsite') }}"><i class='fa fa-circle-o'></i> Identitas Website</a></li>
+                                    @endif
+                                    @if($cekMenuwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/menuwebsite') }}"><i class='fa fa-circle-o'></i> Menu Website</a></li>
+                                    @endif
+                                    @if($cekHalamanbaru == 1 || session('level') == 'admin' || session('level') == 'user')
                                         <li><a href="{{ url('administrator/halamanbaru') }}"><i class='fa fa-circle-o'></i> Halaman Baru</a></li>
                                     @endif
 
@@ -125,74 +142,41 @@
                                 </ul>
                             </div> --}}
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#modul-berita" data-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="modul-berita">
-                                <i class="ni ni-ungroup text-orange"></i>
-                                <span class="nav-link-text">Modul Berita</span>
-                            </a>
-                            <div class="collapse" id="modul-berita">
-                                <ul class="nav nav-sm flex-column">
-                                    {{-- <li class="nav-item">
-                                        <a href="{{ url('administrator/berita') }}" class="nav-link">Berita</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/kategoriberita') }}" class="nav-link">Kategori Berita</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('administrator/tagberita') }}" class="nav-link">Tag Berita</a>
-                                    </li> --}}
-                                    @php
-                                        $userModul = new \App\Models\UserModul;
-                                        $cek = $userModul->umenu_akses("berita", session('id_session'));
-                                    @endphp
-                                    @if($cek == 1 || session('level') == 'admin')
-                                        <li><a href="{{ url('administrator/berita') }}"><i class='fa fa-circle-o'></i> Berita</a></li>
-                                    @endif
-                                    @php
-                                        $userModul = new \App\Models\UserModul;
-                                        $cek = $userModul->umenu_akses("kategoriberita", session('id_session'));
-                                    @endphp
-                                    @if($cek == 1 || session('level') == 'admin')
-                                        <li><a href="{{ url('administrator/kategoriberita') }}"><i class='fa fa-circle-o'></i> Kategori Berita</a></li>
-                                    @endif
-                                    @php
-                                        $userModul = new \App\Models\UserModul;
-                                        $cek = $userModul->umenu_akses("tagberita", session('id_session'));
-                                    @endphp
-                                    @if($cek == 1 || session('level') == 'admin')
-                                        <li><a href="{{ url('administrator/tagberita') }}"><i class='fa fa-circle-o'></i> Tag Berita</a></li>
-                                    @endif
-                                </ul>
-                            </div>
-                            {{-- <div class="collapse" id="modul-berita">
-                                <ul class="nav nav-sm flex-column">
-                                    @if(Auth::user()->hasAccessTo('berita'))
-                                        <li class="nav-item">
-                                            <a href="{{ url('administrator/berita') }}" class="nav-link">
-                                                <i class="ni ni-world text-orange"></i> Berita
-                                            </a>
-                                        </li>
-                                    @endif
+                        @php
+                            $userModul = new \App\Models\UserModul;
+                            $hasAccess = false;
 
-                                    @if(Auth::user()->hasAccessTo('kategoriwebsite'))
-                                        <li class="nav-item">
-                                            <a href="{{ url('administrator/kategoriwebsite') }}" class="nav-link">
-                                                <i class="ni ni-compass-04 text-orange"></i> Kategori Website
-                                            </a>
-                                        </li>
-                                    @endif
+                            $cekBerita = $userModul->umenu_akses("berita", session('id_session'));
+                            $cekKategoriBerita = $userModul->umenu_akses("kategoriberita", session('id_session'));
+                            $cekTagBerita = $userModul->umenu_akses("tagberita", session('id_session'));
 
-                                    @if(Auth::user()->hasAccessTo('tagberita'))
-                                        <li class="nav-item">
-                                            <a href="{{ url('administrator/tagberita') }}" class="nav-link">
-                                                <i class="ni ni-fat-add text-orange"></i> Tag berita
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div> --}}
-                        </li>
+                            if ($cekBerita == 1 || $cekKategoriBerita == 1 || $cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user') {
+                                $hasAccess = true;
+                            }
+                        @endphp
+
+                        @if($hasAccess)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#modul-berita" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="modul-berita">
+                                    <i class="ni ni-ungroup text-orange"></i>
+                                    <span class="nav-link-text">Modul Berita</span>
+                                </a>
+                                <div class="collapse" id="modul-berita">
+                                    <ul class="nav nav-sm flex-column">
+                                        @if($cekBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                            <li><a href="{{ url('administrator/berita') }}"><i class='fa fa-circle-o'></i> Berita</a></li>
+                                        @endif
+                                        @if($cekKategoriBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                            <li><a href="{{ url('administrator/kategoriberita') }}"><i class='fa fa-circle-o'></i> Kategori Berita</a></li>
+                                        @endif
+                                        @if($cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                            <li><a href="{{ url('administrator/tagberita') }}"><i class='fa fa-circle-o'></i> Tag Berita</a></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+
                         <li class="nav-item">
                             <a class="nav-link" href="#modul-video" data-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="modul-video">
@@ -213,7 +197,7 @@
                                         <a href="{{ url('administrator/tagvideo') }}"
                                             class="nav-link">Tag Video</a>
                                     </li> --}}
-                                    @php
+                                    {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("playlistvideo", session('id_session'));
                                     @endphp
@@ -232,6 +216,23 @@
                                         $cek = $userModul->umenu_akses("tagvideo", session('id_session'));
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
+                                        <li><a href="{{ url('administrator/tagvideo') }}"><i class='fa fa-circle-o'></i> Tag Video</a></li>
+                                    @endif --}}
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekPlaylistvideo = $userModul->umenu_akses("playlistvideo", session('id_session'));
+                                        $cekVideo = $userModul->umenu_akses("video", session('id_session'));
+                                        $cekTagvideo = $userModul->umenu_akses("tagvideo", session('id_session'));
+                                    @endphp
+
+                                    @if($cekPlaylistvideo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/playlistvideo') }}"><i class='fa fa-circle-o'></i> Playlist Video</a></li>
+                                    @endif
+                                    @if($cekVideo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/video') }}"><i class='fa fa-circle-o'></i> Video</a></li>
+                                    @endif
+                                    @if($cekTagvideo == 1 || session('level') == 'admin' || session('level') == 'user')
                                         <li><a href="{{ url('administrator/tagvideo') }}"><i class='fa fa-circle-o'></i> Tag Video</a></li>
                                     @endif
                                 </ul>
@@ -284,7 +285,7 @@
                                         <a href="{{ url('administrator/iklansidebar') }}"
                                             class="nav-link">Iklan Sidebar</a>
                                     </li> --}}
-                                    @php
+                                    {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("bannerslider", session('id_session'));
                                     @endphp
@@ -304,7 +305,25 @@
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
                                         <li><a href="{{ url('administrator/iklansidebar') }}"><i class='fa fa-circle-o'></i> Iklan Sidebar</a></li>
+                                    @endif --}}
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekBannerslider = $userModul->umenu_akses("bannerslider", session('id_session'));
+                                        $cekBannerhome = $userModul->umenu_akses("bannerhome", session('id_session'));
+                                        $cekIklansidebar = $userModul->umenu_akses("iklansidebar", session('id_session'));
+                                    @endphp
+
+                                    @if($cekBannerslider == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/bannerslider') }}"><i class='fa fa-circle-o'></i> Banner Slider</a></li>
                                     @endif
+                                    @if($cekBannerhome == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/bannerhome') }}"><i class='fa fa-circle-o'></i> Banner Home</a></li>
+                                    @endif
+                                    @if($cekIklansidebar == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/iklansidebar') }}"><i class='fa fa-circle-o'></i> Iklan Sidebar</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                             {{-- <div class="collapse" id="modul-banner">
@@ -355,7 +374,7 @@
                                         <a href="{{ url('administrator/backgroundwebsite') }}"
                                             class="nav-link">Background Website</a>
                                     </li> --}}
-                                    @php
+                                    {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("logowebsite", session('id_session'));
                                     @endphp
@@ -374,6 +393,25 @@
                                         $cek = $userModul->umenu_akses("backgroundwebsite", session('id_session'));
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
+                                        <li><a href="{{ url('administrator/backgroundwebsite') }}"><i class='fa fa-circle-o'></i> Background Website</a></li>
+                                    @endif --}}
+
+
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekLogowebsite = $userModul->umenu_akses("logowebsite", session('id_session'));
+                                        $cekTemplatewebsite = $userModul->umenu_akses("templatewebsite", session('id_session'));
+                                        $cekBackgroundwebsite = $userModul->umenu_akses("backgroundwebsite", session('id_session'));
+                                    @endphp
+
+                                    @if($cekLogowebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/logowebsite') }}"><i class='fa fa-circle-o'></i> Logo Website</a></li>
+                                    @endif
+                                    @if($cekTemplatewebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/templatewebsite') }}"><i class='fa fa-circle-o'></i> Template Website</a></li>
+                                    @endif
+                                    @if($cekBackgroundwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
                                         <li><a href="{{ url('administrator/backgroundwebsite') }}"><i class='fa fa-circle-o'></i> Background Website</a></li>
                                     @endif
                                 </ul>
@@ -485,7 +523,7 @@
                                             </a>
                                         </li>
                                     @endif --}}
-                                     @php
+                                     {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("agenda", session('id_session'));
                                     @endphp
@@ -519,6 +557,33 @@
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
                                         <li><a href="{{ url('administrator/pesanmasuk') }}"><i class='fa fa-circle-o'></i> Pesan Masuk</a></li>
+                                    @endif --}}
+
+
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekAgenda = $userModul->umenu_akses("agenda", session('id_session'));
+                                        $cekSekilasinfo = $userModul->umenu_akses("sekilasinfo", session('id_session'));
+                                        $cekJejakpendapat = $userModul->umenu_akses("jejakpendapat", session('id_session'));
+                                        $cekDownloadarea = $userModul->umenu_akses("downloadarea", session('id_session'));
+                                        $cekPesanmasuk = $userModul->umenu_akses("pesanmasuk", session('id_session'));
+                                    @endphp
+
+                                    @if($cekAgenda == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/agenda') }}"><i class='fa fa-circle-o'></i> Agenda</a></li>
+                                    @endif
+                                    @if($cekSekilasinfo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/sekilasinfo') }}"><i class='fa fa-circle-o'></i> Sekilas Info</a></li>
+                                    @endif
+                                    @if($cekJejakpendapat == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/jejakpendapat') }}"><i class='fa fa-circle-o'></i> Jejak Pendapat</a></li>
+                                    @endif
+                                    @if($cekDownloadarea == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/downloadarea') }}"><i class='fa fa-circle-o'></i> Download Area</a></li>
+                                    @endif
+                                    @if($cekPesanmasuk == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/pesanmasuk') }}"><i class='fa fa-circle-o'></i> Pesan Masuk</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -540,7 +605,7 @@
                                             class="nav-link">Manajemen Modul</a>
                                     </li> --}}
 
-                                    @php
+                                    {{-- @php
                                         $userModul = new \App\Models\UserModul;
                                         $cek = $userModul->umenu_akses("manajemenuser", session('id_session'));
                                     @endphp
@@ -553,23 +618,21 @@
                                     @endphp
                                     @if($cek == 1 || session('level') == 'admin')
                                         <li><a href="{{ url('administrator/manajemenmodul') }}"><i class='fa fa-circle-o'></i> Manajemen Modul</a></li>
-                                    @endif
-
-                                    {{-- @if(Auth::user()->hasAccessTo('manajemenuser'))
-                                        <li class="nav-item">
-                                            <a href="{{ url('administrator/manajemenuser') }}" class="nav-link">
-                                                <i class="ni ni-fat-add text-orange"></i> Manajemen User
-                                            </a>
-                                        </li>
-                                    @endif
-
-                                    @if(Auth::user()->hasAccessTo('manajemenmodul'))
-                                        <li class="nav-item">
-                                            <a href="{{ url('administrator/manajemenmodul') }}" class="nav-link">
-                                                <i class="ni ni-fat-add text-orange"></i> Manajemen Modul
-                                            </a>
-                                        </li>
                                     @endif --}}
+
+
+                                    @php
+                                        $userModul = new \App\Models\UserModul;
+                                        $cekManajemenuser = $userModul->umenu_akses("manajemenuser", session('id_session'));
+                                        $cekManajemenmodul = $userModul->umenu_akses("manajemenmodul", session('id_session'));
+                                    @endphp
+
+                                    @if($cekManajemenuser == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/manajemenuser') }}"><i class='fa fa-circle-o'></i> Manajemen User</a></li>
+                                    @endif
+                                    @if($cekManajemenmodul == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        <li><a href="{{ url('administrator/manajemenmodul') }}"><i class='fa fa-circle-o'></i> Manajemen Modul</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </li>
@@ -725,53 +788,6 @@
                                 </div>
                                 <a href="#!"
                                     class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-ungroup"></i>
-                            </a>
-                            <div
-                                class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default dropdown-menu-right">
-                                <div class="row shortcuts px-4">
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                                            <i class="ni ni-calendar-grid-58"></i>
-                                        </span>
-                                        <small>Calendar</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                                            <i class="ni ni-email-83"></i>
-                                        </span>
-                                        <small>Email</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                                            <i class="ni ni-credit-card"></i>
-                                        </span>
-                                        <small>Payments</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                                            <i class="ni ni-books"></i>
-                                        </span>
-                                        <small>Reports</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                                            <i class="ni ni-pin-3"></i>
-                                        </span>
-                                        <small>Maps</small>
-                                    </a>
-                                    <a href="#!" class="col-4 shortcut-item">
-                                        <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                                            <i class="ni ni-basket"></i>
-                                        </span>
-                                        <small>Shop</small>
-                                    </a>
-                                </div>
                             </div>
                         </li>
                     </ul>

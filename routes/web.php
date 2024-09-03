@@ -9,6 +9,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadareaController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GrafikController;
 use App\Http\Controllers\HalamanbaruController;
 use App\Http\Controllers\IdentitaswebsiteController;
 use App\Http\Controllers\IklanatasController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ManajemenmodulController;
 use App\Http\Controllers\ManajemenuserController;
 use App\Http\Controllers\MenuwebsiteController;
+use App\Http\Controllers\PesanmasukController;
 use App\Http\Controllers\PlaylistvideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekilasinfoController;
@@ -61,6 +63,16 @@ require __DIR__ . '/auth.php';
 
 Route::prefix('administrator')->name('administrator.')->group(function () {
     // Route::resource('halamanbaru', HalamanbaruController::class);
+    // Route::get('grafik/data', [GrafikController::class, 'fetchGrafikData'])
+    //     ->name('grafik.data')
+    //     ->middleware('checkModul:grafik');
+    
+    // Route::resource('grafik', GrafikController::class)
+    //     ->middleware('checkModul:grafik');
+
+    Route::get('grafik/data', [GrafikController::class, 'fetchGrafikData'])->name('grafik.data'); // Correctly named route
+
+
     Route::resource('halamanbaru', HalamanbaruController::class)
     ->middleware('checkModul:halamanbaru');
     // Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])->name('identitaswebsite.edit');
@@ -68,15 +80,19 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])
     ->middleware('checkModul:identitaswebsite')
     ->name('identitaswebsite.edit');
+    
     Route::resource('berita', BeritaController::class)
     ->middleware('checkModul:berita');
     Route::get('berita/publish/{id_berita}', [BeritaController::class, 'publish'])
         ->name('berita.publish')
         ->middleware('checkModul:berita.publish');
+
     Route::resource('kategoriberita', KategoriberitaController::class)
         ->middleware('checkModul:kategoriberita');
+        
     Route::resource('tagberita', TagberitaController::class)
         ->middleware('checkModul:tagberita');
+
     Route::resource('playlistvideo', PlaylistvideoController::class)
         ->middleware('checkModul:playlistvideo');
     Route::resource('video', VideoController::class)
@@ -98,6 +114,8 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
         ->middleware('checkModul:jejakpendapat');
     Route::resource('downloadarea', DownloadareaController::class)
         ->middleware('checkModul:downloadarea');
+    Route::resource('pesanmasuk', PesanmasukController::class)
+        ->middleware('checkModul:pesanmasuk');
     
     // Route::resource('menuwebsite', MenuwebsiteController::class);
     Route::resource('menuwebsite', MenuwebsiteController::class)

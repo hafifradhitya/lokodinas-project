@@ -250,13 +250,18 @@
             <div class="card">
                 <div class="card-header bg-transparent">
                     <h6 class="text-uppercase text-muted ls-1 mb-1">PERFORMANCE</h6>
-                    <h2 class="h3 mb-0">Total orders</h2>
+                    <h2 class="h3 mb-0">Total Orders</h2>
                 </div>
                 <div class="card-body">
                     <canvas id="chart-bars" class="chart-canvas"></canvas>
                 </div>
             </div>
         </div>
+
+        {{-- <div class="chart-container">
+            <canvas id="chart-bars"></canvas>
+        </div> --}}
+
     </div>
 </div>
 
@@ -275,39 +280,57 @@
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('chart-bars').getContext('2d');
-    const totalOrdersChart = new Chart(ctx, {
-        type: 'bar', // Ubah menjadi 'bar'
-        data: {
-            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Total Orders',
-                data: [10, 20, 30, 25, 15, 30],
-                backgroundColor: 'rgba(255, 99, 132, 1)', // Warna batang
-                borderColor: 'rgba(255, 99, 132, 1)', // Warna garis
-                borderWidth: 2 // Lebar garis
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.1)', // Warna grid
+
+    function fetchChartData() {
+        fetch("{{ route('administrator.grafik.data') }}") // Adjust URL if needed
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.labels;
+                const jumlahKunjungan = data.jumlahKunjungan;
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Jumlah Kunjungan',
+                            data: jumlahKunjungan,
+                            backgroundColor: 'rgba(30, 144, 255, 0.8)', // Adjust color as needed
+                            borderColor: 'rgba(30, 144, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1 // Ensure y-axis steps are in whole numbers
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        }
                     }
-                },
-                x: {
-                    grid: {
-                        display: false // Menyembunyikan grid pada sumbu x
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false // Menyembunyikan legenda
-                }
-            }
-        }
-    });
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    fetchChartData();
+});
 </script>
 @endsection
