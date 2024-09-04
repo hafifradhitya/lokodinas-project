@@ -32,6 +32,25 @@
 
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('foto_identitas/' . $identitas->favicon)}}" type="image/x-icon">
+
+    <style>
+        /* Sembunyikan semua submenu pada awalnya */
+        .dropdown-menu.d-none {
+            display: none;
+        }
+
+        /* Tampilkan submenu level 22 saat induk level 33 di-hover */
+        .dropdown:hover > .dropdown-menu.d-none {
+            display: block;
+        }
+
+        /* Tampilkan submenu level 11 saat induk level 22 di-hover */
+        .dropdown-menu > .dropdown:hover > .dropdown-menu {
+            display: block;
+        }
+
+    </style>
+    
 </head>
 
 <body>
@@ -44,7 +63,7 @@
             <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Revo</a> -->
 
             <!-- Image Logo -->
-            <a href="#" class="navbar-brand logo-image"><img src="{{ asset('logo/' . $logo->gambar) }}" class="d-flex" style="margin: auto; display: block;" /></a>
+            <a href="#" class="navbar-brand logo-image"><img src="{{ asset('logo/' . $logo->gambar) }}" style="margin: auto; display: block;" /></a>
 
             <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
                 <span class="navbar-toggler-icon"></span>
@@ -55,29 +74,51 @@
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#registration">TRIAL</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#features">FEATURES</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#details">DETAILS</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DROP</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item page-scroll" href="article.html">ARTICLE DETAILS</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item page-scroll" href="terms.html">TERMS CONDITIONS</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item page-scroll" href="privacy.html">PRIVACY POLICY</a>
-                        </div>
-                    </li>
+                    @foreach($menus as $menu)
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle nav-link" href="{{ $menu->link }}" id="navbarDropdown{{ $menu->id_menu }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color:black;">
+                                {{ $menu->nama_menu }}33
+                            </a>
+                            @if($menu->children->count() > 0)
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ $menu->id_menu }}">
+                                @foreach($menu->children as $child)
+                                <li class="dropdown">
+                                    <a href="{{ $child->link }}" class="dropdown-item page-scroll dropdown-toggle" id="navbarDropdownChild{{ $child->id_menu }}" role="button" aria-expanded="false">
+                                        {{ $child->nama_menu }}22
+                                    </a>
+                                    @if($child->children->count() > 0)
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownChild{{ $child->id_menu }}">
+                                        @foreach($child->children as $subChild)
+                                        <li class="dropdown">
+                                            <a href="{{ $subChild->link }}" class="dropdown-item page-scroll dropdown-toggle" id="navbarDropdownSubChild{{ $subChild->id_menu }}" role="button" aria-expanded="false">
+                                                <i class="fa fa-chevron-right justify-content-end"></i> {{ $subChild->nama_menu }}11
+                                            </a>
+                                            @if($subChild->children->count() > 0)
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownSubChild{{ $subChild->id_menu }}">
+                                                @foreach($subChild->children as $subSubChild)
+                                                <li>
+                                                    <a href="{{ $subSubChild->link }}" class="dropdown-item page-scroll">
+                                                        {{ $subSubChild->nama_menu }}
+                                                    </a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </li>
+                    @endforeach
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#purchase">PURCHASE</a>
                     </li>
                 </ul>
+
                 <span class="nav-item social-icons">
                     <span class="fa-stack">
                         <a href="#your-link">
@@ -164,6 +205,10 @@
 
 
     <!-- Scripts -->
+
+    <script>
+        
+    </script>
 
 
     <script src="{{ url('template/revo/js/jquery.min.js') }}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->

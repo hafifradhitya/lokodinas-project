@@ -252,9 +252,11 @@
                         @foreach($jawaban as $j)
                         <label>
                             <input type="radio" name="radio" checked="">
-                            <span>{{ $j->jawaban }}</span>
+                            <span>{{ $j->pilihan }}</span>
                         </label>
                         @endforeach
+                        <button type="submit" class="btn-outline-sm" style="margin: 0 auto; padding: 0.5rem 1rem;">Konfirmasi Pilihan</button>
+                        <button type="button" class="btn-outline-sm" style="margin: 0 auto; padding: 0.5rem 1rem;" onclick="lihatHasil()">Lihat Hasil</button>
                     </form>
                 </div>
             </div>

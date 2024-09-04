@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>UpConstruction Bootstrap Template - Index</title>
+  <title>{{ $identitas->nama_website }}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="{{ asset('foto_identitas/' . $identitas->favicon)}}" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -47,39 +47,39 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>UpConstruction<span>.</span></h1>
+        <img src="{{ asset('logo/' . $logo->gambar) }}" alt="">
+        <!-- <h1>UpConstruction<span>.</span></h1> -->
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
-        <ul>
+        <ul style="color:black;">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i
+          <li class="dropdown"><a href="#" style="color:black;"><span>Dropdown</span> <i
                 class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
+            <ul style="color:black;">
+              <li><a href="#" style="color:black;">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#" style="color:black;"><span>Deep Dropdown</span> <i
                     class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
+                <ul style="color:black;">
+                  <li><a href="#" style="color:black;">Deep Dropdown 1</a></li>
+                  <li><a href="#" style="color:black;">Deep Dropdown 2</a></li>
+                  <li><a href="#" style="color:black;">Deep Dropdown 3</a></li>
+                  <li><a href="#" style="color:black;">Deep Dropdown 4</a></li>
+                  <li><a href="#" style="color:black;">Deep Dropdown 5</a></li>
                 </ul>
               </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              <li><a href="#" style="color:black;">Dropdown 2</a></li>
+              <li><a href="#" style="color:black;">Dropdown 3</a></li>
+              <li><a href="#" style="color:black;">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" style="color:black;">Contact</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -104,14 +104,11 @@
     </div>
 
     <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-
-      <div class="carousel-item active" style="background-image: url(assets/img/hero-carousel/hero-carousel-1.jpg)">
+      @foreach($banners as $banner)
+      <div class="carousel-item active{{ $loop->first ? 'active' : '' }}">
+        <img src="{{ url('foto_banner/' . $banner->gambar) }}" alt="alternative">
       </div>
-      <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/hero-carousel-2.jpg)"></div>
-      <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/hero-carousel-3.jpg)"></div>
-      <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/hero-carousel-4.jpg)"></div>
-      <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/hero-carousel-5.jpg)"></div>
-
+      @endforeach
       <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
       </a>

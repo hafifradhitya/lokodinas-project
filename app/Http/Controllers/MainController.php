@@ -37,12 +37,14 @@ class MainController extends Controller
         $infos = Sekilasinfo::all();
         $videos = Video::all();
         $agendas = Agenda::all();
-        $pilihan = Poling::where('status', 'Pilihan')->get();
+        $pilihan = Poling::where('status', 'Pertanyaan')->get();
         $jawaban = Poling::where('status', 'Jawaban')->get();
         $menus = Menuwebsite::where('id_parent', 0)
             ->with('children.children') // Menyertakan children hingga 2 level
             ->orderBy('position', 'asc')
             ->get();
+
+        // dd($menus);
         $gambar = $request->query('gambar', 'default'); // Mengambil parameter 'gambar' dari query string
         // $background = Background::where('gambar', $gambar)->first();
 
@@ -63,10 +65,10 @@ class MainController extends Controller
             return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
         } elseif ($templateDinas1 && $templateDinas1->aktif === 'Y') {
             // Jika 'dinas-1' aktif (aktif = 'Y'), tampilkan view dari folder 'dinas-1'
-            return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+            return view('administrator.dashboard', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
         } else {
             // Jika tidak ada template yang aktif, tampilkan view default
-            return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+            return view('administrator.dashboard', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
         }
     }
 
