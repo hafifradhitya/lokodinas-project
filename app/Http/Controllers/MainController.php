@@ -13,6 +13,7 @@ use App\Models\Logo;
 use App\Models\Menuwebsite;
 use App\Models\Poling;
 use App\Models\Sekilasinfo;
+use App\Models\Template;
 use App\Models\Video;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -50,7 +51,23 @@ class MainController extends Controller
         // } else {
         //     return response()->json(['color' => 'darkslateblue']); // Warna default jika tidak ditemukan
         // }
-        return view('dinas-3.dashboard', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+        $templateDinas3 = Template::where('folder', 'dinas-3')->first();
+        $templateDinas2 = Template::where('folder', 'dinas-2')->first();
+        $templateDinas1 = Template::where('folder', 'dinas-1')->first();
+
+        if ($templateDinas3 && $templateDinas3->aktif === 'Y') {
+            // Jika 'dinas-3' aktif (aktif = 'Y'), tampilkan view dari folder 'dinas-3'
+            return view('dinas-3.dashboard', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+        } elseif ($templateDinas2 && $templateDinas2->aktif === 'Y') {
+            // Jika 'dinas-2' aktif (aktif = 'Y'), tampilkan view dari folder 'dinas-2'
+            return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+        } elseif ($templateDinas1 && $templateDinas1->aktif === 'Y') {
+            // Jika 'dinas-1' aktif (aktif = 'Y'), tampilkan view dari folder 'dinas-1'
+            return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+        } else {
+            // Jika tidak ada template yang aktif, tampilkan view default
+            return view('dinas-2.layout', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
+        }
     }
 
     /**
@@ -73,9 +90,10 @@ class MainController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         //
+
     }
 
     /**
