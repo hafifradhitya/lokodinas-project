@@ -1,7 +1,7 @@
 @extends('administrator.layout')
 
 @section('content')
-    <div class="card shadow">
+    <div class="card card-shadow">
         <div class="card-header">
             <h3 class="mb-0">Edit Berita</h3>
         </div>

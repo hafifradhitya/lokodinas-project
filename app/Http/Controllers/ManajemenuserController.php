@@ -259,7 +259,7 @@ class ManajemenuserController extends Controller
             'success' => true,
             'message' => 'Data User Berhasil Diperbarui'
         ]);
-    }
+    }  
 
     /**
      * Remove the specified resource from storage.

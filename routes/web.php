@@ -117,6 +117,11 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::resource('pesanmasuk', PesanmasukController::class)
         ->middleware('checkModul:pesanmasuk');
 
+    Route::get('detailpesanmasuk/{id}', [PesanmasukController::class, 'show'])->name('detailpesanmasuk.show');
+
+    // Tambahkan rute untuk sendReply
+    Route::post('pesanmasuk/{id}/sendReply', [PesanmasukController::class, 'sendReply'])->name('pesanmasuk.sendReply');
+
     // Route::resource('menuwebsite', MenuwebsiteController::class);
     Route::resource('menuwebsite', MenuwebsiteController::class)
     ->middleware('checkModul:menuwebsite');
@@ -148,7 +153,8 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
         ->middleware('checkModul:ym');
     Route::resource('templatewebsite', TemplatewebsiteController::class);
     Route::get('templatewebsite/active/{id_templates}', [TemplatewebsiteController::class, 'active'])
-        ->name('temlatewebsite.active');
+        ->name('templatewebsite.active')
+        ->middleware('checkModul:templatewebsite.active');
 
     // Rute untuk backup database
      // Rute untuk backup database

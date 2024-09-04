@@ -19,18 +19,17 @@ class CheckUserModul
     {
 
         // Tambahkan log untuk memeriksa nilai parameter dan sesi pengguna
-
         $user = $request->user();
         Log::info('Memeriksa akses middleware untuk modul: ' . $modul . ' dan user session ID: ' . $user->id_session);
 
-        $akses = Usermodul::where('id_session', $user->id_session)
-                ->whereHas('modul', function ($query) use ($modul) {
-                    $query->where('link', $modul);
-                })
-                ->count();
+        $akses = Usermodul::where('id_session', $user->id_session)->whereHas('modul', function ($query) use ($modul) {
+                $query->where('link', $modul);
+            })->get();
+
         Log::info('Akses ditemukan di middleware: ' . $akses);
 
-        if ($akses < 1 && $user->level != 'admin') {
+        // Ubah perbandingan dari $akses < 1 menjadi $akses->isEmpty()
+        if ($akses->isEmpty() && $user->level != 'admin') {
             // Jika pengguna tidak memiliki akses dan bukan admin, redirect ke halaman error atau halaman lain
             Log::info('Tidak memiliki akses untuk modul: ' . $modul);
 

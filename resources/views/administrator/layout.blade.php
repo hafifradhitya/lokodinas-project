@@ -102,13 +102,13 @@
                                         $cekHalamanbaru = $userModul->umenu_akses("halamanbaru", session('id_session'));
                                     @endphp
 
-                                    @if($cekIdentitaswebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekIdentitaswebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/identitaswebsite') }}"><i class='ni ni-diamond text-blue'></i> Identitas Website</a></li>
                                     @endif
-                                    @if($cekMenuwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekMenuwebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/menuwebsite') }}"><i class='ni ni-bullet-list-67 text-orange'></i> Menu Website</a></li>
                                     @endif
-                                    @if($cekHalamanbaru == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekHalamanbaru == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/halamanbaru') }}"><i class='ni ni-book-bookmark text-purple'></i> Halaman Baru</a></li>
                                     @endif
 
@@ -150,7 +150,7 @@
                             $cekKategoriBerita = $userModul->umenu_akses("kategoriberita", session('id_session'));
                             $cekTagBerita = $userModul->umenu_akses("tagberita", session('id_session'));
 
-                            if ($cekBerita == 1 || $cekKategoriBerita == 1 || $cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user') {
+                            if ($cekBerita == 1 || $cekKategoriBerita == 1 || $cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor') {
                                 $hasAccess = true;
                             }
                         @endphp
@@ -163,13 +163,13 @@
                                 </a>
                                 <div class="collapse" id="modul-berita">
                                     <ul class="nav nav-sm flex-column">
-                                        @if($cekBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        @if($cekBerita == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                             <li class="nav-item"><a class="nav-link" href="{{ url('administrator/berita') }}"><i class='ni ni-paper-diploma text-blue'></i> Berita</a></li>
                                         @endif
-                                        @if($cekKategoriBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        @if($cekKategoriBerita == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                             <li class="nav-item"><a class="nav-link" href="{{ url('administrator/kategoriberita') }}"><i class='ni ni-box-2 text-orange'></i> Kategori Berita</a></li>
                                         @endif
-                                        @if($cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user')
+                                        @if($cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                             <li class="nav-item"><a class="nav-link" href="{{ url('administrator/tagberita') }}"><i class='ni ni-ruler-pencil text-purple'></i> Tag Berita</a></li>
                                         @endif
                                     </ul>
@@ -226,13 +226,13 @@
                                         $cekTagvideo = $userModul->umenu_akses("tagvideo", session('id_session'));
                                     @endphp
 
-                                    @if($cekPlaylistvideo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekPlaylistvideo == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/playlistvideo') }}"><i class='ni ni-folder-17 text-blue'></i> Playlist Video</a></li>
                                     @endif
-                                    @if($cekVideo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekVideo == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/video') }}"><i class='ni ni-camera-compact text-orange'></i> Video</a></li>
                                     @endif
-                                    @if($cekTagvideo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekTagvideo == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/tagvideo') }}"><i class='ni ni-tag text-purple'></i> Tag Video</a></li>
                                     @endif
                                 </ul>
@@ -314,13 +314,13 @@
                                         $cekIklansidebar = $userModul->umenu_akses("iklansidebar", session('id_session'));
                                     @endphp
 
-                                    @if($cekBannerslider == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekBannerslider == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/bannerslider') }}"><i class='ni ni-image text-blue'></i> Banner Slider</a></li>
                                     @endif
-                                    @if($cekBannerhome == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekBannerhome == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/bannerhome') }}"><i class='ni ni-shop text-orange'></i> Banner Home</a></li>
                                     @endif
-                                    @if($cekIklansidebar == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekIklansidebar == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/iklansidebar') }}"><i class='ni ni-notification-70 text-purple'></i> Iklan Sidebar</a></li>
                                     @endif
 
@@ -405,13 +405,13 @@
                                         $cekBackgroundwebsite = $userModul->umenu_akses("backgroundwebsite", session('id_session'));
                                     @endphp
 
-                                    @if($cekLogowebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekLogowebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/logowebsite') }}"><i class='ni ni-badge text-blue'></i> Logo Website</a></li>
                                     @endif
-                                    @if($cekTemplatewebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekTemplatewebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/templatewebsite') }}"><i class='ni ni-settings-gear-65 text-orange'></i> Template Website</a></li>
                                     @endif
-                                    @if($cekBackgroundwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekBackgroundwebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/backgroundwebsite') }}"><i class='ni ni-ui-04 text-purple'></i> Background Website</a></li>
                                     @endif
                                 </ul>
@@ -570,19 +570,19 @@
                                         $cekPesanmasuk = $userModul->umenu_akses("pesanmasuk", session('id_session'));
                                     @endphp
 
-                                    @if($cekAgenda == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekAgenda == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/agenda') }}"><i class='ni ni-collection text-blue'></i> Agenda</a></li>
                                     @endif
-                                    @if($cekSekilasinfo == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekSekilasinfo == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/sekilasinfo') }}"><i class='ni ni-single-copy-04 text-orange'></i> Sekilas Info</a></li>
                                     @endif
-                                    @if($cekJejakpendapat == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekJejakpendapat == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/jejakpendapat') }}"><i class='ni ni-chart-bar-32 text-purple'></i> Jejak Pendapat</a></li>
                                     @endif
-                                    @if($cekDownloadarea == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekDownloadarea == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/downloadarea') }}"><i class='ni ni-cloud-download-95 text-blue'></i> Download Area</a></li>
                                     @endif
-                                    @if($cekPesanmasuk == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekPesanmasuk == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/pesanmasuk') }}"><i class='ni ni-chat-round text-orange'></i> Pesan Masuk</a></li>
                                     @endif
                                 </ul>
@@ -627,15 +627,15 @@
                                         $cekManajemenmodul = $userModul->umenu_akses("manajemenmodul", session('id_session'));
                                     @endphp
 
-                                    @if($cekManajemenuser == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekManajemenuser == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/manajemenuser') }}"><i class='ni ni-folder-17 text-blue'></i> Manajemen User</a></li>
                                     @endif
-                                    @if($cekManajemenmodul == 1 || session('level') == 'admin' || session('level') == 'user')
+                                    @if($cekManajemenmodul == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/manajemenmodul') }}"><i class='ni ni-folder-17 text-orange'></i> Manajemen Modul</a></li>
                                     @endif
                                 </ul>
                             </div>
-                        </li>
+                        </li>   
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('administrator/database') }}">
                                 <i class="ni ni-map-big text-primary"></i>
@@ -692,108 +692,31 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden">
                                 <div class="px-3 py-3">
-                                    <h6 class="text-sm text-muted m-0">You have <strong
-                                            class="text-primary">13</strong> notifications.</h6>
+                                    <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">{{ $latestMessages->count() }}</strong> notifications.</h6>
                                 </div>
                                 <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
+                                    @foreach($latestMessages as $message)
+                                    <a href="{{ route('administrator.detailpesanmasuk.show', $message->id_hubungi) }}" class="list-group-item list-group-item-action">
                                         <div class="row align-items-center">
                                             <div class="col-auto">
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-1.jpg"
-                                                    class="avatar rounded-circle">
+                                                <img alt="Image placeholder" src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle">
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                        <h4 class="mb-0 text-sm">{{ $message->nama }}</h4>
                                                     </div>
                                                     <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
+                                                        <small>{{ $message->tanggal }}</small>
                                                     </div>
                                                 </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                                <p class="text-sm mb-0">{{ Str::limit($message->pesan, 50) }}</p>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-2.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-3.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>5 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-5.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @endforeach
                                 </div>
-                                <a href="#!"
-                                    class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+                                <a href="{{ route('administrator.pesanmasuk.index') }}" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
                             </div>
                         </li>
                     </ul>

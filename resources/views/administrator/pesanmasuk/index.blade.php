@@ -13,7 +13,7 @@
                 <input type="text" class="form-control" placeholder="Cari Agenda..." name="search" value="{{ request('search') }}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit">Cari</button>
-                </div>
+                </div>  
             </div>
         </form>
 
@@ -38,7 +38,7 @@
                             <td>{{ $mess->subjek }}</td>
                             <td>{{ $mess->tanggal }}</td>
                             <td class="text-center">
-                                <a href="{{ route('administrator.pesanmasuk.show', $mess->id_hubungi) }}" class="btn btn-success btn-sm" title="Detail Data">
+                                <a href="{{ route('administrator.detailpesanmasuk.show', $mess->id_hubungi) }}" class="btn btn-success btn-sm" title="Detail Data">
                                     <i class="fa fa-envelope"></i>
                                 </a>
                                 <button data-url="{{ route('administrator.pesanmasuk.destroy', $mess->id_hubungi) }}"
