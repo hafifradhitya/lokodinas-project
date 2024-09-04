@@ -89,7 +89,7 @@ class ManajemenuserController extends Controller
             $nama_modul = '';
         }
 
-        $user = User::create([
+        User::create([
             "username" => $username,
             "nama_lengkap" => $request->nama_lengkap,
             "email" => $request->email,
@@ -99,7 +99,7 @@ class ManajemenuserController extends Controller
             "no_telp" => $no_telp,
             "nama_modul" => $nama_modul,
             "blokir" => 'N',
-            "id_session" => md5($username.'-'.date('YmdHis'))
+            "id_session" => md5($username.'-'.date('YmdHis')),
         ]);
 
         // $mod=count($this->input->post('modul'));

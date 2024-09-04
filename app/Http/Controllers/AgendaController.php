@@ -21,7 +21,7 @@ class AgendaController extends Controller
      */
     public function index(Request $request):View
     {
-        //
+        //  
         $search = $request->search;
         if (!empty($search)) {
             $agendas = Agenda::latest()

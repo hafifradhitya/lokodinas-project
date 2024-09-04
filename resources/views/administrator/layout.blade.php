@@ -103,13 +103,13 @@
                                     @endphp
 
                                     @if($cekIdentitaswebsite == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/identitaswebsite') }}"><i class='fa fa-circle-o'></i> Identitas Website</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/identitaswebsite') }}"><i class='ni ni-diamond text-blue'></i> Identitas Website</a></li>
                                     @endif
                                     @if($cekMenuwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/menuwebsite') }}"><i class='fa fa-circle-o'></i> Menu Website</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/menuwebsite') }}"><i class='ni ni-bullet-list-67 text-orange'></i> Menu Website</a></li>
                                     @endif
                                     @if($cekHalamanbaru == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/halamanbaru') }}"><i class='fa fa-circle-o'></i> Halaman Baru</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/halamanbaru') }}"><i class='ni ni-book-bookmark text-purple'></i> Halaman Baru</a></li>
                                     @endif
 
                                 </ul>
@@ -164,13 +164,13 @@
                                 <div class="collapse" id="modul-berita">
                                     <ul class="nav nav-sm flex-column">
                                         @if($cekBerita == 1 || session('level') == 'admin' || session('level') == 'user')
-                                            <li><a href="{{ url('administrator/berita') }}"><i class='fa fa-circle-o'></i> Berita</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="{{ url('administrator/berita') }}"><i class='ni ni-paper-diploma text-blue'></i> Berita</a></li>
                                         @endif
                                         @if($cekKategoriBerita == 1 || session('level') == 'admin' || session('level') == 'user')
-                                            <li><a href="{{ url('administrator/kategoriberita') }}"><i class='fa fa-circle-o'></i> Kategori Berita</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="{{ url('administrator/kategoriberita') }}"><i class='ni ni-box-2 text-orange'></i> Kategori Berita</a></li>
                                         @endif
                                         @if($cekTagBerita == 1 || session('level') == 'admin' || session('level') == 'user')
-                                            <li><a href="{{ url('administrator/tagberita') }}"><i class='fa fa-circle-o'></i> Tag Berita</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="{{ url('administrator/tagberita') }}"><i class='ni ni-ruler-pencil text-purple'></i> Tag Berita</a></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -227,13 +227,13 @@
                                     @endphp
 
                                     @if($cekPlaylistvideo == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/playlistvideo') }}"><i class='fa fa-circle-o'></i> Playlist Video</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/playlistvideo') }}"><i class='ni ni-folder-17 text-blue'></i> Playlist Video</a></li>
                                     @endif
                                     @if($cekVideo == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/video') }}"><i class='fa fa-circle-o'></i> Video</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/video') }}"><i class='ni ni-camera-compact text-orange'></i> Video</a></li>
                                     @endif
                                     @if($cekTagvideo == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/tagvideo') }}"><i class='fa fa-circle-o'></i> Tag Video</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/tagvideo') }}"><i class='ni ni-tag text-purple'></i> Tag Video</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -315,13 +315,13 @@
                                     @endphp
 
                                     @if($cekBannerslider == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/bannerslider') }}"><i class='fa fa-circle-o'></i> Banner Slider</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/bannerslider') }}"><i class='ni ni-image text-blue'></i> Banner Slider</a></li>
                                     @endif
                                     @if($cekBannerhome == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/bannerhome') }}"><i class='fa fa-circle-o'></i> Banner Home</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/bannerhome') }}"><i class='ni ni-shop text-orange'></i> Banner Home</a></li>
                                     @endif
                                     @if($cekIklansidebar == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/iklansidebar') }}"><i class='fa fa-circle-o'></i> Iklan Sidebar</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/iklansidebar') }}"><i class='ni ni-notification-70 text-purple'></i> Iklan Sidebar</a></li>
                                     @endif
 
                                 </ul>
@@ -406,13 +406,13 @@
                                     @endphp
 
                                     @if($cekLogowebsite == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/logowebsite') }}"><i class='fa fa-circle-o'></i> Logo Website</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/logowebsite') }}"><i class='ni ni-badge text-blue'></i> Logo Website</a></li>
                                     @endif
                                     @if($cekTemplatewebsite == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/templatewebsite') }}"><i class='fa fa-circle-o'></i> Template Website</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/templatewebsite') }}"><i class='ni ni-settings-gear-65 text-orange'></i> Template Website</a></li>
                                     @endif
                                     @if($cekBackgroundwebsite == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/backgroundwebsite') }}"><i class='fa fa-circle-o'></i> Background Website</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/backgroundwebsite') }}"><i class='ni ni-ui-04 text-purple'></i> Background Website</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -571,19 +571,19 @@
                                     @endphp
 
                                     @if($cekAgenda == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/agenda') }}"><i class='fa fa-circle-o'></i> Agenda</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/agenda') }}"><i class='ni ni-collection text-blue'></i> Agenda</a></li>
                                     @endif
                                     @if($cekSekilasinfo == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/sekilasinfo') }}"><i class='fa fa-circle-o'></i> Sekilas Info</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/sekilasinfo') }}"><i class='ni ni-single-copy-04 text-orange'></i> Sekilas Info</a></li>
                                     @endif
                                     @if($cekJejakpendapat == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/jejakpendapat') }}"><i class='fa fa-circle-o'></i> Jejak Pendapat</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/jejakpendapat') }}"><i class='ni ni-chart-bar-32 text-purple'></i> Jejak Pendapat</a></li>
                                     @endif
                                     @if($cekDownloadarea == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/downloadarea') }}"><i class='fa fa-circle-o'></i> Download Area</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/downloadarea') }}"><i class='ni ni-cloud-download-95 text-blue'></i> Download Area</a></li>
                                     @endif
                                     @if($cekPesanmasuk == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/pesanmasuk') }}"><i class='fa fa-circle-o'></i> Pesan Masuk</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/pesanmasuk') }}"><i class='ni ni-chat-round text-orange'></i> Pesan Masuk</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -628,13 +628,19 @@
                                     @endphp
 
                                     @if($cekManajemenuser == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/manajemenuser') }}"><i class='fa fa-circle-o'></i> Manajemen User</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/manajemenuser') }}"><i class='ni ni-folder-17 text-blue'></i> Manajemen User</a></li>
                                     @endif
                                     @if($cekManajemenmodul == 1 || session('level') == 'admin' || session('level') == 'user')
-                                        <li><a href="{{ url('administrator/manajemenmodul') }}"><i class='fa fa-circle-o'></i> Manajemen Modul</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/manajemenmodul') }}"><i class='ni ni-folder-17 text-orange'></i> Manajemen Modul</a></li>
                                     @endif
                                 </ul>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('administrator/database') }}">
+                                <i class="ni ni-map-big text-primary"></i>
+                                <span class="nav-link-text">Backup Database</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -35,6 +35,8 @@ use App\Http\Controllers\TagvideoController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\YmController;
+use App\Http\Controllers\DatabaseController;
+use App\Http\Controllers\TemplatewebsiteController;
 use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\Halamanbaru;
@@ -66,12 +68,11 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     // Route::get('grafik/data', [GrafikController::class, 'fetchGrafikData'])
     //     ->name('grafik.data')
     //     ->middleware('checkModul:grafik');
-    
+
     // Route::resource('grafik', GrafikController::class)
     //     ->middleware('checkModul:grafik');
 
     Route::get('grafik/data', [GrafikController::class, 'fetchGrafikData'])->name('grafik.data'); // Correctly named route
-
 
     Route::resource('halamanbaru', HalamanbaruController::class)
     ->middleware('checkModul:halamanbaru');
@@ -80,7 +81,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::get('identitaswebsite', [IdentitaswebsiteController::class, 'edit'])
     ->middleware('checkModul:identitaswebsite')
     ->name('identitaswebsite.edit');
-    
+
     Route::resource('berita', BeritaController::class)
     ->middleware('checkModul:berita');
     Route::get('berita/publish/{id_berita}', [BeritaController::class, 'publish'])
@@ -89,7 +90,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
 
     Route::resource('kategoriberita', KategoriberitaController::class)
         ->middleware('checkModul:kategoriberita');
-        
+
     Route::resource('tagberita', TagberitaController::class)
         ->middleware('checkModul:tagberita');
 
@@ -99,7 +100,6 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
         ->middleware('checkModul:video');
     Route::resource('tagvideo', TagvideoController::class)
         ->middleware('checkModul:tagvideo');
-
 
     Route::resource('manajemenuser', ManajemenuserController::class)
         ->middleware('checkModul:manajemenuser');
@@ -116,7 +116,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
         ->middleware('checkModul:downloadarea');
     Route::resource('pesanmasuk', PesanmasukController::class)
         ->middleware('checkModul:pesanmasuk');
-    
+
     // Route::resource('menuwebsite', MenuwebsiteController::class);
     Route::resource('menuwebsite', MenuwebsiteController::class)
     ->middleware('checkModul:menuwebsite');
@@ -146,6 +146,24 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
         ->middleware('checkModul:gallery');
     Route::resource('ym', YmController::class)
         ->middleware('checkModul:ym');
+    Route::resource('templatewebsite', TemplatewebsiteController::class);
+    Route::get('templatewebsite/active/{id_templates}', [TemplatewebsiteController::class, 'active'])
+        ->name('temlatewebsite.active');
+
+    // Rute untuk backup database
+     // Rute untuk backup database
+    Route::get('database', [DatabaseController::class, 'index'])
+        ->middleware('checkModul:database')
+        ->name('database.index');
+    Route::get('database/backup', [DatabaseController::class, 'database_backup'])
+        ->middleware('checkModul:database.backup')
+        ->name('database.backup');
+    Route::get('database/backup/{file}/download', [DatabaseController::class, 'database_backup_download'])
+        ->middleware('checkModul:database.backup.download')
+        ->name('database.backup.download');
+    Route::get('database/backup/{file}/remove', [DatabaseController::class, 'database_backup_remove'])
+        ->middleware('checkModul:database.backup.remove')
+        ->name('database.backup.remove');
 });
 
 // Route::prefix('dinas-1')->name('dinas-1.')->group(function () {
