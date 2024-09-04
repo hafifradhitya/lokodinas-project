@@ -58,14 +58,14 @@ class LogowebsiteController extends Controller
     {
         //
         $validated = $request->validate([
-            'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $logo = Logo::findOrFail($id_logo);
 
-        if ($request->hasFile('cover')) {
-            $gambar = $request->file("cover");
-            $logoName = "logo".Str::random(25).".".$gambar->getClientOriginalExtension();
+        if ($request->hasFile('logo')) {
+            $gambar = $request->file("logo");
+            $logoName = "logo".Str::random(25).".".$gambar->getClientOriginalName();
             $gambar->move(public_path('logo'), $logoName);
             $logo->update(['gambar' => $logoName]);
         }

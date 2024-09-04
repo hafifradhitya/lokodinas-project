@@ -2,7 +2,7 @@
 
 @section('content')
 
-<header id="header" class="header" style="padding-bottom: 10px;"> <!-- Mengurangi padding atas untuk mengangkat header -->
+<header id="header" class="slide-1 header" style="padding-bottom: 10px;"> <!-- Mengurangi padding atas untuk mengangkat header -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

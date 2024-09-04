@@ -39,18 +39,18 @@ class MainController extends Controller
         $pilihan = Poling::where('status', 'Pilihan')->get();
         $jawaban = Poling::where('status', 'Jawaban')->get();
         $menus = Menuwebsite::where('id_parent', 0)
-        ->with('children.children') // Menyertakan children hingga 2 level
+            ->with('children.children') // Menyertakan children hingga 2 level
             ->orderBy('position', 'asc')
             ->get();
-            $gambar = $request->query('gambar', 'default'); // Mengambil parameter 'gambar' dari query string
-        $background = Background::where('gambar', $gambar)->first();
+        $gambar = $request->query('gambar', 'default'); // Mengambil parameter 'gambar' dari query string
+        // $background = Background::where('gambar', $gambar)->first();
 
-        if ($background) {
-            return response()->json(['color' => $background->gambar]);
-        } else {
-            return response()->json(['color' => 'darkslateblue']); // Warna default jika tidak ditemukan
-        }
-        return view('dinas-3.dashboard', compact('identitas','logo','banners','pilihan','jawaban','links','menus','alamat','beritas','infos','agendas','beritau','beritao','beritad','videos'));
+        // if ($background) {
+        //     return response()->json(['color' => $background->gambar]);
+        // } else {
+        //     return response()->json(['color' => 'darkslateblue']); // Warna default jika tidak ditemukan
+        // }
+        return view('dinas-3.dashboard', compact('identitas', 'logo', 'banners', 'pilihan', 'jawaban', 'links', 'menus', 'alamat', 'beritas', 'infos', 'agendas', 'beritau', 'beritao', 'beritad', 'videos'));
     }
 
     /**

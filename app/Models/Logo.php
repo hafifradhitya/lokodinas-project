@@ -11,5 +11,5 @@ class Logo extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_logo';
     protected $table = 'logo';
-    protected $fillable = ['gambar'];
+    protected $fillable = ['id_logo','gambar'];
 }

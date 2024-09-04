@@ -50,48 +50,32 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="navbar-collapse offcanvas-collapse text-center" id="navbarsExampleDefault">
-                <ul class="navbar-nav mx-auto">
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#header">
-                            <span class="fa fa-home" style="font-size: 1.5rem;"></span>
-                        </a>
-                    <li class="nav-item dropdown dropdown-mega position-relative d-flex">
-                        @foreach($menus as $menu)
-                        <a class="nav-link dropdown-toggle" href="{{ $menu->link }}" id="navbarDropdown{{ $menu->id_menu }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.0rem;">
-                            {{ $menu->nama_menu }}
-                        </a>
-                        @if($menu->children->count() > 0)
-                        <ul class="dropdown-menu" id="dropdown{{ $menu->id_menu }}">
-                            <li>
-                                <div class="dropdown-mega-content container">
-                                    <div class="row">
-                                        @foreach($menu->children as $child)
-                                        <div class="col-md-3">
-                                            <h4>{{ $child->nama_menu }}</h4>
-                                            @if($child->children->count() > 0)
-                                            <ul class="dropdown-mega-sub-nav" style="width:auto;">
-                                                @foreach($child->children as $subChild)
-                                                <li class="justify-content-end">
-                                                    <a href="{{ $subChild->link }}">
-                                                        <i class="fa fa-chevron-right justify-content-end"></i> {{ $subChild->nama_menu }}
-                                                    </a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                            @endif
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        @endif
-                        @endforeach
+                        <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" style="font-size: 1.0rem;" href="#hubungi">Hubungi Kami</a>
+                        <a class="nav-link page-scroll" href="#registration">TRIAL</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#features">FEATURES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#details">DETAILS</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DROP</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item page-scroll" href="article.html">ARTICLE DETAILS</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item page-scroll" href="terms.html">TERMS CONDITIONS</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item page-scroll" href="privacy.html">PRIVACY POLICY</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#purchase">PURCHASE</a>
                     </li>
                 </ul>
                 <span class="nav-item social-icons">
@@ -180,16 +164,7 @@
 
 
     <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const gambar = document.querySelector('meta[name="gambar"]').getAttribute('content');
-            fetch(`/background-color?gambar=${gambar}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.documentElement.style.setProperty('--dynamic-bg-color', data.color);
-                })
-        });
-    </script>
+
 
     <script src="{{ url('template/revo/js/jquery.min.js') }}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="{{ url('template/revo/js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
