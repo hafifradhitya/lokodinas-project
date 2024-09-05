@@ -181,6 +181,11 @@ Route::get('/', [MainController::class, 'index']);
 Route::get('sejarah-instansi', [HalamanController::class, 'sejarah_instansi']);
 Route::get('struktur-organisasi', [HalamanController::class, 'struktur_organisasi']);
 Route::get('visi-dan-misi', [HalamanController::class, 'visi_dan_misi']);
+Route::get('berita', [HalamanController::class, 'berita']);
+Route::get('detailberita/{judul_seo}', [HalamanController::class, 'detailBerita'])->name('detailberita');
+Route::get('albums', [HalamanController::class, 'album']);
+Route::get('video', [HalamanController::class, 'video']);
+Route::get('agenda', [HalamanController::class, 'agenda']);
 Route::get('sliderlogo', [MainController::class, 'create']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);
