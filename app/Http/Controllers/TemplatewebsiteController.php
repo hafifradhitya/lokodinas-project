@@ -123,9 +123,9 @@ class TemplatewebsiteController extends Controller
     public function destroy(string $id_templates)
     {
         //
-        $templ = Template::findOrFail($id_templates);
+        $templs = Template::findOrFail($id_templates);
 
-        $templ->delete();
+        $templs->delete();
         return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 
