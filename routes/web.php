@@ -178,7 +178,9 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
 // });
 
 Route::get('/', [MainController::class, 'index']);
-Route::get('halaman/detail/sejarah-instansi', [HalamanController::class, 'sejarah_instansi']);
+Route::get('sejarah-instansi', [HalamanController::class, 'sejarah_instansi']);
+Route::get('struktur-organisasi', [HalamanController::class, 'struktur_organisasi']);
+Route::get('visi-dan-misi', [HalamanController::class, 'visi_dan_misi']);
 Route::get('sliderlogo', [MainController::class, 'create']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);

@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="col-lg-5" data-aos="fade">
-                    <form action="" method="post" class="php-email-form" enctype="multipart/form-data">
+                    <form action="{{ route('administrator.pesanmasuk.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <h3>Contact Us</h3>
                         <div class="row gy-3">
@@ -59,11 +59,19 @@
                             <div class="col-md-12 ">
                                 <input type="email" class="form-control" name="email" placeholder="Email" required>
                             </div>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="subjek" name="subjek" placeholder="subjek" required>
+                                @if ($errors->has('subjek'))
+                                <span class="text-danger">{{ $errors->first('subjek') }}</span>
+                                @endif  
+                            </div>
 
                             <div class="col-md-12">
                                 <textarea class="form-control" name="pesan" rows="6" placeholder="Message" required></textarea>
                             </div>
 
+                            <!-- ... existing code ... -->
+                            <!-- ... existing code ... -->
                             <div class="col-md-12 text-center">
                                 <button type="submit">Send</button>
                             </div>
@@ -285,7 +293,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
-                            <form action="{{ route('polling.submit') }}" method="POST">
+                            <form action="" method="POST">
                                 @csrf
                                 @foreach($pilihan as $p)
                                 <p>{{ $p->pilihan }}</p>
@@ -303,7 +311,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
     </section><!-- End Our Projects Section -->

@@ -82,22 +82,22 @@ class PesanmasukController extends Controller
         return implode("\r\n", array_merge($headers, ["", ""], $body));
     }
 
-     public function getLatestMessages()
-     {
-         $latestMessages = Pesanmasuk::orderBy('tanggal', 'desc')->take(5)->get();
-         return $latestMessages;
-     }
+    public function getLatestMessages()
+    {
+        $latestMessages = Pesanmasuk::orderBy('tanggal', 'desc')->take(5)->get();
+        return $latestMessages;
+    }
 
 
-    public function index(Request $request):View
+    public function index(Request $request): View
     {
         //
         $search = $request->search;
         if (!empty($search)) {
             $pesan = Pesanmasuk::latest()
-            ->where('id_hubungi', 'like', "%$search%")
-            ->orWhere('nama', 'like', "%$search%")
-            ->paginate(10);
+                ->where('id_hubungi', 'like', "%$search%")
+                ->orWhere('nama', 'like', "%$search%")
+                ->paginate(10);
         } else {
             $pesan = Pesanmasuk::orderBy('tanggal', 'desc')->paginate(10);
         }
@@ -123,14 +123,23 @@ class PesanmasukController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'subjek' => 'nullable|string|max:255',
             'pesan' => 'required|string',
         ]);
+
+        if (empty($validatedData['subjek'])) {
+            $validatedData['subjek'] = $request->ip();
+        }
+
+        // Tambahkan tanggal dan jam saat ini ke dalam data yang divalidasi
+        $validatedData['tanggal'] = now();
+        $validatedData['jam'] = now()->format('H:i:s');
 
         // Simpan data ke database
         Pesanmasuk::create($validatedData);
 
         // Redirect atau response sesuai kebutuhan
-        return redirect('dinas-2.dashboard');
+        return redirect()->back();
     }
 
     /**
@@ -140,7 +149,7 @@ class PesanmasukController extends Controller
     {
         // Update status pesan menjadi dibaca
         Pesanmasuk::where('id_hubungi', $id)->update(['dibaca' => 'Y']);
-        
+
         // Ambil data pesan berdasarkan id
         $pesan = Pesanmasuk::where('id_hubungi', $id)->firstOrFail();
         $alamat = Alamat::where('id_alamat', 1)->first();
