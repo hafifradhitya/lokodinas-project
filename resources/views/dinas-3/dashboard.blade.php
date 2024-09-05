@@ -65,13 +65,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="text-center mb-4">Berita <strong>Terbaru</strong></h2> <!-- Tambahkan judul -->
+                        <h2 class="text-center mb-4">Berita <strong>Terbaru</strong></h2>
                         <div class="slider-container">
                             <div class="swiper-container card-slider">
                                 <div class="swiper-wrapper">
                                     @foreach ($beritas as $index => $berita)
                                     <div class="swiper-slide">
-                                        <div class="card">
+                                        <div class="card modern-card">
                                             <img class="card-image" src="{{ asset('foto_berita/' . $berita->gambar) }}" alt="alternative">
                                             <div class="card-body">
                                                 <p class="testimonial-text">"{{ $berita->judul }}"</p>
@@ -89,6 +89,7 @@
             </div>
         </div>
     </div>
+    
 
     <div class="tabs" style="margin-top: -50px; width: 100%;">
         <div class="container">

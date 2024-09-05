@@ -34,28 +34,55 @@
     <link rel="icon" href="{{ asset('foto_identitas/' . $identitas->favicon)}}" type="image/x-icon">
 
     <style>
+        /* Navbar Styles */
+        .navbar {
+            background-color: #FFFFFF; /* Mengubah warna navbar menjadi putih */
+            backdrop-filter: none; /* Nonaktifkan efek blur jika ada */
+            -webkit-backdrop-filter: none; /* Nonaktifkan efek blur untuk Safari */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Ubah border-bottom untuk kontras yang lebih lembut */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Kurangi bayangan untuk navbar putih */
+        }
+    
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(0, 0, 0, 0.7); /* Ubah warna teks link menjadi hitam */
+        }
+    
+        .navbar-dark .navbar-nav .nav-link:hover,
+        .navbar-dark .navbar-nav .nav-link:focus {
+            color: rgba(0, 0, 0, 0.9); /* Ubah warna teks link saat hover */
+        }
+    
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+    
+        .navbar-dark .navbar-toggler {
+            border-color: rgba(0, 0, 0, 0.1); /* Ubah border-color untuk tombol toggler */
+        }
+    
         /* Sembunyikan semua submenu pada awalnya */
         .dropdown-menu.d-none {
             display: none;
         }
-
+    
         /* Tampilkan submenu level 22 saat induk level 33 di-hover */
         .dropdown:hover > .dropdown-menu.d-none {
             display: block;
         }
-
+    
         /* Tampilkan submenu level 11 saat induk level 22 di-hover */
         .dropdown-menu > .dropdown:hover > .dropdown-menu {
             display: block;
         }
-
     </style>
+    
     
 </head>
 
 <body>
 
     <!-- Navigation -->
+    @yield('content')
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark"> <!-- Menambahkan padding untuk memperbesar ukuran navbar -->
         <div class="container">
 
@@ -137,7 +164,6 @@
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
 
-    @yield('content')
 
     <!-- Footer -->
     <div class="footer ">

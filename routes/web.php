@@ -36,6 +36,7 @@ use App\Http\Controllers\TestingController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\YmController;
 use App\Http\Controllers\DatabaseController;
+use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\TemplatewebsiteController;
 use App\Models\Agenda;
 use App\Models\Berita;
@@ -177,6 +178,7 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
 // });
 
 Route::get('/', [MainController::class, 'index']);
+Route::get('halaman/detail/sejarah-instansi', [HalamanController::class, 'sejarah_instansi']);
 Route::get('sliderlogo', [MainController::class, 'create']);
 
 // Route::get('administrator/layout', [TestingController::class, 'layout']);
