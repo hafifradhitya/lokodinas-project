@@ -119,6 +119,18 @@ class PesanmasukController extends Controller
     public function store(Request $request)
     {
         //
+        // Validasi data
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'pesan' => 'required|string',
+        ]);
+
+        // Simpan data ke database
+        Pesanmasuk::create($validatedData);
+
+        // Redirect atau response sesuai kebutuhan
+        return redirect('dinas-2.dashboard');
     }
 
     /**
