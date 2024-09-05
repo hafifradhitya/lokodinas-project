@@ -183,7 +183,7 @@
         </div>
     </div>
 
-    <div id="hubungi" class="basic-1 bg-dark-blue">
+    <div id="hubungi" class="basic-1">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-xl-5">
@@ -232,7 +232,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     @foreach($videos as $video)
-                    <div class="resource-container">
+                    <div class="resource-container card-shadow">
                         <iframe class="img-fluid" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     @endforeach

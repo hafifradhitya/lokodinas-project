@@ -104,14 +104,14 @@
                     @foreach($menus as $menu)
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link" href="{{ $menu->link }}" id="navbarDropdown{{ $menu->id_menu }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color:black;">
-                                {{ $menu->nama_menu }}33
+                                {{ $menu->nama_menu }}
                             </a>
                             @if($menu->children->count() > 0)
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ $menu->id_menu }}">
                                 @foreach($menu->children as $child)
                                 <li class="dropdown">
                                     <a href="{{ $child->link }}" class="dropdown-item page-scroll dropdown-toggle" id="navbarDropdownChild{{ $child->id_menu }}" role="button" aria-expanded="false">
-                                        {{ $child->nama_menu }}22
+                                        {{ $child->nama_menu }}
                                     </a>
                                     @if($child->children->count() > 0)
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownChild{{ $child->id_menu }}">
