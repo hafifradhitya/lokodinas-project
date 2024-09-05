@@ -1,8 +1,6 @@
-@extends('dinas-3.layout')
-
+@extends('dinas-2.layout')
 
 @section('content')
-<br>
 <div class="container mt-5 pt-5">
     <div class="row">
         <div class="col-lg-12">
@@ -18,7 +16,7 @@
                             <div class="col-md-8 d-flex flex-column justify-content-between">
                                 <div>
                                     <h3 class="text-danger">{{ $berita->tema }}</h3>
-                                    {!! Str::limit($berita->isi_berita, 100, '...') !!} <!-- Menampilkan isi berita tanpa tag HTML -->
+                                    {!! Str::limit($berita->isi_agenda, 100, '...') !!} <!-- Menampilkan isi berita tanpa tag HTML -->
                                     <p class="text-muted">
                                         <i class="fa fa-calendar"></i> {{ $berita->tgl_mulai }}
                                     </p>
@@ -37,5 +35,4 @@
         </div>
     </div>
 </div>
-
 @endsection

@@ -183,6 +183,7 @@ Route::get('struktur-organisasi', [HalamanController::class, 'struktur_organisas
 Route::get('visi-dan-misi', [HalamanController::class, 'visi_dan_misi']);
 Route::get('berita', [HalamanController::class, 'berita']);
 Route::get('detailberita/{judul_seo}', [HalamanController::class, 'detailBerita'])->name('detailberita');
+Route::get('detailagenda/{tema_seo}', [HalamanController::class, 'detailAgenda'])->name('detailagenda');
 Route::get('albums', [HalamanController::class, 'album']);
 Route::get('video', [HalamanController::class, 'video']);
 Route::get('agenda', [HalamanController::class, 'agenda']);

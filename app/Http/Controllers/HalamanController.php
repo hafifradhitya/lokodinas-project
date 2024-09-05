@@ -143,7 +143,7 @@ class HalamanController extends Controller
         $video = Video::orderBy('id_video', 'DESC')->get(); // Mengambil data video
 
         $template = Template::where('aktif', 'Y')->first();
-        return view($template->folder . ".video", compact('video', 'identitas', 'logo', 'banners', 'menus', 'alamat'));
+        return view($template->folder . ".playlist", compact('video', 'identitas', 'logo', 'banners', 'menus', 'alamat'));
     }
 
     public function agenda()
@@ -160,6 +160,24 @@ class HalamanController extends Controller
 
         $template = Template::where('aktif', 'Y')->first();
         return view($template->folder . ".agenda", compact('agenda', 'identitas', 'logo', 'banners', 'menus', 'alamat'));
+    }
+
+    public function detailAgenda($tema_seo)
+    {
+        // dd($judul_seo);
+        $agenda = Agenda::where('tema_seo', $tema_seo)->firstOrFail(); // Ambil berita berdasarkan judul_seo
+        $identitas = Identitaswebsite::first();
+        $logo = Logo::orderBy('id_logo', 'DESC')->first();
+        $banners = Bannerslider::all();
+        $menus = Menuwebsite::where('id_parent', 0)
+            ->with('children.children') // Menyertakan children hingga 2 level
+            ->orderBy('position', 'asc')
+            ->get();
+        $alamat = Alamatkontak::first();
+
+
+        $template = Template::where('aktif', 'Y')->first();
+        return view($template->folder . ".detailagenda", compact('agenda', 'identitas', 'logo', 'banners', 'menus', 'alamat')); // Kirim data ke view
     }
 
 }
