@@ -11,13 +11,33 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('administrator.gallery.index') }}" method="GET" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari kategori..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                <form action="{{ route('administrator.gallery.index') }}" method="GET" class="mb-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="jdl_gallery">
+                                <option value="">Pilih Judul Gallery</option>
+                                @foreach ($jdl_galleries as $jdl_gallery)
+                                    <option value="{{ $jdl_gallery->jdl_gallery }}" {{ request('jdl_gallery') == $jdl_gallery->jdl_gallery ? 'selected' : '' }}>
+                                        {{ $jdl_gallery->jdl_gallery }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Gallery..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('jdl_gallery'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.gallery.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
             </div>  
 

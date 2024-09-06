@@ -19,17 +19,37 @@ class PlaylistvideoController extends Controller
     public function index(Request $request):View
     {
         //
+
+          
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $playlistvideos = Playlistvideo::latest()
+        //     ->where('jdl_playlist', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $playlistvideos = Playlistvideo::paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $playlistvideos = Playlistvideo::latest()
-            ->where('jdl_playlist', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $playlistvideos = Playlistvideo::paginate(10);
+        $jdl_playlist = $request->jdl_playlist;
+
+        $query = Playlistvideo::query();
+
+        if (!empty($search)) {
+            $query->where('jdl_playlist', 'like', "%$search%");
         }
 
-        $playlistvideos = Playlistvideo::paginate(10);
-        return view('administrator.playlistvideo.index', compact(['playlistvideos']));
+        if (!empty($jdl_playlist)) {
+            $query->where('jdl_playlist', $jdl_playlist);
+        }
+
+        $playlistvideos = $query->paginate(10);
+
+        $jdl_playlists = Playlistvideo::select('jdl_playlist')
+                    ->groupBy('jdl_playlist')
+                    ->get();
+
+        return view('administrator.playlistvideo.index', compact(['playlistvideos', 'jdl_playlists']));
     }
 
     /**

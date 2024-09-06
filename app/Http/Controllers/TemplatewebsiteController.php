@@ -15,15 +15,25 @@ class TemplatewebsiteController extends Controller
     {
         //
         $search = $request->search;
+        $pembuat = $request->pembuat;
+
+        $query = Template::query();
+
         if (!empty($search)) {
-            $temps = Template::latest()
-                ->where('nama_tag', 'like', "%$search%")
-                ->paginate(5);
-        } else {
-            $temps = Template::paginate(5);
+            $query->where('pembuat', 'like', "%$search%");
         }
 
-        return view('administrator.templatewebsite.index', compact(['temps']));
+        if (!empty($pembuat)) {
+            $query->where('pembuat', $pembuat);
+        }
+
+        $temps = $query->paginate(10);
+
+        $pembuats = Template::select('pembuat')
+                    ->groupBy('pembuat')
+                    ->get();
+
+        return view('administrator.templatewebsite.index', compact(['temps', 'pembuats']));
     }
 
     /**

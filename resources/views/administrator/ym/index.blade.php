@@ -20,12 +20,32 @@
             <!-- Tambahkan form pencarian -->
             <div class="card-body">
                 <form action="{{ route('administrator.ym.index') }}" method="GET" class="mb-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari ym..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="nama">
+                                <option value="">Pilih Yahoo Message</option>
+                                @foreach ($namas as $nama)
+                                    <option value="{{ $nama->nama }}" {{ request('nama') == $nama->nama ? 'selected' : '' }}>
+                                        {{ $nama->nama }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Yahoo Messenger..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('nama'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.ym.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
             </div>
 

@@ -411,9 +411,6 @@
                                     @if($cekTemplatewebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
                                         <li class="nav-item"><a class="nav-link" href="{{ url('administrator/templatewebsite') }}"><i class='ni ni-settings-gear-65 text-orange'></i> Template Website</a></li>
                                     @endif
-                                    @if($cekBackgroundwebsite == 1 || session('level') == 'admin' || session('level') == 'user' || session('level') == 'kontributor')
-                                        <li class="nav-item"><a class="nav-link" href="{{ url('administrator/backgroundwebsite') }}"><i class='ni ni-ui-04 text-purple'></i> Background Website</a></li>
-                                    @endif
                                 </ul>
                             </div>
                             {{-- <div class="collapse" id="modul-web">

@@ -19,15 +19,25 @@ class BannersliderController extends Controller
     public function index(Request $request): View
     {
         $search = $request->search;
+        $judul = $request->judul;
+
+        $query = Bannerslider::query();
+
         if (!empty($search)) {
-            $bannersliders = Bannerslider::latest()
-            ->orWhere('judul', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $bannersliders = Bannerslider::orderBy('id_banner', 'desc')->paginate(10);
+            $query->where('judul', 'like', "%$search%");
         }
 
-        return view('administrator.bannerslider.index', compact('bannersliders'));
+        if (!empty($judul)) {
+            $query->where('judul', $judul);
+        }
+
+        $bannersliders = $query->paginate(10);
+
+        $juduls = Bannerslider::select('judul')
+                    ->groupBy('judul')
+                    ->get();
+
+        return view('administrator.bannerslider.index', compact('bannersliders', 'juduls'));
     }
 
     /**

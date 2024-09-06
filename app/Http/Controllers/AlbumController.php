@@ -20,22 +20,41 @@ class AlbumController extends Controller
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $albums = Album::latest()
+        //         ->where('id_album', 'like', "%$search%")
+        //         ->orWhere('jdl_album', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $albums = Album::orderBy('id_album', 'DESC')->paginate(10);
+        // }
+
         $search = $request->search;
+        $hari = $request->hari;
+
+        $query = Album::query();
+
         if (!empty($search)) {
-            $albums = Album::latest()
-                ->where('id_album', 'like', "%$search%")
-                ->orWhere('jdl_album', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $albums = Album::orderBy('id_album', 'DESC')->paginate(10);
+            $query->where('jdl_album', 'like', "%$search%")->orWhere('keterangan', 'like', "%$search%");
+        }
+  
+        if (!empty($hari)) {
+            $query->where('hari', $hari);
+        }
+
+        $albums = $query->paginate(10);
+
+        $harian = Album::select('hari')
+                    ->groupBy('hari')
+                    ->get();
 
             $berita['total_berita'] = Berita::count();
             $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
-        }
 
-        return view('administrator.album.index', compact('berita', 'halamanbaru', 'agenda', 'users' ,'albums'));
+        return view('administrator.album.index', compact('berita', 'halamanbaru', 'agenda', 'users' ,'albums', 'harian'));
     }
 
     /**

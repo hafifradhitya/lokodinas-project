@@ -7,16 +7,36 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="mb-0">Semua Agenda</h3>
         <a href="{{ route('administrator.agenda.create')}}" class="btn btn-primary btn-sm">Tambah Data</a>
-    </div>
+    </div>  
 
     <div class="card-body">
         <form action="{{ route('administrator.agenda.index') }}" method="GET" class="mb-1">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Cari Agenda..." name="search" value="{{ request('search') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit">Cari</button>
+            <div class="d-flex justify-content-between">
+                <div class="input-group" style="max-width: 300px;">
+                    <select class="form-control" name="tema">
+                        <option value="">Pilih Agenda</option>
+                        @foreach ($temas as $tema)
+                            <option value="{{ $tema->tema }}" {{ request('tema') == $tema->tema ? 'selected' : '' }}>
+                                {{ $tema->tema }}
+                            </option>
+                        @endforeach  
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">Filter</button>
+                    </div>
+                </div>
+                <div class="input-group" style="max-width: 300px;">
+                    <input type="text" class="form-control" placeholder="Cari Tema Agenda..." name="search" value="{{ request('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
                 </div>
             </div>
+            @if(request('search') || request('tema'))
+            <div class="mt-2 d-flex justify-content-center">
+                <a href="{{ route('administrator.agenda.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+            </div>
+            @endif
         </form>
 
         <div class="table-responsive py-4">

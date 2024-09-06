@@ -23,17 +23,36 @@ class ManajemenuserController extends Controller
     public function index(Request $request):View
     {
         //
-        $search = $request->search;
-        if(!empty($search)) {
-            $users = User::latest()
-            ->where('username', 'like', "%$search%")
-            ->orWhere('nama_lengkap', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $users = User::orderBy('username', 'desc')->paginate(10);
-        }  
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $users = User::latest()
+        //     ->where('username', 'like', "%$search%")
+        //     ->orWhere('nama_lengkap', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $users = User::orderBy('username', 'desc')->paginate(10);
+        // }    
 
-        return view('administrator.manajemenuser.index', compact(['users']));
+        $search = $request->search;
+        $level = $request->level;
+
+        $query = User::query();
+
+        if (!empty($search)) {
+            $query->where('username', 'like', "%$search%")->orWhere('nama_lengkap', 'like', "%$search%")->orWhere('email', 'like', "%$search%")->orWhere('no_telp', 'like', "%$search%");
+        }
+  
+        if (!empty($level)) {
+            $query->where('level', $level);
+        }
+
+        $users = $query->paginate(10);
+
+        $levels = User::select('level')
+                    ->groupBy('level')
+                    ->get();
+
+        return view('administrator.manajemenuser.index', compact(['users', 'levels']));
     }
 
     public function delete_akses(string $id_umod, string $user_id):RedirectResponse

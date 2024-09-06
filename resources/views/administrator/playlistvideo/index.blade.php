@@ -13,12 +13,32 @@
             <!-- Tambahkan form pencarian -->
             <div class="card-body">
                 <form action="{{ route('administrator.playlistvideo.index') }}" method="GET" class="mb-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari Playlistvideo..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="jdl_playlist">
+                                <option value="">Pilih Playlist</option>
+                                @foreach ($jdl_playlists as $jdl_playlist)
+                                    <option value="{{ $jdl_playlist->jdl_playlist }}" {{ request('jdl_playlist') == $jdl_playlist->jdl_playlist ? 'selected' : '' }}>
+                                        {{ $jdl_playlist->jdl_playlist }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Playlist Video..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('jdl_playlist'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.playlistvideo.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
 
                 <div class="table-responsive py-4">

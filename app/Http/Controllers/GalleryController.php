@@ -20,16 +20,35 @@ class GalleryController extends Controller
     public function index(Request $request):View
     {
         // 
-        $search = $request->search;
-        if(!empty($search)) {
-            $gallery = Gallery::with('album')
-            ->where('jdl_gallery', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $gallery = Gallery::with('album')->orderBy('id_album', 'desc')->paginate(10);
-        }  
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $gallery = Gallery::with('album')
+        //     ->where('jdl_gallery', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $gallery = Gallery::with('album')->orderBy('id_album', 'desc')->paginate(10);
+        // }  
 
-        return view('administrator.gallery.index', compact(['gallery']));
+        $search = $request->search;
+        $jdl_gallery = $request->jdl_gallery;
+
+        $query = Gallery::query();
+
+        if (!empty($search)) {
+            $query->where('jdl_gallery', 'like', "%$search%")->orWhere('keterangan', 'like', "%$search%");
+        }
+  
+        if (!empty($jdl_gallery)) {
+            $query->where('jdl_gallery', $jdl_gallery);
+        }
+
+        $gallery = $query->paginate(10);
+
+        $jdl_galleries = Gallery::select('jdl_gallery')
+                    ->groupBy('jdl_gallery')
+                    ->get();
+
+        return view('administrator.gallery.index', compact(['gallery', 'jdl_galleries']));
     }
 
     /**

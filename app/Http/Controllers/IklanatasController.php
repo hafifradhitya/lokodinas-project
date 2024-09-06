@@ -16,16 +16,35 @@ class IklanatasController extends Controller
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $iklanatas = Iklanatas::latest()
+        //         ->orWhere('judul', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $iklanatas = Iklanatas::orderBy('id_iklanatas', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $tgl_posting = $request->tgl_posting;
+
+        $query = Iklanatas::query();
+
         if (!empty($search)) {
-            $iklanatas = Iklanatas::latest()
-                ->orWhere('judul', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $iklanatas = Iklanatas::orderBy('id_iklanatas', 'desc')->paginate(10);
+            $query->where('judul', 'like', "%$search%")->orWhere('tgl_posting', 'like', "%$search%");
+        }
+  
+        if (!empty($tgl_posting)) {
+            $query->where('tgl_posting', $tgl_posting);
         }
 
-        return view('administrator.iklanatas.index', compact(['iklanatas']));
+        $iklanatas = $query->paginate(10);
+
+        $tgl_postings = Iklanatas::select('tgl_posting')
+                    ->groupBy('tgl_posting')
+                    ->get();
+
+        return view('administrator.iklanatas.index', compact(['iklanatas', 'tgl_postings']));
     }
 
     /**

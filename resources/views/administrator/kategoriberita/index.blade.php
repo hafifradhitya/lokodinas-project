@@ -25,12 +25,12 @@
                     <div class="d-flex justify-content-between">
                         <div class="input-group" style="max-width: 300px;">
                             <select class="form-control" name="sidebar">
-                                <option value="">Pilih Sidebar</option>
+                                <option value="">Pilih Kategori</option>
                                 @foreach ($sidebars as $sidebar)
                                     <option value="{{ $sidebar->sidebar }}" {{ request('sidebar') == $sidebar->sidebar ? 'selected' : '' }}>
                                         {{ $sidebar->sidebar }}
                                     </option>
-                                @endforeach
+                                @endforeach  
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit">Filter</button>

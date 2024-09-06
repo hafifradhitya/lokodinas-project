@@ -15,12 +15,32 @@
 
             <div class="card-body">
                 <form action="{{ route('administrator.tagvideo.index') }}" method="GET" class="mb-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari Tagvideo..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="nama_tag">
+                                <option value="">Pilih Tag Video</option>
+                                @foreach ($nama_tags as $nama_tag)
+                                    <option value="{{ $nama_tag->nama_tag }}" {{ request('nama_tag') == $nama_tag->nama_tag ? 'selected' : '' }}>
+                                        {{ $nama_tag->nama_tag }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Tag Video..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('sidebar'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.tagvideo.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
 
                 <div class="table-responsive py-4">
@@ -34,9 +54,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tagvid as $index => $tagv)
+                            @foreach ($tagvideos as $index => $tagv)
                             <tr>
-                                <td>{{ $loop->iteration + $tagvid->firstItem() - 1 }}</td>
+                                <td>{{ $loop->iteration + $tagvideos->firstItem() - 1 }}</td>
                                 <td>{{ $tagv->nama_tag }}</td>
                                 <td><a href="#">video/tag/{{ $tagv->tag_seo }}</a></td>
                                 <td class="text-center">
@@ -53,7 +73,7 @@
                         </tbody>
                     </table>
                     <br>
-                    {{ $tagvid->links('vendor.pagination.bootstrap-4') }}
+                    {{ $tagvideos->links('vendor.pagination.bootstrap-4') }}
                 </div>
             </div>
         </div>
@@ -135,7 +155,7 @@
 
         // Fungsi untuk memperbarui nomor urut
         function updateRowNumbers() {
-            let startingIndex = {{ $tagvid->firstItem() - 1 }};
+            let startingIndex = {{ $tagvideos->firstItem() - 1 }};
             $('table tbody tr').each(function(index) {
                 $(this).find('td:first-child').text(startingIndex + index + 1);
             });

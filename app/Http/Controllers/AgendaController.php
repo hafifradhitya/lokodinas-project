@@ -22,22 +22,42 @@ class AgendaController extends Controller
     public function index(Request $request):View
     {
         //  
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $agendas = Agenda::latest()
+        //         ->where('id_agenda', 'like', "%$search%")
+        //         ->orWhere('tema', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $agendas = Agenda::orderBy('tgl_posting', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $tema = $request->tema;
+
+        $query = Agenda::query();
+
         if (!empty($search)) {
-            $agendas = Agenda::latest()
-                ->where('id_agenda', 'like', "%$search%")
-                ->orWhere('tema', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $agendas = Agenda::orderBy('tgl_posting', 'desc')->paginate(10);
+            $query->where('tema', 'like', "%$search%");
+        }
+
+        if (!empty($tema)) {
+            $query->where('tema', $tema);
+        }
+
+        $agendas = $query->paginate(10);
+
+        $temas = Agenda::select('tema')
+                    ->groupBy('tema')
+                    ->get();
+        
 
             $berita['total_berita'] = Berita::count();
             $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
-        }
-  
-        return view('administrator.agenda.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'agendas'));
+
+        return view('administrator.agenda.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'agendas', 'temas'));
     }
 
 

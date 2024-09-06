@@ -11,20 +11,39 @@ class SensorkomentarController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
+     */  
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $sensors = Sensorkomentar::latest()
+        //         ->orWhere('kata', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $sensors = Sensorkomentar::orderBy('id_jelek', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $kata = $request->kata;
+
+        $query = Sensorkomentar::query();
+
         if (!empty($search)) {
-            $sensors = Sensorkomentar::latest()
-                ->orWhere('kata', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $sensors = Sensorkomentar::orderBy('id_jelek', 'desc')->paginate(10);
+            $query->where('kata', 'like', "%$search%")->orWhere('username', 'like', "%$search%");
         }
 
-        return view('administrator.sensorkomentar.index', compact(['sensors']));
+        if (!empty($kata)) {
+            $query->where('kata', $kata);
+        }
+
+        $sensors = $query->paginate(10);
+
+        $katas = Sensorkomentar::select('kata')
+                    ->groupBy('kata')
+                    ->get();
+
+        return view('administrator.sensorkomentar.index', compact(['sensors', 'katas']));
     }
 
     /**

@@ -17,18 +17,37 @@ class BannerhomeController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request):View
-    {
-        //
+    { 
+        //  
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $bannerhomes = Bannerhome::latest()
+        //     ->where('judul', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $bannerhomes = Bannerhome::orderBy('id_iklantengah', 'desc')->orderBy('tgl_posting')->paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $bannerhomes = Bannerhome::latest()
-            ->where('judul', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $bannerhomes = Bannerhome::orderBy('id_iklantengah', 'desc')->orderBy('tgl_posting')->paginate(10);
+        $judul = $request->judul;
+
+        $query = Bannerhome::query();
+
+        if (!empty($search)) {
+            $query->where('judul', 'like', "%$search%");
         }
 
-        return view('administrator.bannerhome.index', compact(['bannerhomes']));
+        if (!empty($judul)) {
+            $query->where('judul', $judul);
+        }
+
+        $bannerhomes = $query->paginate(10);
+
+        $juduls = Bannerhome::select('judul')
+                    ->groupBy('judul')
+                    ->get();
+
+        return view('administrator.bannerhome.index', compact(['bannerhomes', 'juduls']));
     }
 
     /**

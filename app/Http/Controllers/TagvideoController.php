@@ -20,15 +20,25 @@ class TagvideoController extends Controller
     {
         //
         $search = $request->search;
-        if(!empty($search)) {
-            $tagvid = Tagvideo::latest()
-            ->where('nama_tag', 'like', "%$search%")
-            ->paginate(5);
-        } else {
-            $tagvid = Tagvideo::paginate(5);
+        $nama_tag = $request->nama_tag;
+
+        $query = Tagvideo::query();
+
+        if (!empty($search)) {
+            $query->where('nama_tag', 'like', "%$search%");
         }
 
-        return view('administrator.tagvideo.index', compact(['tagvid']));
+        if (!empty($nama_tag)) {
+            $query->where('nama_tag', $nama_tag);
+        }
+
+        $tagvideos = $query->paginate(10);
+
+        $nama_tags = Tagvideo::select('nama_tag')
+                    ->groupBy('nama_tag')
+                    ->get();
+
+        return view('administrator.tagvideo.index', compact(['tagvideos', 'nama_tags']));
     }
 
     /**

@@ -22,16 +22,36 @@ class VideoController extends Controller
     public function index(Request $request):View
     {
         //
+
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $videos = Video::with('playlist')
+        //     ->where('jdl_video', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $videos = Video::with('playlist')->orderBy('tanggal', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $videos = Video::with('playlist')
-            ->where('jdl_video', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $videos = Video::with('playlist')->orderBy('tanggal', 'desc')->paginate(10);
+        $tagvid = $request->tagvid;
+
+        $query = Video::query();
+
+        if (!empty($search)) {
+            $query->where('tagvid', 'like', "%$search%");
         }
 
-        return view('administrator.video.index', compact(['videos']));
+        if (!empty($tagvid)) {
+            $query->where('sidebar', $tagvid);
+        }
+
+        $videos = $query->paginate(10);
+
+        $tagvids = Video::select('tagvid')
+                    ->groupBy('tagvid')
+                    ->get();
+
+        return view('administrator.video.index', compact(['videos', 'tagvids']));
     }
 
     /**

@@ -19,22 +19,41 @@ class JejakpendapatController extends Controller
     public function index(Request $request):View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $polings = Poling::latest()
+        //         ->where('id_poling', 'like', "%$search%")
+        //         ->orWhere('pilihan', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $polings = Poling::orderBy('id_poling', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $status = $request->status;
+
+        $query = Poling::query();
+
         if (!empty($search)) {
-            $polings = Poling::latest()
-                ->where('id_poling', 'like', "%$search%")
-                ->orWhere('pilihan', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $polings = Poling::orderBy('id_poling', 'desc')->paginate(10);
+            $query->where('pilihan', 'like', "%$search%");
+        }
+
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $polings = $query->paginate(10);
+
+        $statuses = Poling::select('status')
+                    ->groupBy('status')
+                    ->get();
 
             $berita['total_berita'] = Berita::count();
             $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
-        }
 
-        return view('administrator.jejakpendapat.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'polings'));
+        return view('administrator.jejakpendapat.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'polings', 'statuses'));
     }
 
     /**

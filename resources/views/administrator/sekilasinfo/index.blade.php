@@ -18,12 +18,32 @@
         
             <div class="card-body">
                 <form action="{{ route('administrator.sekilasinfo.index') }}" method="GET" class="mb-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari Sekilasinfo..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="sidebar">
+                                <option value="">Pilih Sekilasinfo</option>
+                                @foreach ($informas as $info)
+                                    <option value="{{ $info->info }}" {{ request('info') == $info->info ? 'selected' : '' }}>
+                                        {{ $info->info }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Sekilas Info..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('info'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.sekilasinfo.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
         
                 <div class="table-responsive py-4">

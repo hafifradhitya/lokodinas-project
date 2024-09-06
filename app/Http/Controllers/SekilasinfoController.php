@@ -20,22 +20,41 @@ class SekilasinfoController extends Controller
     public function index(Request $request):View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $infos = Sekilasinfo::latest()
+        //         ->where('id_sekilas', 'like', "%$search%")
+        //         ->orWhere('info', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $infos = Sekilasinfo::orderBy('id_sekilas', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $info = $request->info;
+
+        $query = Sekilasinfo::query();
+
         if (!empty($search)) {
-            $infos = Sekilasinfo::latest()
-                ->where('id_sekilas', 'like', "%$search%")
-                ->orWhere('info', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $infos = Sekilasinfo::orderBy('id_sekilas', 'desc')->paginate(10);
+            $query->where('info', 'like', "%$search%");
+        }
+
+        if (!empty($info)) {
+            $query->where('info', $info);
+        }
+
+        $infos = $query->paginate(10);
+
+        $informas = Sekilasinfo::select('info')
+                    ->groupBy('info')
+                    ->get();
 
             $berita['total_berita'] = Berita::count();
             $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
-        }
 
-        return view('administrator.sekilasinfo.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'infos'));
+        return view('administrator.sekilasinfo.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'informas', 'infos'));
     }
 
     /**

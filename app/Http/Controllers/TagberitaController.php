@@ -19,16 +19,35 @@ class TagberitaController extends Controller
     public function index(Request $request):View
     {
         //
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $tags = Tag::latest()
+        //     ->where('nama_tag', 'like', "%$search%")
+        //     ->paginate(5);
+        // } else {
+        //     $tags = Tag::paginate(5);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $tags = Tag::latest()
-            ->where('nama_tag', 'like', "%$search%")
-            ->paginate(5);
-        } else {
-            $tags = Tag::paginate(5);
+        $nama_tag = $request->nama_tag;
+
+        $query = Tag::query();
+
+        if (!empty($search)) {
+            $query->where('nama_tag', 'like', "%$search%");
         }
 
-        return view('administrator.tagberita.index', compact(['tags']));
+        if (!empty($nama_tag)) {
+            $query->where('nama_tag', $nama_tag);
+        }
+
+        $tags = $query->paginate(10);
+
+        $nama_tags = Tag::select('nama_tag')
+                    ->groupBy('nama_tag')
+                    ->get();
+
+        return view('administrator.tagberita.index', compact(['tags', 'nama_tags']));
     }
 
     /**

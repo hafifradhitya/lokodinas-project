@@ -15,16 +15,35 @@ class YmController extends Controller
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $yms = Ym::latest()
+        //         ->orWhere('nama', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $yms = Ym::orderBy('id', 'desc')->paginate(10);
+        // }  
+
+
         $search = $request->search;
+        $nama = $request->naman;
+
+        $query = Ym::query();
+
         if (!empty($search)) {
-            $yms = Ym::latest()
-                ->orWhere('nama', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $yms = Ym::orderBy('id', 'desc')->paginate(10);
+            $query->where('nama', 'like', "%$search%")->orWhere('username', 'like', "%$search%");
+        }
+  
+        if (!empty($nama)) {
+            $query->where('nama', $nama);
         }
 
-        return view('administrator.ym.index', compact(['yms']));
+        $yms = $query->paginate(10);
+        $namas = Ym::select('nama')
+                    ->groupBy('nama')
+                    ->get();
+
+        return view('administrator.ym.index', compact(['yms', 'namas']));
     }
 
     /**

@@ -19,16 +19,35 @@ class KomentarvideoController extends Controller
     public function index(Request $request):View
     {
         //
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $komentarvideo = Komentarvideo::latest()
+        //     ->where('nama_komentar', 'like', "%$search%")
+        //     ->paginate(10);
+        // }else {
+        //     $komentarvideo = Komentarvideo::paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $komentarvideo = Komentarvideo::latest()
-            ->where('nama_komentar', 'like', "%$search%")
-            ->paginate(10);
-        }else {
-            $komentarvideo = Komentarvideo::paginate(10);
+        $aktif = $request->aktif;
+
+        $query = Komentarvideo::query();
+
+        if (!empty($aktif)) {
+            $query->where('nama_komentar', 'like', "%$search%")->orWhere('isi_komentar', 'like', "%$search%")->orWhere('jam_komentar', 'like', "%$search%")->orWhere('url', 'like', "%$search%");
+        }
+  
+        if (!empty($aktif)) {
+            $query->where('aktif', $aktif);
         }
 
-        return view('administrator.komentarvideo.index', compact(['komentarvideo']));
+        $komentarvideo = $query->paginate(10);
+
+        $aktived = Komentarvideo::select('aktif')
+                    ->groupBy('aktif')
+                    ->get();
+
+        return view('administrator.komentarvideo.index', compact(['komentarvideo', 'aktived']));
     }
 
     /**

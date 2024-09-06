@@ -13,19 +13,39 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="mb-0">Iklan Sidebar</h3>
+                <h3 class="mb-0">Iklan Atas</h3>
                 <a href="{{ route('administrator.iklanatas.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
             </div>
 
             <!-- Tambahkan form pencarian -->
             <div class="card-body">
                 <form action="{{ route('administrator.iklanatas.index') }}" method="GET" class="mb-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari iklan..." name="search" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group" style="max-width: 300px;">
+                            <select class="form-control" name="tgl_posting">
+                                <option value="">Pilih Iklan Atas</option>
+                                @foreach ($tgl_postings as $tgl_posting)
+                                    <option value="{{ $tgl_posting->tgl_posting }}" {{ request('tgl_posting') == $tgl_posting->tgl_posting ? 'selected' : '' }}>
+                                        {{ $tgl_posting->tgl_posting }}
+                                    </option>
+                                @endforeach  
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        <div class="input-group" style="max-width: 300px;">
+                            <input type="text" class="form-control" placeholder="Cari Iklan Atas..." name="search" value="{{ request('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Cari</button>
+                            </div>
                         </div>
                     </div>
+                    @if(request('search') || request('tgl_posting'))
+                    <div class="mt-2 d-flex justify-content-center">
+                        <a href="{{ route('administrator.iklanatas.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
+                    </div>
+                    @endif
                 </form>
             </div>
 

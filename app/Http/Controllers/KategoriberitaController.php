@@ -22,7 +22,7 @@ class KategoriberitaController extends Controller
      */
     public function index(Request $request):View
     {
-        //
+        //  
         $search = $request->search;
         $sidebar = $request->sidebar;
 

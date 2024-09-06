@@ -21,22 +21,41 @@ class DownloadareaController extends Controller
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $downloads = Downloadarea::latest()
+        //         ->where('id_download', 'like', "%$search%")
+        //         ->orWhere('judul', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {
+        //     $downloads = Downloadarea::orderBy('id_download', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $tgl_posting = $request->tgl_posting;
+
+        $query = Downloadarea::query();
+
         if (!empty($search)) {
-            $downloads = Downloadarea::latest()
-                ->where('id_download', 'like', "%$search%")
-                ->orWhere('judul', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $downloads = Downloadarea::orderBy('id_download', 'desc')->paginate(10);
+            $query->where('judul', 'like', "%$search%")->orWhere('nama_file', 'like', "%$search%");
+        }
+
+        if (!empty($tgl_posting)) {
+            $query->where('tgl_posting', $tgl_posting);
+        }
+
+        $downloads = $query->paginate(10);
+
+        $tgl_postings = Downloadarea::select('tgl_posting')
+                    ->groupBy('tgl_posting')
+                    ->get();
 
             $berita['total_berita'] = Berita::count();
             $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
             $agenda['total_agenda'] = Agenda::count();
             $users['total_users'] = User::count();
-        }
 
-        return view('administrator.downloadarea.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'downloads'));
+        return view('administrator.downloadarea.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'downloads', 'tgl_postings'));
     }
 
     /**

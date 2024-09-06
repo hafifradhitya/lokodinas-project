@@ -21,16 +21,35 @@ class ManajemenmodulController extends Controller
     public function index(Request $request):View
     {  
         //
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $manajemenmodul = Manajemenmodul::latest()
+        //     ->orWhere('nama_modul', 'like', "%$search%")
+        //     ->paginate(10);
+        // } else {
+        //     $manajemenmodul = Manajemenmodul::paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $manajemenmodul = Manajemenmodul::latest()
-            ->orWhere('nama_modul', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $manajemenmodul = Manajemenmodul::paginate(10);
+        $status = $request->status;
+
+        $query = Manajemenmodul::query();
+
+        if (!empty($search)) {
+            $query->where('nama_modul', 'like', "%$search%")->orWhere('link', 'like', "%$search%");
         }
+
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $manajemenmodul = $query->paginate(10);
+
+        $statuses = Manajemenmodul::select('status')
+                    ->groupBy('status')
+                    ->get();
   
-        return view('administrator.manajemenmodul.index', compact(['manajemenmodul']));
+        return view('administrator.manajemenmodul.index', compact(['manajemenmodul', 'statuses']));
     }
     /**
      * Show the form for creating a new resource.

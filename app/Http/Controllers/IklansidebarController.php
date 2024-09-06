@@ -20,15 +20,25 @@ class IklansidebarController extends Controller
     {
         //
         $search = $request->search;
-        if(!empty($search)) {
-            $iklansidebar = Iklansidebar::latest()
-            ->orWhere('judul', 'like', "%$search%")
-            ->paginate(10);
-        } else {
-            $iklansidebar = Iklansidebar::orderBy('id_pasangiklan', 'desc')->paginate(10);
+        $judul = $request->judul;
+
+        $query = Iklansidebar::query();
+
+        if (!empty($search)) {
+            $query->where('judul', 'like', "%$search%");
         }
 
-        return view('administrator.iklansidebar.index', compact(['iklansidebar']));
+        if (!empty($judul)) {
+            $query->where('judul', $judul);
+        }
+
+        $iklansidebar = $query->paginate(10);
+
+        $juduls = Iklansidebar::select('judul')
+                    ->groupBy('judul')
+                    ->get();
+
+        return view('administrator.iklansidebar.index', compact(['iklansidebar', 'juduls']));
     }  
 
     /**

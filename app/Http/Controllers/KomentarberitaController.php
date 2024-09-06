@@ -19,16 +19,35 @@ class KomentarberitaController extends Controller
     public function index(Request $request):View
     {
         //  
+        // $search = $request->search;
+        // if(!empty($search)) {
+        //     $komentarberita = Komentarberita::latest()
+        //     ->where('nama_komentar', 'like', "%$search%")
+        //     ->paginate(10);
+        // }else {
+        //     $komentarberita = Komentarberita::paginate(10);
+        // }
+
         $search = $request->search;
-        if(!empty($search)) {
-            $komentarberita = Komentarberita::latest()
-            ->where('nama_komentar', 'like', "%$search%")
-            ->paginate(10);
-        }else {
-            $komentarberita = Komentarberita::paginate(10);
+        $aktif = $request->aktif;
+
+        $query = Komentarberita::query();
+
+        if (!empty($search)) {
+            $query->where('nama_komentar', 'like', "%$search%")->orWhere('isi_komentar', 'like', "%$search%");
         }
 
-        return view('administrator.komentarberita.index', compact(['komentarberita']));
+        if (!empty($aktif)) {
+            $query->where('aktif', $aktif);
+        }
+
+        $komentarberita = $query->paginate(10);
+
+        $aktived = Komentarberita::select('aktif')
+                    ->groupBy('aktif')
+                    ->get();
+
+        return view('administrator.komentarberita.index', compact(['komentarberita', 'aktived']));
     }
 
     /**
