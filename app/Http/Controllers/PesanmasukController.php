@@ -92,17 +92,36 @@ class PesanmasukController extends Controller
     public function index(Request $request): View
     {
         //
+        // $search = $request->search;
+        // if (!empty($search)) {
+        //     $pesan = Pesanmasuk::latest()
+        //         ->where('id_hubungi', 'like', "%$search%")
+        //         ->orWhere('nama', 'like', "%$search%")
+        //         ->paginate(10);
+        // } else {  
+        //     $pesan = Pesanmasuk::orderBy('tanggal', 'desc')->paginate(10);
+        // }
+
         $search = $request->search;
+        $tanggal = $request->tanggal;  
+
+        $query = Pesanmasuk::query();
+
         if (!empty($search)) {
-            $pesan = Pesanmasuk::latest()
-                ->where('id_hubungi', 'like', "%$search%")
-                ->orWhere('nama', 'like', "%$search%")
-                ->paginate(10);
-        } else {
-            $pesan = Pesanmasuk::orderBy('tanggal', 'desc')->paginate(10);
+            $query->where('nama', 'like', "%$search%")->orWhere('email', 'like', "%$search%")->orWhere('subject', 'like', "%$search%")->orWhere('pesan', 'like', "%$search%")->orWhere('tanggal', 'like', "%$search%");
+        }
+  
+        if (!empty($tanggal)) {
+            $query->where('tanggal', $tanggal);
         }
 
-        return view('administrator.pesanmasuk.index', compact('pesan'));
+        $pesan = $query->paginate(10);
+
+        $tanggals = Pesanmasuk::select('tanggal')
+                    ->groupBy('tanggal')
+                    ->get();
+
+        return view('administrator.pesanmasuk.index', compact('pesan', 'tanggals'));
     }
 
     /**

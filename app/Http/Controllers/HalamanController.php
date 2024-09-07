@@ -7,6 +7,7 @@ use App\Models\Alamatkontak;
 use App\Models\Album;
 use App\Models\Bannerslider;
 use App\Models\Berita;
+use App\Models\Gallery;
 use App\Models\Halamanbaru;
 use App\Models\Identitaswebsite;
 use App\Models\Logo;
@@ -129,6 +130,24 @@ class HalamanController extends Controller
         $template = Template::where('aktif', 'Y')->first();
         return view($template->folder . ".albums", compact('album', 'identitas', 'logo', 'banners', 'menus', 'alamat'));
     }
+
+    public function detailalbum($album_seo)
+    {
+        $album = Album::where('album_seo', $album_seo)->firstOrFail();
+        $gallery = Gallery::where('id_album', $album->id_album)->get(['jdl_gallery', 'keterangan', 'gbr_album']); // Mengambil data gallery berdasarkan id_album
+        $identitas = Identitaswebsite::first();
+        $logo = Logo::orderBy('id_logo', 'DESC')->first();
+        $banners = Bannerslider::all();
+        $menus = Menuwebsite::where('id_parent', 0)
+            ->with('children.children') // Menyertakan children hingga 2 level
+            ->orderBy('position', 'asc')
+            ->get();
+        $alamat = Alamatkontak::first();
+
+        $template = Template::where('aktif', 'Y')->first();
+        return view($template->folder . ".detailalbum", compact('album', 'gallery', 'identitas', 'logo', 'banners', 'menus', 'alamat'));
+    }
+
 
     public function video()
     {

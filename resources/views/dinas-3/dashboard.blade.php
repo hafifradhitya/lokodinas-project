@@ -72,7 +72,9 @@
                                 @foreach ($beritas as $index => $berita)
                                 <div class="swiper-slide">
                                     <div class="card modern-card">
-                                        <img class="card-image" src="{{ asset('foto_berita/' . $berita->gambar) }}" alt="alternative">
+                                        <a href="{{ url('detailberita/' . $berita->judul_seo) }}">
+                                            <img class="card-image" src="{{ asset('foto_berita/' . $berita->gambar) }}" alt="alternative">
+                                        </a>
                                         <div class="card-body">
                                             <p class="testimonial-text">"{{ $berita->judul }}"</p>
                                         </div>
@@ -147,7 +149,9 @@
                 <h2 class="h2-heading text-left">Berita <strong>OPD</strong></h2>
                 @foreach($beritao as $berita)
                 <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                    <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    <a href="{{ url('detailberita/' . $berita->judul_seo) }}">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    </a>
                     <div class="card-body">
                         <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
                         <p class="card-title">{{ $berita->judul }}</p>
@@ -159,7 +163,9 @@
                 <h2 class="h2-heading text-left">Berita <strong>DAERAH</strong></h2>
                 @foreach($beritad as $berita)
                 <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                    <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    <a href="{{ url('detailberita/' . $berita->judul_seo) }}">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    </a>
                     <div class="card-body">
                         <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
                         <p class="card-title">{{ $berita->judul }}</p>
@@ -171,7 +177,9 @@
                 <h2 class="h2-heading text-left">Berita <strong>UMUM</strong></h2>
                 @foreach($beritau as $berita)
                 <div class="card bg-transparent" style="margin-bottom: 20px; margin-right: 50px;">
-                    <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    <a href="{{ url('detailberita/' . $berita->judul_seo) }}">
+                        <img class="card-img-top" src="{{ asset('foto_berita/' . $berita->gambar)}}" alt="Card image cap">
+                    </a>
                     <div class="card-body">
                         <p><i class="fa fa-calendar"> </i> {{ $berita->tanggal }} , {{ $berita->jam }}</p>
                         <p class="card-title">{{ $berita->judul }}</p>
@@ -230,7 +238,7 @@
                     <textarea required autocomplete="off" name="pesan"></textarea>
                     <label for="message">Pesan</label>
                 </div>
-                <button type="submit">Kirim</button>
+                <button type="submit" class="btn btn-info">Kirim</button>
                 <button class="btn-outline-reg mfp-close as-button" type="button">KEMBALI</button>
             </form>
         </div>

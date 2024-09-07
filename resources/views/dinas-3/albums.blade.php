@@ -10,13 +10,15 @@
         @foreach($album as $item)
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="{{ asset('img_album/' . $item->gbr_album) }}" class="card-img-top" alt="{{ $item->jdl_album }}">
+                    <a href="{{ route('detailalbum', $item->album_seo) }}">
+                        <img src="{{ asset('img_album/' . $item->gbr_album) }}" class="card-img-top" alt="{{ $item->jdl_album }}">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->jdl_album }}</h5>
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach  
     </div>
 </div>
 

@@ -651,7 +651,7 @@
         <nav class="navbar navbar-top navbar-expand navbar-light bg-secondary border-bottom">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="navbar-search navbar-search-dark form-inline mr-sm-3" id="navbar-search-main">
+                    {{-- <form class="navbar-search navbar-search-dark form-inline mr-sm-3" id="navbar-search-main">
                         <div class="form-group mb-0">
                             <div class="input-group input-group-alternative input-group-merge">
                                 <div class="input-group-prepend">
@@ -664,7 +664,7 @@
                             data-target="#navbar-search-main" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                    </form>
+                    </form> --}}
                     <ul class="navbar-nav align-items-center ml-md-auto">
                         <li class="nav-item d-xl-none">
                             <div class="pr-3 sidenav-toggler sidenav-toggler-light" data-action="sidenav-pin"

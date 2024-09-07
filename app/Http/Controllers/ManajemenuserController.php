@@ -34,7 +34,7 @@ class ManajemenuserController extends Controller
         // }    
 
         $search = $request->search;
-        $level = $request->level;
+        $level = $request->level;  
 
         $query = User::query();
 

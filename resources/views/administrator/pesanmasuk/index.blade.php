@@ -11,11 +11,11 @@
         <form action="{{ route('administrator.pesanmasuk.index') }}" method="GET" class="mb-1">
             <div class="d-flex justify-content-between">
                 <div class="input-group" style="max-width: 300px;">
-                    <select class="form-control" name="sidebar">
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($sidebars as $sidebar)
-                            <option value="{{ $sidebar->sidebar }}" {{ request('sidebar') == $sidebar->sidebar ? 'selected' : '' }}>
-                                {{ $sidebar->sidebar }}
+                    <select class="form-control" name="tanggal">
+                        <option value="">Pilih Pesan Masuk</option>
+                        @foreach ($tanggals as $tanggal)
+                            <option value="{{ $tanggal->tanggal }}" {{ request('tanggal') == $tanggal->tanggal ? 'selected' : '' }}>
+                                {{ $tanggal->tanggal }}
                             </option>
                         @endforeach  
                     </select>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            @if(request('search') || request('sidebar'))
+            @if(request('search') || request('tanggal'))
             <div class="mt-2 d-flex justify-content-center">
                 <a href="{{ route('administrator.pesanmasuk.index') }}" class="btn btn-primary text-white shadow">Seluruh Data</a>
             </div>

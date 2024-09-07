@@ -140,24 +140,9 @@
                         </li>
                     @endforeach
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#purchase" style="color: white;">PURCHASE</a>
+                        <a class="nav-link page-scroll" href="#hubungi" style="color: white;">HUBUNGI KAMI</a>
                     </li>
                 </ul>
-    
-                <span class="nav-item social-icons">
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x" style="color: white;"></i>
-                            <i class="fab fa-facebook-f fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x" style="color: white;"></i>
-                            <i class="fab fa-twitter fa-stack-1x"></i>
-                        </a>
-                    </span>
-                </span>
             </div> <!-- end of navbar-collapse -->
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
