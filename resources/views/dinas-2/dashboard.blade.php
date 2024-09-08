@@ -63,7 +63,7 @@
                                 <input type="text" class="form-control" id="subjek" name="subjek" placeholder="subjek" required>
                                 @if ($errors->has('subjek'))
                                 <span class="text-danger">{{ $errors->first('subjek') }}</span>
-                                @endif  
+                                @endif
                             </div>
 
                             <div class="col-md-12">
@@ -293,28 +293,47 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
-                            <form action="" method="POST">
+                            <form action="" method="POST" onsubmit="return false;">
                                 @csrf
                                 @foreach($pilihan as $p)
                                 <p>{{ $p->pilihan }}</p>
                                 @endforeach
                                 @foreach($jawaban as $j)
                                 <label>
-                                    <input type="radio" name="pilihan_id" value="{{ $j->id }}" required>
+                                    <input type="radio" name="pilihan_id" value="{{ $j->id_poling }}" required>
                                     <span>{{ $j->pilihan }}</span>
                                 </label>
                                 @endforeach
-                                <button type="submit" class="btn-outline-sm p-2" style="margin: 0 auto; margin-bottom: 10px;">Konfirmasi Pilihan</button>
-                                <button type="button" class="btn-outline-sm" style="margin: 0 auto;" onclick="lihatHasil()">Lihat Hasil</button>
+                                <button type="button" class="btn-outline-sm p-2" style="margin: 0 auto; margin-bottom: 10px;" data-bs-target="#exampleModalToggle">Konfirmasi Pilihan</button>
+                                <button type="button" class="btn-outline-sm" style="margin: 0 auto;" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">Lihat Hasil</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
-    </section><!-- End Our Projects Section -->
+    </section>
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Hasil Polling</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @foreach($jawaban as $jp)
+                    <div class="hasil-polling">
+                        @php
+                        $totalRating = $jawaban->sum('rating');
+                        @endphp
+                        <p>{{ $jp->pilihan }}: {{ round(($jp->rating / $totalRating) * 100, 2) }}%</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Our Projects Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <!-- End Testimonials Section -->
@@ -330,8 +349,13 @@
 
                 <div class="col-xl-12 col-md-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
                     @foreach($videos as $video)
-                    <div class="post-item position-relative h-100">
-                        <iframe class="img-fluid w-100 mb-3" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="height: 250px; width:250px;"></iframe>
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <iframe src="{{ $video->embed_url }}" class="card-img-top" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16 / 9;"></iframe>
+                            <div class="card-body">
+                                <a href="{{ $video->video_seo }}" class="primary">{{ $video->jdl_video }}</a>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                 </div>

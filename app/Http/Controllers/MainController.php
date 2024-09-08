@@ -36,7 +36,7 @@ class MainController extends Controller
         $beritas = Berita::orderBy('id_berita', 'DESC')->limit(5)->get();
         $infos = Sekilasinfo::all();
         $videos = Video::all();
-        $polings = Poling::all();
+        $polings = Poling::where('id_poling');
         $agendas = Agenda::all();
         $pilihan = Poling::where('status', 'Pertanyaan')->get();
         $jawaban = Poling::where('status', 'Jawaban')->get();

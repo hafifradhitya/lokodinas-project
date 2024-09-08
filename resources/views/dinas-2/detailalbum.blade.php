@@ -1,19 +1,19 @@
-@extends('dinas-3.layout')
+@extends('dinas-2.layout')
 
 @section('content')
+
 <div class="ecommerce-gallery vertical" data-mdb-ecommerce-gallery-init>
   <div class="row">
     <div class="col-4 col-sm-3">
       <div class="multi-carousel vertical" data-mdb-multi-carousel-init data-mdb-items="3">
         <div class="multi-carousel-inner">
-
           @foreach($gallery as $item)
           <div class="multi-carousel-item {{ $loop->first ? 'active' : '' }}">
             <img
               src="{{ asset('img_gallery/' . $item->gbr_gallery) }}"
               data-mdb-img="{{ asset('img_gallery/' . $item->gbr_gallery) }}"
               alt="{{ $item->jdl_gallery }}"
-              class="{{ $loop->first ? 'active' : '' }} w-100" />
+              class="{{ $loop->first ? 'active' : '' }} w-100" style="max-height: 150px;" />
           </div>
           @endforeach
         </div>
@@ -43,14 +43,16 @@
         <img
           src="{{ asset('img_gallery/' . $item->gbr_gallery) }}"
           alt="{{ $item->jdl_gallery }}"
-          class="ecommerce-gallery-main-img active w-100" />
-          <div class="mt-3">
+          class="ecommerce-gallery-main-img active w-100" style="max-height: 500px;" />
+        <div class="mt-3">
           <h3>{{ $item->jdl_gallery }}</h3>
           <p>{{ $item->keterangan }}</p>
         </div>
-          @endforeach
+        @endforeach
       </div>
     </div>
   </div>
 </div>
+
+
 @endsection

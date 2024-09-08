@@ -134,7 +134,7 @@ class HalamanController extends Controller
     public function detailalbum($album_seo)
     {
         $album = Album::where('album_seo', $album_seo)->firstOrFail();
-        $gallery = Gallery::where('id_album', $album->id_album)->get(['jdl_gallery', 'keterangan', 'gbr_album']); // Mengambil data gallery berdasarkan id_album
+        $gallery = Gallery::where('id_album', $album->id_album)->get(['jdl_gallery', 'keterangan', 'gbr_gallery']); // Mengambil data gallery berdasarkan id_album
         $identitas = Identitaswebsite::first();
         $logo = Logo::orderBy('id_logo', 'DESC')->first();
         $banners = Bannerslider::all();

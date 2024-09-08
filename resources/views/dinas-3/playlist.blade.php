@@ -3,23 +3,18 @@
 
 @section('content')
 <div class="container mt-5 pt-5">
+    <h1>Daftar Video</h1>
     <div class="row">
+    @foreach($video as $video)
         <div class="col-lg-6">
             <div class="card mb-4">
-                <img src="{{ asset('path/to/your/image1.jpg') }}" class="card-img-top" alt="Gambar 1">
+                <iframe src="{{ $video->embed_url }}" class="card-img-top" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16 / 9;"></iframe>
                 <div class="card-body">
-                    <a href="{{ route('detail', ['id' => 1]) }}" class="btn btn-primary">Detail</a>
+                    <h5 class="card-title">{{ $video->judul_video }}</h5>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="card mb-4">
-                <img src="{{ asset('path/to/your/image2.jpg') }}" class="card-img-top" alt="Gambar 2">
-                <div class="card-body">
-                    <a href="{{ route('detail', ['id' => 2]) }}" class="btn btn-primary">Detail</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 

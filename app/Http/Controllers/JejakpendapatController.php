@@ -16,7 +16,7 @@ class JejakpendapatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):View
+    public function index(Request $request): View
     {
         //
         // $search = $request->search;
@@ -45,13 +45,13 @@ class JejakpendapatController extends Controller
         $polings = $query->paginate(10);
 
         $statuses = Poling::select('status')
-                    ->groupBy('status')
-                    ->get();
+            ->groupBy('status')
+            ->get();
 
-            $berita['total_berita'] = Berita::count();
-            $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
-            $agenda['total_agenda'] = Agenda::count();
-            $users['total_users'] = User::count();
+        $berita['total_berita'] = Berita::count();
+        $halamanbaru['total_halamanbaru'] = Halamanbaru::count();
+        $agenda['total_agenda'] = Agenda::count();
+        $users['total_users'] = User::count();
 
         return view('administrator.jejakpendapat.index', compact('berita', 'halamanbaru', 'agenda', 'users', 'polings', 'statuses'));
     }
@@ -59,7 +59,7 @@ class JejakpendapatController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create():View
+    public function create(): View
     {
         //
         return view('administrator.jejakpendapat.create');
@@ -96,15 +96,36 @@ class JejakpendapatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+
+        $request->validate([
+            'pilihan_id' => 'required', // Pastikan ini sesuai dengan struktur data Anda
+            'id_polling' => 'required|exists:pollings,id_polling', // Validasi untuk id_polling
+        ]);
+
+        // Temukan polling berdasarkan ID
+        $polling = Poling::find($request->id_polling);
+
+        // Cek jika pilihan_id ada dalam status
+        if ($polling->status == $request->pilihan_id) {
+            // Tambah rating jika jawaban yang dipilih sama dengan status
+            $polling->increment('rating'); // Asumsikan ada kolom rating di tabel polling
+        }
+
+        // Update status polling jika diperlukan
+        $polling->status = $request->pilihan_id; // Atur status sesuai pilihan
+        $polling->save();
+
+        // Redirect atau respon sesuai kebutuhan
+        return redirect()->back()->with('success', 'Pilihan berhasil disimpan!');
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id_poling):View
+    public function edit(string $id_poling): View
     {
         //
         $poll = Poling::where('id_poling', $id_poling)->firstOrFail();
@@ -144,7 +165,7 @@ class JejakpendapatController extends Controller
     public function destroy(string $id_poling)
     {
         //
-        $poling = Poling::findOrFail($id_poling); 
+        $poling = Poling::findOrFail($id_poling);
         $poling->delete();
         return response()->json(['message' => 'Data berhasil dihapus.']);
     }

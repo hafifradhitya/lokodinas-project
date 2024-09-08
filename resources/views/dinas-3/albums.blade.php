@@ -8,17 +8,19 @@
     <hr>
     <div class="row mb-5">
         @foreach($album as $item)
-            <div class="col-md-4">
-                <div class="card mb-4">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <a href="{{ route('detailalbum', $item->album_seo) }}">
+                    <img src="{{ asset('img_album/' . $item->gbr_album) }}" class="card-img-top" alt="{{ $item->jdl_album }}">
+                </a>
+                <div class="card-body">
                     <a href="{{ route('detailalbum', $item->album_seo) }}">
-                        <img src="{{ asset('img_album/' . $item->gbr_album) }}" class="card-img-top" alt="{{ $item->jdl_album }}">
-                    </a>
-                    <div class="card-body">
                         <h5 class="card-title">{{ $item->jdl_album }}</h5>
-                    </div>
+                    </a>
                 </div>
             </div>
-        @endforeach  
+        </div>
+        @endforeach
     </div>
 </div>
 

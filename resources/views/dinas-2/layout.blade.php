@@ -55,7 +55,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul style="color:black;">
-          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="{{ url('/')}}" class="active">Home</a></li>
           @foreach($menus as $menu)
           <li class="nav-item dropdown">
               <a class="dropdown-toggle nav-link" href="{{ $menu->link }}" id="navbarDropdown{{ $menu->id_menu }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color:black;">
