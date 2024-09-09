@@ -8,12 +8,12 @@
         white-space: normal;
     }
 </style>
-   
+
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="mb-0">Trainer</h3>
+                <h3 class="mb-0">Data Trainer</h3>
                 <a href="{{ route('administrator.trainer.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
             </div>
 
@@ -28,7 +28,7 @@
                                     <option value="{{ $nama_trainer->nama_trainer }}" {{ request('nama_trainer') == $nama_trainer->nama_trainer ? 'selected' : '' }}>
                                         {{ $nama_trainer->nama_trainer }}
                                     </option>
-                                @endforeach  
+                                @endforeach
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit">Filter</button>
