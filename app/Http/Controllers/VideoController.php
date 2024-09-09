@@ -39,10 +39,10 @@ class VideoController extends Controller
 
         if (!empty($search)) {
             $query->where('tagvid', 'like', "%$search%");
-        }
+        }  
 
         if (!empty($tagvid)) {
-            $query->where('sidebar', $tagvid);
+            $query->where('sidebar', $tagvid);   
         }
 
         $videos = $query->paginate(10);
@@ -59,7 +59,7 @@ class VideoController extends Controller
      */
     public function create():View
     {
-        //
+        //  
         $playlistvideos = Playlistvideo::all();
         $tagvids = Tagvideo::orderBy('nama_tag', 'desc')->get();
 

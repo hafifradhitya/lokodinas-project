@@ -27,7 +27,7 @@
                         <td style="padding: 5px;">
                             <input type="text" class="form-control" id="youtube" name="youtube" placeholder="Contoh link: http://www.youtube.com/embed/xbuEmoRWQHU">
                         </td>
-                    </tr>
+                    </tr>  
                     <tr>
                         <th style="padding: 5px;">Kategori</th>
                         <td style="padding: 5px;">

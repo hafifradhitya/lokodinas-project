@@ -37,7 +37,11 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\YmController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\HalamanController;
+use App\Http\Controllers\KategoriprogramController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TemplatewebsiteController;
+use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\TrainerController;
 use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\Halamanbaru;
@@ -156,6 +160,14 @@ Route::prefix('administrator')->name('administrator.')->group(function () {
     Route::get('templatewebsite/active/{id_templates}', [TemplatewebsiteController::class, 'active'])
         ->name('templatewebsite.active')
         ->middleware('checkModul:templatewebsite.active');
+    Route::resource('testimoni', TestimoniController::class)
+        ->middleware('checkModul:testimoni');
+    Route::resource('trainer', TrainerController::class)
+        ->middleware('checkModul:trainer');
+    Route::resource('program', ProgramController::class)
+        ->middleware('checkModul:program');
+    Route::resource('kategoriprogram', KategoriprogramController::class)
+        ->middleware('checkModul:kategoriprogram');
 
     // Rute untuk backup database
      // Rute untuk backup database

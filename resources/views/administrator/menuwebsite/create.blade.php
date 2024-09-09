@@ -12,7 +12,7 @@
                     @csrf
                     <table class="table" id="datatable-buttons" style="border: none; border-collapse: collapse;">
                         <tbody>
-                            <tr>
+                            <tr>  
                                 <th style="padding: 5px;">Link Menu</th>
                                 <td style="padding: 5px;">
                                     <input type="text" class="form-control @error('link') is-invalid @enderror" id="link" name="link" placeholder="Masukkan Link Menu Website" required>

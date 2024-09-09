@@ -48,6 +48,6 @@ class Usermodul extends Model
 
         return $akses > 0 ? 1 : 0;
     }
-
+  
 
 }

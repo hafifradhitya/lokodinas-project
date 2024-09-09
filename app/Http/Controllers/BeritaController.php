@@ -50,7 +50,7 @@ class BeritaController extends Controller
     {
         //
         $kategori = Kategori::all();
-
+  
         $tags = Tag::all();
         return view('administrator.berita.create', compact(['kategori', 'tags']));
     }
@@ -137,7 +137,7 @@ class BeritaController extends Controller
         $tags = Tag::all();
 
         $berita = Berita::where('id_berita', $id_berita)->firstOrFail();
-
+  
         return view('administrator.berita.edit', compact('berita', 'kategori', 'tags'));
     }
 

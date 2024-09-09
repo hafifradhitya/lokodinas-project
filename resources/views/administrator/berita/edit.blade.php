@@ -39,7 +39,7 @@
                                     </option>
                                     @endforeach
                                 </select>
-                            </td>
+                            </td>  
                         </tr>
                         <tr>
                             <th style="padding: 5px;">Headline</th>

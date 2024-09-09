@@ -128,9 +128,9 @@ class ManajemenuserController extends Controller
         //         $datam = array('id_session'=>$sess,
         //                       'id_modul'=>$modul[$i]);
         //         $this->model_app->insert('users_modul',$datam);
-        //       }
-
-        $mod = count($request->modul);
+        //       }  
+  
+        $mod = count($request->modul);  
         $modul = $request->modul;
         $sess = md5($username.'-'.date('YmdHis'));
         for($i = 0; $i < $mod; $i++){
